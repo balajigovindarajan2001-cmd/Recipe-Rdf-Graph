@@ -1,0 +1,115 @@
+# this is the schema of the projects what are the relationships between them
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix schema: <http://schema.org/> .
+
+# classes
+:Recipe a rdfs:Class ;
+    rdfs:label "Recipe"@en, "Rezept"@de ;
+    rdfs:comment "A culinary recipe with ingredients, instructions."@en,
+                 "Ein kulinarisches Rezept mit Zutaten und Anweisungen."@de ;
+    rdfs:subClassOf schema:Recipe .
+
+:Ingredient a rdfs:Class ;
+    rdfs:label "Ingredient"@en, "Zutat"@de ;
+    rdfs:comment "An ingredient used in a recipe."@en,
+                 "Eine Zutat, die in einem Rezept verwendet wird."@de .
+    
+    #subclasses of Ingredient
+    :Vegetable a rdfs:Class ;
+        rdfs:label "Vegetable"@en, "Gemüse"@de ;
+        rdfs:comment "A plant or part of a plant used as food."@en,
+                     "Eine Pflanze oder ein Teil einer Pflanze, die als Nahrungsmittel verwendet wird."@de ;
+        rdfs:subClassOf :Ingredient .
+    :Fruit a rdfs:Class ;
+        rdfs:label "Fruit"@en, "Obst"@de ;
+        rdfs:comment "The sweet and fleshy product of a tree or other plant that contains seed and can be eaten as food."@en,
+                     "Das süße und fleischige Produkt eines Baumes oder einer anderen Pflanze, das Samen enthält und als Nahrungsmittel gegessen werden kann."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    :Spice a rdfs:Class ;
+        rdfs:label "Spice"@en, "Gewürz"@de ;
+        rdfs:comment "A dried seed, fruit, root, bark, or vegetable substance used for flavoring, coloring or preserving food."@en,
+                     "Ein getrockneter Samen, eine Frucht, eine Wurzel, Rinde oder eine pflanzliche Substanz, die zum Würzen, Färben oder Konservieren von Lebensmitteln verwendet wird."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    :DairyProduct a rdfs:Class ;
+        rdfs:label "Dairy Product"@en, "Milchprodukt"@de ;
+        rdfs:comment "A food product made from or containing milk."@en,
+                     "Ein Lebensmittelprodukt, das aus Milch hergestellt wird oder Milch enthält."@de ;
+        rdfs:subClassOf :Ingredient .
+
+    :Meat a rdfs:Class ;
+        rdfs:label "Meat"@en, "Fleisch"@de ;
+        rdfs:comment "The flesh of animals used as food."@en,
+                     "Das Fleisch von Tieren, das als Nahrungsmittel verwendet wird."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    :Grain a rdfs:Class ;
+        rdfs:label "Grain"@en, "Getreide"@de ;
+        rdfs:comment "Seeds of cereal plants used as food."@en,
+                     "Samen von Getreidepflanzen, die als Nahrungsmittel verwendet werden."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    :Herb a rdfs:Class ;
+        rdfs:label "Herb"@en, "Kräuter"@de ;
+        rdfs:comment "A plant or plant part used for flavoring."@en,
+                     "Eine Pflanze oder ein Pflanzenteil, der zum Würzen oder als Medizin verwendet wird."@de ;
+        rdfs:subClassOf :Ingredient .
+
+    :sauce a rdfs:Class ;
+        rdfs:label "Sauce"@en, "Soße"@de ;
+        rdfs:comment "A liquid or semi-liquid substance served with food to add flavor."@en,
+                     "Eine flüssige oder halbfeste Substanz, die mit Lebensmitteln serviert wird, um Geschmack hinzuzufügen."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    :oil a rdfs:Class ;
+        rdfs:label "Oil"@en, "Öl"@de ;
+        rdfs:comment "A viscous liquid derived from plants or animals, used in cooking."@en,
+                     "Eine viskose Flüssigkeit, die aus Pflanzen oder Tieren gewonnen wird und zum Kochen verwendet wird."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    :legumes a rdfs:Class ;
+        rdfs:label "Legumes"@en, "Hülsenfrüchte"@de ;
+        rdfs:comment "A class of vegetables that includes beans, lentils, and peas."@en,
+                     "Eine Klasse von Gemüsesorten, zu der Bohnen, Linsen und Erbsen gehören."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    :Nut a rdfs:Class ;
+        rdfs:label "Nut"@en, "Nuss"@de ;
+        rdfs:comment "A hard-shelled fruit or seed that is edible."@en,
+                     "Eine hartschalige Frucht oder Samen, die essbar ist."@de ;
+        rdfs:subClassOf :Ingredient, :Allergen.
+    
+    :Sefood a rdfs:Class ;
+        rdfs:label "Seafood"@en, "Meeresfrüchte"@de ;
+        rdfs:comment "Edible marine animals and plants."@en,
+                     "Essbare Meerestiere und Pflanzen."@de ;
+        rdfs:subClassOf :Ingredient .
+
+:Menu a rdfs:Class ;
+    rdfs:label "Menu"@en, "Menü"@de ;
+    rdfs:comment "A collection of recipes that go well as a menu together. A buyable product."@en,
+                 "Eine Sammlung von Rezepten, die zusammen serviert werden können und als ein Produkt verkauft werden können."@de .
+
+:Allergen a rdfs:Class ;
+    rdfs:label "Allergen"@en, "Allergen"@de ;
+    rdfs:comment "A substance that can cause an allergic reaction."@en,
+                 "Eine Substanz, die eine allergische Reaktion hervorrufen kann."@de .
+
+#properties
+:hasIngredient a rdf:Property ;
+    rdfs:domain :Recipe ;
+    rdfs:range :Ingredient ;
+    rdfs:label "has ingredient"@en, "hat Zutat"@de ;
+    rdfs:comment "Links a recipe to its ingredients."@en,
+                 "Verknüpft ein Rezept mit seinen Zutaten."@de .
+
+:hasAllergenInfo a rdf:Property ;
+    rdfs:domain :Recipe ;
+    rdfs:range :Allergen ; 
+    rdfs:label "has allergen info"@en, "hat Allergeninformation"@de ;
+    rdfs:comment "Provides allergen information for the recipe."@en,
+                 "Bietet Allergeninformationen für das Rezept."@de .
+
