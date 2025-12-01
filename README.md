@@ -1,2 +1,2 @@
-# Web-Of-Data
-Web Of Data Project
+# Recipe-Rdf-Graph
+Recipe-Rdf-Graph Project
