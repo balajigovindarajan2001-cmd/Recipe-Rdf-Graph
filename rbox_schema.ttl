@@ -1,0 +1,366 @@
+# this is the schema of the projects what are the relationships between them
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rbox: <http://example.org/rbox#> .
+# @prefix owl:  <http://www.w3.org/2002/07/owl#> .
+
+# classes
+rbox:Recipe a rdfs:Class ;
+    rdfs:label "Recipe"@en, "Rezept"@de ;
+    rdfs:comment "A culinary recipe with ingredients, instructions."@en,
+                 "Ein kulinarisches Rezept mit Zutaten und Anweisungen."@de ;
+    rdfs:subClassOf schema:Recipe .
+
+rbox:Ingredient a rdfs:Class ;
+    rdfs:label "Ingredient"@en, "Zutat"@de ;
+    rdfs:comment "An ingredient used in a recipe."@en,
+                 "Eine Zutat, die in einem Rezept verwendet wird."@de ;
+    rdfs:hasQuantity rdfs:Literal .
+    
+#subclasses of Ingredient
+    rbox:Vegetable a rdfs:Class ;
+        rdfs:label "Vegetable"@en, "Gemüse"@de ;
+        rdfs:comment "A plant or part of a plant used as food."@en,
+                     "Eine Pflanze oder ein Teil einer Pflanze, die als Nahrungsmittel verwendet wird."@de ;
+        rdfs:subClassOf rbox:Ingredient .
+    rbox:Fruit a rdfs:Class ;
+        rdfs:label "Fruit"@en, "Obst"@de ;
+        rdfs:comment "The sweet and fleshy product of a tree or other plant that contains seed and can be eaten as food."@en,
+                     "Das süße und fleischige Produkt eines Baumes oder einer anderen Pflanze, das Samen enthält und als Nahrungsmittel gegessen werden kann."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    rbox:Spice a rdfs:Class ;
+        rdfs:label "Spice"@en, "Gewürz"@de ;
+        rdfs:comment "A dried seed, fruit, root, bark, or vegetable substance used for flavoring, coloring or preserving food."@en,
+                     "Ein getrockneter Samen, eine Frucht, eine Wurzel, Rinde oder eine pflanzliche Substanz, die zum Würzen, Färben oder Konservieren von Lebensmitteln verwendet wird."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    rbox:DairyProduct a rdfs:Class ;
+        rdfs:label "Dairy Product"@en, "Milchprodukt"@de ;
+        rdfs:comment "A food product made from or containing milk."@en,
+                     "Ein Lebensmittelprodukt, das aus Milch hergestellt wird oder Milch enthält."@de ;
+        rdfs:subClassOf :Ingredient .
+
+    rbox:Meat a rdfs:Class ;
+        rdfs:label "Meat"@en, "Fleisch"@de ;
+        rdfs:comment "The flesh of animals used as food."@en,
+                     "Das Fleisch von Tieren, das als Nahrungsmittel verwendet wird."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    rbox:Grain a rdfs:Class ;
+        rdfs:label "Grain"@en, "Getreide"@de ;
+        rdfs:comment "Seeds of cereal plants used as food."@en,
+                     "Samen von Getreidepflanzen, die als Nahrungsmittel verwendet werden."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    rbox:Herb a rdfs:Class ;
+        rdfs:label "Herb"@en, "Kräuter"@de ;
+        rdfs:comment "A plant or plant part used for flavoring."@en,
+                     "Eine Pflanze oder ein Pflanzenteil, der zum Würzen oder als Medizin verwendet wird."@de ;
+        rdfs:subClassOf :Ingredient .
+
+    rbox:Sauce a rdfs:Class ;
+        rdfs:label "Sauce"@en, "Soße"@de ;
+        rdfs:comment "A liquid or semi-liquid substance served with food to add flavor."@en,
+                     "Eine flüssige oder halbfeste Substanz, die mit Lebensmitteln serviert wird, um Geschmack hinzuzufügen."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    rbox:Oil a rdfs:Class ;
+        rdfs:label "Oil"@en, "Öl"@de ;
+        rdfs:comment "A viscous liquid derived from plants or animals, used in cooking."@en,
+                     "Eine viskose Flüssigkeit, die aus Pflanzen oder Tieren gewonnen wird und zum Kochen verwendet wird."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    rbox:Legumes a rdfs:Class ;
+        rdfs:label "Legumes"@en, "Hülsenfrüchte"@de ;
+        rdfs:comment "A class of vegetables that includes beans, lentils, and peas."@en,
+                     "Eine Klasse von Gemüsesorten, zu der Bohnen, Linsen und Erbsen gehören."@de ;
+        rdfs:subClassOf :Ingredient .
+    
+    rbox:Nut a rdfs:Class ;
+        rdfs:label "Nut"@en, "Nuss"@de ;
+        rdfs:comment "A hard-shelled fruit or seed that is edible."@en,
+                     "Eine hartschalige Frucht oder Samen, die essbar ist."@de ;
+        rdfs:subClassOf :Ingredient, :Allergen.
+    
+    rbox:Sefood a rdfs:Class ;
+        rdfs:label "Seafood"@en, "Meeresfrüchte"@de ;
+        rdfs:comment "Edible marine animals and plants."@en,
+                     "Essbare Meerestiere und Pflanzen."@de ;
+        rdfs:subClassOf :Ingredient .
+    rbox:EggProduct a rdfs:Class ;
+        rdfs:label "Egg Product"@en, "Eierprodukt"@de ;
+        rdfs:comment "A food product made from or containing eggs."@en,
+                     "Ein Lebensmittelprodukt, das aus Eiern hergestellt wird oder Eier enthält."@de ;
+        rdfs:subClassOf :Ingredient .
+
+rbox:Menu a rdfs:Class ; # still link it
+    rdfs:label "Menu"@en, "Menü"@de ;
+    rdfs:comment "A collection of recipes that go well as a menu together. A buyable product."@en,
+                 "Eine Sammlung von Rezepten, die zusammen serviert werden können und als ein Produkt verkauft werden können."@de .
+
+rbox:Quantity a rdfs:Class ;
+    rdfs:label "Quantity"@en, "Menge"@de ;
+    rdfs:comment "The amount of an ingredient required for a recipe."@en,
+                 "Die Menge einer Zutat, die für ein Rezept benötigt wird."@de .
+    
+#instances of allergens
+rbox:Allergen a rdfs:Class ;
+    rdfs:label "Allergen"@en, "Allergen"@de ;
+    rdfs:comment "A substance that can cause an allergic reaction."@en,
+                 "Eine Substanz, die eine allergische Reaktion hervorrufen kann."@de .
+    
+    rbox:Gluten a rdfs:Class ;
+        rdfs:label "gluten allergen"@en, "Getreide mit Gluten"@de ;
+        rdfs:comment "A protein found in wheat, barley, rye, and oats that can cause allergic reactions in some individuals."@en,
+                 "Ein Protein, das in Weizen, Gerste, Roggen und Hafer vorkommt und bei einigen Personen allergische Reaktionen hervorrufen kann."@de ;
+        rdfs:subClassOf rbox:Allergen .
+
+    rbox:Crustaceans a rdfs:Class ;
+        rdfs:label "Crustaceans"@en, "Krebstiere"@de ; 
+        rdfs:comment "A class of aquatic animals that includes crabs, lobsters, and shrimp, which can cause allergic reactions in some individuals."@en,
+                     "Eine Klasse von Wasserlebewesen, zu der Krabben, Hummer und Garnelen gehören und bei einigen Personen allergische Reaktionen hervorrufen können."@de ;
+        rdfs:subClassOf rbox:Allergen .
+
+    rbox:Eggs a rdfs:Class ;
+        rdfs:label "Eggs"@en, "Eier"@de ;
+        rdfs:comment "A common allergen found in eggs that can cause allergic reactions in some individuals."@en,
+                     "Ein häufiges Allergen, das in Eiern vorkommt und bei einigen Personen allergische Reaktionen hervorrufen kann."@de ;
+        rdfs:subClassOf rbox:Allergen .
+
+    rbox:Fish a rdfs:Class ;
+        rdfs:label "Fish"@en, "Fisch"@de ;
+        rdfs:comment "A common allergen found in fish that can cause allergic reactions in some individuals."@en,
+                     "Ein häufiges Allergen, das in Fisch vorkommt und bei einigen Personen allergische Reaktionen hervorrufen kann."@de ;
+        rdfs:subClassOf rbox:Allergen .
+        
+
+    rbox:Peanuts a rdfs:Class ;
+        rdfs:label "Peanuts"@en, "Erdnüsse"@de ;
+        rdfs:comment "A common allergen found in peanuts that can cause allergic reactions in some individuals."@en,
+                     "Ein häufiges Allergen, das in Erdnüssen vorkommt und bei einigen Personen allergische Reaktionen hervorrufen kann."@de ;
+        rdfs:subClassOf rbox:Allergen .
+
+    rbox:Soybeans a rdfs:Class ;
+        rdfs:label "Soybeans"@en, "Sojabohnen"@de ;
+        rdfs:comment "A common allergen found in soybeans that can cause allergic reactions in some individuals."@en,
+                     "Ein häufiges Allergen, das in Sojabohnen vorkommt und bei einigen Personen allergische Reaktionen hervorrufen kann."@de ;
+        rdfs:subClassOf rbox:Allergen .
+
+    rbox:Milk a rdfs:Class ;
+        rdfs:label "Milk"@en, "Milch"@de ;
+        rdfs:comment "A common allergen found in milk that can cause allergic reactions in some individuals."@en,
+                     "Ein häufiges Allergen, das in Milch vorkommt und bei einigen Personen allergische Reaktionen hervorrufen kann."@de ;
+        rdfs:subClassOf rbox:Allergen .
+    
+
+    rbox:Nuts a rdfs:Class ;
+        rdfs:label "Nuts"@en, "Nüsse"@de ;
+        rdfs:comment "A common allergen found in various nuts that can cause allergic reactions in some individuals."@en,
+                     "Ein häufiges Allergen, das in verschiedenen Nüssen vorkommt und bei einigen Personen allergische Reaktionen hervorrufen kann."@de ;
+        rdfs:subClassOf rbox:Allergen .
+
+    rbox:Celery a rdfs:Class ;
+        rdfs:label "Celery"@en, "Sellerie"@de ;
+        rdfs:comment "A common allergen found in celery that can cause allergic reactions in some individuals."@en,
+                     "Ein häufiges Allergen, das in Sellerie vorkommt und bei einigen Personen allergische Reaktionen hervorrufen kann."@de ;
+        rdfs:subClassOf rbox:Allergen .
+
+
+    rbox:Mustard a rdfs:Class ;
+        rdfs:label "Mustard"@en, "Senf"@de ;
+        rdfs:comment "A common allergen found in mustard that can cause allergic reactions in some individuals."@en,
+                     "Ein häufiges Allergen, das in Senf vorkommt und bei einigen Personen allergische Reaktionen hervorrufen kann."@de ;
+        rdfs:subClassOf rbox:Allergen .
+
+    rbox:SesameSeeds a rdfs:Class ;
+        rdfs:label "Sesame seeds"@en, "Sesamsamen"@de ;
+        rdfs:comment "A common allergen found in sesame seeds that can cause allergic reactions in some individuals."@en,
+                     "Ein häufiges Allergen, das in Sesamsamen vorkommt und bei einigen Personen allergische Reaktionen hervorrufen kann."@de ;
+        rdfs:subClassOf rbox:Allergen .
+
+    rbox:SulphurDioxide a rdfs:Class ;
+        rdfs:label "Sulphur dioxide / sulphites"@en, "Schwefeldioxid / Sulfite"@de ;
+        rdfs:comment "A common allergen found in sulphur dioxide and sulphites that can cause allergic reactions in some individuals."@en,
+                     "Ein häufiges Allergen, das in Schwefeldioxid und Sulfiten vorkommt und bei einigen Personen allergische Reaktionen hervorrufen kann."@de ;
+        rdfs:subClassOf rbox:Allergen .
+
+    rbox:Lupin a rdfs:Class ;
+        rdfs:label "Lupin"@en, "Lupine"@de ;
+        rdfs:comment "A common allergen found in lupin that can cause allergic reactions in some individuals."@en,
+                     "Ein häufiges Allergen, das in Lupinen vorkommt und bei einigen Personen allergische Reaktionen hervorrufen kann."@de ;
+        rdfs:subClassOf rbox:Allergen .
+
+    rbox:Molluscs a rdfs:Class ;
+        rdfs:label "Molluscs"@en, "Weichtiere"@de ; 
+        rdfs:comment "A class of aquatic animals that includes clams, mussels, and squids, which can cause allergic reactions in some individuals."@en,
+                     "Eine Klasse von Wasserlebewesen, zu der Muscheln, Miesmuscheln und Tintenfische gehören und bei einigen Personen allergische Reaktionen hervorrufen können."@de ;
+        rdfs:subClassOf rbox:Allergen .
+    
+
+### subclases of Recipe:  ######
+# type of recipes
+    rbox:VegetarianRecipe a rdfs:Class ;
+        rdfs:label "Vegetarian Recipe"@en, "Vegetarisches Rezept"@de ;
+        rdfs:comment "A recipe that does not include meat or fish."@en,
+                     "Ein Rezept, das kein Fleisch oder Fisch enthält."@de ;
+        rdfs:subClassOf :Recipe .
+
+    rbox:VeganRecipe a rdfs:Class ;
+        rdfs:label "Vegan Recipe"@en, "Veganes Rezept"@de ;
+        rdfs:comment "A recipe that does not include any animal products."@en,
+                     "Ein Rezept, das keine tierischen Produkte enthält."@de ;
+        rdfs:subClassOf :Recipe .   
+    
+
+# course type 
+    rbox:course a rdfs:class ; 
+        rdfs:label "Course"@en, "Kurs"@de ;
+        rdfs:comment "A type of course for a recipe."@en,
+                     "Eine Art von Gericht für ein Rezept."@de ;
+        rdfs:subClassOf :Recipe .
+
+    rbox:Appetizer a rdfs:Class ;
+        rdfs:label "Appetizer"@en, "Vorspeise"@de ;
+        rdfs:comment "A recipe for a starter dish."@en,
+                     "Ein Rezept für eine Vorspeise."@de ;
+        rdfs:subClassOf rbox:course .
+    
+    rbox:MainDish a rdfs:Class ;
+        rdfs:label "Main Dish"@en, "Hauptgericht"@de ;
+        rdfs:comment "A recipe for a main course."@en,
+                     "Ein Rezept für ein Hauptgericht."@de ;
+        rdfs:subClassOf rbox:course .
+    
+    rbox:Dessert a rdfs:Class ;
+        rdfs:label "Dessert"@en, "Nachtisch"@de ;
+        rdfs:comment "A recipe for a dessert."@en,
+                     "Ein Rezept für einen Nachtisch."@de ;
+        rdfs:subClassOf rbox:course .
+    
+
+# cuisine type
+    rbox:Cuisine a rdfs:Class ;
+        rdfs:label "Cuisine"@en, "Küche"@de ;
+        rdfs:comment "A type of cuisine for a recipe."@en,
+                     "Eine Art von Küche für ein Rezept."@de .
+
+    rbox:ItalianCuisine a rdfs:Class ;
+        rdfs:label "Italian Cuisine"@en, "Italienische Küche"@de ;
+        rdfs:comment "A recipe from Italian cuisine."@en,
+                     "Ein Rezept aus der italienischen Küche."@de ;
+        rdfs:subClassOf rbox:Cuisine .
+
+    rbox:ChineseCuisine a rdfs:Class ;
+        rdfs:label "Chinese Cuisine"@en, "Chinesische Küche"@de ;
+        rdfs:comment "A recipe from Chinese cuisine."@en,
+                     "Ein Rezept aus der chinesischen Küche."@de ;
+        rdfs:subClassOf rbox:Cuisine .
+
+    rbox:MexicanCuisine a rdfs:Class ;
+        rdfs:label "Mexican Cuisine"@en, "Mexikanische Küche"@de ;
+        rdfs:comment "A recipe from Mexican cuisine."@en,
+                     "Ein Rezept aus der mexikanischen Küche."@de ;
+        rdfs:subClassOf rbox:Cuisine .
+
+    rbox:IndianCuisine a rdfs:Class ;
+        rdfs:label "Indian Cuisine"@en, "Indische Küche"@de ;
+        rdfs:comment "A recipe from Indian cuisine."@en,
+                     "Ein Rezept aus der indischen Küche."@de ;
+        rdfs:subClassOf rbox:Cuisine .
+
+    rbox:FrenchCuisine a rdfs:Class ;
+        rdfs:label "French Cuisine"@en, "Französische Küche"@de ;
+        rdfs:comment "A recipe from French cuisine."@en,
+                     "Ein Rezept aus der französischen Küche."@de ;
+        rdfs:subClassOf rbox:Cuisine .
+   
+    rbox:GermanCuisine a rdfs:Class ;
+        rdfs:label "German Cuisine"@en, "Deutsche Küche"@de ;
+        rdfs:comment "A recipe from German cuisine."@en,
+                     "Ein Rezept aus der deutschen Küche."@de ;
+        rdfs:subClassOf rbox:Cuisine . 
+
+
+#### properties ######
+# recipe properties
+    rbox:hasID a rdfs:DatatypeProperty ;
+        rdfs:domain rbox:Recipe ;
+        rdfs:range xsd:string ; 
+        rdfs:label "has ID"@en, "hat ID"@de ;
+        rdfs:comment "A unique identifier for the recipe."@en,
+                 "Eine eindeutige Kennung für das Rezept."@de .
+
+    rbox:hasTitle a rdfs:DatatypeProperty ;
+        rdfs:domain rbox:Recipe ;
+        rdfs:range xsd:string ;
+        rdfs:label "has title"@en, "hat Titel"@de ;
+        rdfs:comment "The title of the recipe."@en,
+                 "Der Titel des Rezepts."@de .
+
+    rbox:hasDescription a rdfs:DatatypeProperty ;
+        rdfs:domain rbox:Recipe ;
+        rdfs:range xsd:string ;
+        rdfs:label "has description"@en, "hat Beschreibung"@de ;
+        rdfs:comment "A brief description of the recipe."@en,
+                 "Eine kurze Beschreibung des Rezepts."@de .
+    
+    rbox:hasInstructions a rdfs:DatatypeProperty ;
+        rdfs:domain rbox:Recipe ;
+        rdfs:range xsd:string ;
+        rdfs:label "has instructions"@en, "hat Anweisungen"@de ;
+        rdfs:comment "The preparation instructions for the recipe."@en,
+                     "Die Zubereitungsanweisungen für das Rezept."@de .
+
+    rbox:hasIngredient a rdfs:ObjectProperty ;
+        rdfs:domain rbox:Recipe ;
+        rdfs:range rbox:Ingredient ;
+        rdfs:label "has ingredient"@en, "hat Zutat"@de ;
+        rdfs:comment "Links a recipe to its ingredients."@en,
+                     "Verknüpft ein Rezept mit seinen Zutaten."@de .
+    rbox:hasCuisine a rdfs:ObjectProperty ;
+        rdfs:domain rbox:Recipe ;
+        rdfs:range rbox:Cuisine ;
+        rdfs:label "has cuisine"@en, "gehört zur Küche"@de ;
+        rdfs:comment "Specifies the cuisine type of the recipe."@en,
+                     "Gibt die Küchenart des Rezepts an."@de .
+        
+    #ingredient properties
+    rbox:hasName a rdfs:DatatypeProperty ;
+        rdfs:domain rbox:Ingredient ;
+        rdfs:range xsd:string ;
+        rdfs:label "has name"@en, "hat Name"@de ;
+        rdfs:comment "The name of the ingredient."@en,
+                     "Der Name der Zutat."@de .
+    
+    rbox:hasQuantity a rdfs:DatatypeProperty ;
+        rdfs:domain rbox:Ingredient ;
+        rdfs:range xsd:string ;
+        rdfs:label "has quantity"@en, "hat Menge"@de ;
+        rdfs:comment "The quantity of the ingredient required for the recipe."@en,
+                     "Die Menge der Zutat, die für das Rezept benötigt wird."@de .
+    
+    #Quantity property linking Ingredient and Quantity class
+    rbox:hasAmount a rdfs:ObjectProperty ;
+        rdfs:domain rbox:Ingredient ;
+        rdfs:range rbox:Quantity ;
+        rdfs:label "has amount"@en, "hat Menge"@de ;
+        rdfs:comment "Links an ingredient to its quantity."@en,
+                     "Verknüpft eine Zutat mit ihrer Menge."@de .
+    rbox:hasUnit a rdfs:DatatypeProperty ;
+        rdfs:domain rbox:Quantity ;
+        rdfs:range xsd:string ;
+        rdfs:label "has unit"@en, "hat Einheit"@de ;
+        rdfs:comment "The unit of measurement for the quantity."@en,
+                     "Die Maßeinheit für die Menge."@de .
+                     
+rbox:hasAllergenInfo a rdfs:ObjectProperty ;
+    rdfs:domain rbox:Recipe , rbox:Ingredient ;
+    rdfs:range rbox:Allergen ; 
+    rdfs:label "has allergen info"@en, "hat Allergeninformation"@de ;
+    rdfs:comment "Provides allergen information for the recipe."@en,
+                 "Bietet Allergeninformationen für das Rezept."@de .
+    #owl:propertyChainAxiom ( :hasIngredient rbox:hasAllergenInfo ) .
+
