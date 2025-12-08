@@ -1,253 +1,264 @@
-# Vinzent Aschir and Balaji Govindarajan
-# Project: recipe-company 
-# Date: 01/12/2025
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix schema: <https://schema.org/> .
+@prefix rbox:   <http://example.org/rbox#> .
 
-@prefix rbox: <http://www.researchbox.org/ontology#> . # our own ontology
-@prefix schema: <http://schema.org/> . # for the recipe schema 
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-#@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> . 
-#@prefix : <http://example.org/recipes/> .
+############### Subscription plans #################
 
-:spaghetti_carbonara a rbox:MainDish;
-    # properties of the recipe
-    rbox:hasID "recipe001" ;
-    rbox:hasTitle "Spaghetti Carbonara" ;
-    rbox:hasDescription "A classic Italian pasta dish made with eggs, cheese, pancetta, and pepper." ;
-    
-    schema:recipeYield "4 servings" ;
-    rbox:hasCuisine rbox:ItalianCuisine ;
+rbox:Plan_3x2 a rbox:SubscriptionPlan ;
+    rbox:planLabel "3 recipes x 2 people" ;
+    rbox:planPrice "49.90"^^xsd:decimal .
 
-    #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:Eggs, rbox:DairyProduct, rbox:Pork ;
-    rbox:hasIngredient rbox:Spaghetti, rbox:Pancetta, rbox:Eggs, rbox:ParmesanCheese, rbox:BlackPepper ;
-
-    #properties of the preparation
-    schema:prepTime "PT20M" ;
-    rbox:hasInstructions """1. Cook spaghetti according to package instructions. 
-    2. In a pan, cook pancetta until crispy.
-    3. Beat eggs and mix with grated Parmesan cheese.
-    4. Combine hot spaghetti with pancetta and egg mixture, stirring quickly to create a creamy sauce. 
-    5. Season with black pepper and serve immediately.""" .
-
-:briyani a rbox:MainDish ;
-    # properties of the recipe
-    rbox:hasID "recipe002" ;
-    rbox:hasTitle "Chicken Biryani" ;
-    rbox:hasDescription "A flavorful Indian rice dish made with marinated chicken, spices, and basmati rice." ;
-    
-    schema:recipeYield "6 servings" ;
-    rbox:hasCuisine rbox:IndianCuisine ;
-
-    #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:DairyProduct ;
-    rbox:hasIngredient rbox:BasmatiRice, rbox:Chicken, rbox:Yogurt, rbox:Onions, rbox:Garlic, rbox:Ginger, rbox:Spices ;
-
-    #properties of the preparation
-    schema:prepTime "PT1H30M" ;
-    rbox:hasInstructions """1. Marinate chicken with yogurt and spices.
-    2. Fry onions until golden brown.
-    3. Layer marinated chicken and partially cooked basmati rice in a pot.
-    4. Cook on low heat until chicken is tender and rice is fully cooked.
-    5. Garnish with fried onions and serve hot.""" .
-
-:spaghetti_bolognese a rbox:MainDish;
-    # properties of the recipe
-    rbox:hasID "recipe003" ;
-    rbox:hasTitle "Spaghetti Bolognese" ;
-    rbox:hasDescription "A traditional Italian pasta dish with a rich meat sauce." ;
-    
-    schema:recipeYield "4 servings" ;
-    rbox:hasCuisine rbox:ItalianCuisine ;
-
-    #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:DairyProduct ;
-    rbox:hasIngredient rbox:Spaghetti, rbox:GroundBeef, rbox:TomatoSauce, rbox:Onions, rbox:Garlic, rbox:OliveOil, rbox:ParmesanCheese ;
-
-    #properties of the preparation
-    schema:prepTime "PT45M" ;
-    rbox:hasInstructions """1. Cook spaghetti according to package instructions. 
-    2. In a pan, sauté onions and garlic in olive oil until translucent.
-    3. Add ground beef and cook until browned.
-    4. Pour in tomato sauce and simmer for 20 minutes.
-    5. Serve sauce over spaghetti and top with grated Parmesan cheese.""" .
-
-:Kairserschmarn a rbox:Dessert, rbox:VegetarianRecipe;
-    # properties of the recipe
-    rbox:hasID "recipe004" ;
-    rbox:hasTitle "Kaiserschmarrn" ;
-    rbox:hasDescription "A traditional Austrian shredded pancake dessert, often served with fruit compote." ;
-    
-    schema:recipeYield "2 servings" ;
-    rbox:hasCuisine rbox:GermanCuisine ;
-
-    #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:DairyProduct, rbox:Eggs ;
-    rbox:hasIngredient rbox:Flour, rbox:Eggs, rbox:Milk, rbox:Butter, rbox:Sugar, rbox:Salt, rbox:PowderedSugar ;
-
-    #properties of the preparation
-    schema:prepTime "PT30M" ;
-    rbox:hasInstructions """1. Mix flour, eggs, milk, sugar, and a pinch of salt to form a batter.
-    2. Heat butter in a pan and pour in the batter to make a thick pancake.
-    3. Cook until golden brown on both sides, then shred into pieces using two forks.
-    4. Sprinkle with powdered sugar and serve with fruit compote.""" .
-
-:fried_rice a rbox:MainDish ;
-    # properties of the recipe
-    rbox:hasID "recipe005" ;
-    rbox:hasTitle "Chinese Fried Rice" ;
-    rbox:hasDescription "A popular Chinese dish made with stir-fried rice, vegetables, and eggs." ;
-    
-    schema:recipeYield "4 servings" ;
-    rbox:hasCuisine rbox:ChineseCuisine ;
-
-    #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:Eggs ;
-    rbox:hasIngredient rbox:Rice, rbox:Eggs, rbox:SoySauce, rbox:SesameOil , rbox:Peas, rbox:Carrots, rbox:Corn ;
-
-    #properties of the preparation
-    schema:prepTime "PT25M" ;
-    rbox:hasInstructions """1. Cook rice and let it cool.
-    2. In a wok, heat sesame oil and sauté mixed vegetables.
-    3. Push vegetables to the side and scramble eggs in the wok.
-    4. Add cooked rice and soy sauce, stir-frying everything together.
-    5. Serve hot.""" .
-
-# Ingredients declarations
-    #Ingredients of fried rice 
-        rbox:Rice a rbox:Grain ;
-            rbox:hasName "Rice" ;
-            rbox:hasQuantity "2 cups" ;
-            rbox:hasAllergenInfo rbox:Gluten .
-        rbox:Eggs a rbox:EggProduct ;
-            rbox:hasName "Eggs" ;
-            rbox:hasQuantity "2 large eggs" ;
-            rbox:hasAllergenInfo rbox:Eggs .
-
-        rbox:SoySauce a rbox:Condiment ;
-            rbox:hasName "Soy Sauce" ;
-            rbox:hasQuantity "2 tablespoons" ;
-            rbox:hasAllergenInfo rbox:Gluten .
-
-        rbox:SesameOil a rbox:Oil ;
-            rbox:hasName "Sesame Oil" ;
-            rbox:hasQuantity "1 tablespoon" .
-
-        rbox:Peas a rbox:Vegetable ;
-            rbox:hasName "Peas" ;
-            rbox:hasQuantity "1/2 cup" .
-        rbox:Carrots a rbox:Vegetable ;
-            rbox:hasName "Carrots" ;
-            rbox:hasQuantity "1/2 cup, diced" .
-        rbox:Corn a rbox:Vegetable ;
-            rbox:hasName "Corn" ;
-            rbox:hasQuantity "1/2 cup" .
-
-    #Ingredients of Kaiserschmarn
-        rbox:Flour a rbox:Grain ;
-            rbox:hasName "Flour" ;
-            rbox:hasQuantity "150 grams" ;
-            rbox:hasAllergenInfo rbox:Gluten .
-        rbox:Eggs a rbox:EggProduct ;
-            rbox:hasName "Eggs" ;
-            rbox:hasQuantity "4 large eggs" ;
-            rbox:hasAllergenInfo rbox:Eggs .
-
-        rbox:Milk a rbox:DairyProduct ;
-            rbox:hasName "Milk" ;
-            rbox:hasQuantity "200 ml" ;
-            rbox:hasAllergenInfo rbox:DairyProduct .
-
-        rbox:Butter a rbox:DairyProduct ;
-            rbox:hasName "Butter" ;
-            rbox:hasQuantity "50 grams" ;
-            rbox:hasAllergenInfo rbox:DairyProduct .
-
-        rbox:Sugar a rbox:Sweetener ;
-            rbox:hasName "Sugar" ;
-            rbox:hasQuantity "2 tablespoons" .
-
-        rbox:Salt a rbox:Mineral ;
-            rbox:hasName "Salt" ;
-            rbox:hasQuantity "a pinch" .
-
-        rbox:PowderedSugar a rbox:Sweetener ;
-            rbox:hasName "Powdered Sugar" ;
-            rbox:hasQuantity "for dusting" .
-
-    # Ingredients of Spaghetti Carbonara   
-        rbox:Spaghetti a rbox:Grain ; 
-            rbox:hasName "Spaghetti" ;
-            rbox:hasQuantity "400 grams" ;
-            rbox:hasAllergenInfo rbox:Gluten .
-        rbox:Pancetta a rbox:Meat ;
-            rbox:hasName "Pancetta" ;
-            rbox:hasQuantity "150 grams" .
-
-        rbox:Eggs a rbox:EggProduct ;
-            rbox:hasName "Eggs" ;
-            rbox:hasQuantity "4 large eggs" ;
-            rbox:hasAllergenInfo rbox:Eggs .
-        rbox:ParmesanCheese a rbox:DairyProduct ;
-            rbox:hasName "Parmesan Cheese" ;
-            rbox:hasQuantity "100 grams" ;
-            rbox:hasAllergenInfo rbox:DairyProduct .
-
-        rbox:BlackPepper a rbox:Spice ;
-            rbox:hasName "Black Pepper" ;
-            rbox:hasQuantity "to taste" .
-
-    # Ingredients of Chicken Biryani
-        rbox:BasmatiRice a rbox:Grain ;
-            rbox:hasName "Basmati Rice" ;
-            rbox:hasQuantity "500 grams" ;  
-            rbox:hasAllergenInfo rbox:Gluten .
-        rbox:Chicken a rbox:Meat ;
-            rbox:hasName "Chicken" ;
-            rbox:hasQuantity "1 kg" .
-        rbox:Yogurt a rbox:DairyProduct ;
-            rbox:hasName "Yogurt" ;
-            rbox:hasQuantity "200 grams" ;
-            rbox:hasAllergenInfo rbox:DairyProduct .
-        rbox:Onions a rbox:Vegetable ;
-            rbox:hasName "Onions" ;
-            rbox:hasQuantity "2 large onions" .
-        rbox:Garlic a rbox:Vegetable ;
-            rbox:hasName "Garlic" ;
-            rbox:hasQuantity "4 cloves" .
-        rbox:Ginger a rbox:Vegetable ;
-            rbox:hasName "Ginger" ;
-            rbox:hasQuantity "1 inch piece" .
-        rbox:Spices a rbox:Spice ;  
-            rbox:hasName "Mixed Spices" ;
-            rbox:hasQuantity "to taste" .
-
-    # Ingredients of Spaghetti Bolognese
-        rbox:GroundBeef a rbox:Meat ;
-            rbox:hasName "Ground Beef" ;
-            rbox:hasQuantity "500 grams" .
-        rbox:TomatoSauce a rbox:Sauce ;
-            rbox:hasName "Tomato Sauce" ;
-            rbox:hasQuantity "400 grams" .
-        rbox:OliveOil a rbox:Oil ;
-            rbox:hasName "Olive Oil" ;
-            rbox:hasQuantity "2 tablespoons" .
-
-        
+rbox:Plan_4x4 a rbox:SubscriptionPlan ;
+    rbox:planLabel "4 recipes x 4 people" ;
+    rbox:planPrice "89.90"^^xsd:decimal .
 
 
 
+################ Customers ####################
 
-    
+rbox:Customer_Alice a rbox:Customer ;
+    rdfs:label "Alice Martin" ;
+    schema:email "alice@gamil.com" ;
+    rbox:hasSubscriptionPlan rbox:Plan_3x2 .
+
+rbox:Customer_Bruno a rbox:Customer ;
+    rdfs:label "Bruno Lefevre" ;
+    schema:email "bruno@gamil.com" ;
+    rbox:hasSubscriptionPlan rbox:Plan_4x4 .
+
+rbox:Customer_Claire a rbox:Customer ;
+    rdfs:label "Claire Dubois" ;
+    schema:email "Claire@gamil.com" ;
+    rbox:hasSubscriptionPlan rbox:Plan_3x2 .
+
+rbox:Customer_David a rbox:Customer ;
+    rdfs:label "David Morel" ;
+    schema:email "David@gamil.com" ;
+    rbox:hasSubscriptionPlan rbox:Plan_4x4 .
+
+rbox:Customer_Eva a rbox:Customer ;
+    rdfs:label "Eva Simon" ;
+    schema:email "Eva@gamil,com" ;
+    rbox:hasSubscriptionPlan rbox:Plan_3x2 .
+
+################ Couriers ################
+
+rbox:Courier_Emma a rbox:Courier ;
+    rdfs:label "Emma Dubois" ;
+    schema:telephone "+33-6-00-00-00-01" .
+
+rbox:Courier_Luc a rbox:Courier ;
+    rdfs:label "Luc Bernard" ;
+    schema:telephone "+33-6-00-00-00-02" .
+
+rbox:Courier_Sophie a rbox:Courier ;
+    rdfs:label "Sophie Moreau" ;
+    schema:telephone "+33-6-00-00-00-03" .
+
+rbox:Courier_Maxime a rbox:Courier ;
+    rdfs:label "Maxime Richard" ;
+    schema:telephone "+33-6-00-00-00-04" .
+
+############### Orders ##################
+
+# Alice's order
+rbox:Order_1 a rbox:Order ;
+    rdfs:label "Order #1 (Alice)" ;
+    rbox:orderedBy rbox:Customer_Alice .
+
+# Bruno's order
+rbox:Order_2 a rbox:Order ;
+    rdfs:label "Order #2 (Bruno)" ;
+    rbox:orderedBy rbox:Customer_Bruno .
+
+#Claire's order
+rbox:Order_3 a rbox:Order ;
+    rdfs:label "Order #3 (Claire)" ;
+    rbox:orderedBy rbox:Customer_Claire .
+
+# David's order
+rbox:Order_4 a rbox:Order ; 
+    rdfs:label "Order #4 (David)" ;
+    rbox:orderedBy rbox:Customer_David .    
+
+# Eva's order
+rbox:Order_5 a rbox:Order ;
+    rdfs:label "Order #5 (Eva)" ;
+    rbox:orderedBy rbox:Customer_Eva .
 
 
+############## Order lines #############
+
+# Order 1 has two different recipes (we just describe them textually)
+rbox:OrderLine_1_1 a rbox:OrderLine ;
+    rbox:portionCount 2 ;
+    schema:description "Spaghetti Carbonara for 2 people" .
+
+rbox:OrderLine_1_2 a rbox:OrderLine ;
+    rbox:portionCount 2 ;
+    schema:description "Chinese Fried Rice for 2 people" .
+
+rbox:Order_1
+    rbox:hasOrderLine rbox:OrderLine_1_1 ,
+                      rbox:OrderLine_1_2 .
+
+# Order 2 has one large family recipe
+rbox:OrderLine_2_1 a rbox:OrderLine ;
+    rbox:portionCount 4 ;
+    schema:description "Chicken Biryani for 4 people" .
+
+rbox:Order_2
+    rbox:hasOrderLine rbox:OrderLine_2_1 .
 
 
+## Order 3 has three different recipes
+rbox:OrderLine_3_1 a rbox:OrderLine ;
+    rbox:portionCount 2 ;
+    schema:description "Spaghetti Bolognese for 2 people" .   
+
+rbox:OrderLine_3_2 a rbox:OrderLine ;
+    rbox:portionCount 2 ;           
+    schema:description "Kaiserschmarrn for 2 people" .  
+rbox:OrderLine_3_3 a rbox:OrderLine ;
+    rbox:portionCount 2 ;   
+    schema:description "Chinese Fried Rice for 2 people" .
+rbox:Order_3
+    rbox:hasOrderLine rbox:OrderLine_3_1 ,      
+                        rbox:OrderLine_3_2 ,
+                        rbox:OrderLine_3_3 .                                                    
+
+# Order 4 has two family recipes
+rbox:OrderLine_4_1 a rbox:OrderLine ;
+    rbox:portionCount 4 ;
+    schema:description "Spaghetti Carbonara for 4 people" .        
+    rbox:OrderLine_4_2 a rbox:OrderLine ;
+    rbox:portionCount 4 ;
+    schema:description "Chicken Biryani for 4 people" .        
+rbox:Order_4
+    rbox:hasOrderLine rbox:OrderLine_4_1 ,    
+                        rbox:OrderLine_4_2 .    
 
 
+# Order 5 has one recipe
+rbox:OrderLine_5_1 a rbox:OrderLine ;
+    rbox:portionCount 2 ;
+    schema:description "Spaghetti Bolognese for 2 people" . 
+rbox:Order_5                            
+    rbox:hasOrderLine rbox:OrderLine_5_1 .      
 
+            
 
+############ Deliveries ################
 
+# Delivery of Alice's order by Emma
+rbox:Delivery_1 a rbox:Delivery ;
+    rdfs:label "Delivery of Order #1" ;
+    rbox:deliveryForOrder rbox:Order_1 ;
+    rbox:deliveredBy rbox:Courier_Emma ;
+    rbox:deliveredTo rbox:Customer_Alice ;
+    rbox:deliveryStart "2025-12-10T18:00:00"^^xsd:dateTime ;
+    rbox:deliveryEnd   "2025-12-10T20:00:00"^^xsd:dateTime .
 
+# Delivery of Bruno's order by Luc
+rbox:Delivery_2 a rbox:Delivery ;
+    rdfs:label "Delivery of Order #2" ;
+    rbox:deliveryForOrder rbox:Order_2 ;
+    rbox:deliveredBy rbox:Courier_Luc ;
+    rbox:deliveredTo rbox:Customer_Bruno ;
+    rbox:deliveryStart "2025-12-11T10:00:00"^^xsd:dateTime ;
+    rbox:deliveryEnd   "2025-12-11T12:00:00"^^xsd:dateTime .
+
+# Delivery of Claire's order by Sophie
+rbox:Delivery_3 a rbox:Delivery ;           
+    rdfs:label "Delivery of Order #3" ;
+    rbox:deliveryForOrder rbox:Order_3 ;
+    rbox:deliveredBy rbox:Courier_Sophie ;
+    rbox:deliveredTo rbox:Customer_Claire ;
+    rbox:deliveryStart "2025-12-12T14:00:00"^^xsd:dateTime ;
+    rbox:deliveryEnd   "2025-12-12T16:00:00"^^xsd:dateTime .
+
+# Delivery of David's order by Maxime
+rbox:Delivery_4 a rbox:Delivery ;           
+    rdfs:label "Delivery of Order #4" ;
+    rbox:deliveryForOrder rbox:Order_4 ;
+    rbox:deliveredBy rbox:Courier_Maxime ;
+    rbox:deliveredTo rbox:Customer_David ;
+    rbox:deliveryStart "2025-12-13T09:00:00"^^xsd:dateTime ;
+    rbox:deliveryEnd   "2025-12-13T11:00:00"^^xsd:dateTime .
+
+# Delivery of Eva's order by Emma
+rbox:Delivery_5 a rbox:Delivery ;           
+    rdfs:label "Delivery of Order #5" ;
+    rbox:deliveryForOrder rbox:Order_5 ;
+    rbox:deliveredBy rbox:Courier_Emma ;
+    rbox:deliveredTo rbox:Customer_Eva ;
+    rbox:deliveryStart "2025-12-14T15:00:00"^^xsd:dateTime ;
+    rbox:deliveryEnd   "2025-12-14T17:00:00"^^xsd:dateTime .
+
+############## Reviews ##############
+# Alice reviews her order
+rbox:Review_1 a rbox:Review ;
+    rdfs:label "Review for Order #1" ;
+    rbox:reviewAuthor rbox:Customer_Alice ;
+    schema:reviewBody "Very tasty and easy to cook. Delivery was on time." ;
+    schema:reviewRating [
+        a schema:Rating ;
+        schema:ratingValue "5"^^xsd:integer ;
+        schema:bestRating "5"^^xsd:integer
+    ] .
+
+rbox:Order_1 rbox:hasReview rbox:Review_1 .
+
+# Bruno reviews his order
+rbox:Review_2 a rbox:Review ;
+    rdfs:label "Review for Order #2" ;
+    rbox:reviewAuthor rbox:Customer_Bruno ;
+    schema:reviewBody "Good recipes but the salmon box arrived slightly late." ;
+    schema:reviewRating [
+        a schema:Rating ;
+        schema:ratingValue "3"^^xsd:integer ;
+        schema:bestRating "5"^^xsd:integer
+    ] .
+
+rbox:Order_2 rbox:hasReview rbox:Review_2 .
+
+# Claire reviews her order
+rbox:Review_3 a rbox:Review ;
+    rdfs:label "Review for Order #3" ;
+    rbox:reviewAuthor rbox:Customer_Claire ;
+    schema:reviewBody "Loved the variety of recipes! Will order again." ;
+    schema:reviewRating [
+        a schema:Rating ;
+        schema:ratingValue "4"^^xsd:integer ;
+        schema:bestRating "5"^^xsd:integer
+    ] .
+rbox:Order_3 rbox:hasReview rbox:Review_3 .
+
+# David reviews his order
+rbox:Review_4 a rbox:Review ;
+    rdfs:label "Review for Order #4" ;
+    rbox:reviewAuthor rbox:Customer_David ;
+    schema:reviewBody "The roast beef was delicious, but the delivery was delayed." ;
+    schema:reviewRating [
+        a schema:Rating ;
+        schema:ratingValue "4"^^xsd:integer ;
+        schema:bestRating "5"^^xsd:integer
+    ] .
+rbox:Order_4 rbox:hasReview rbox:Review_4 .
+
+# Eva reviews her order
+rbox:Review_5 a rbox:Review ;
+    rdfs:label "Review for Order #5" ;
+    rbox:reviewAuthor rbox:Customer_Eva ;
+    schema:reviewBody "Spaghetti Bolognese was fantastic! Quick delivery too." ;
+    schema:reviewRating [
+        a schema:Rating ;
+        schema:ratingValue "5"^^xsd:integer ;
+        schema:bestRating "5"^^xsd:integer
+    ] .
+rbox:Order_5 rbox:hasReview rbox:Review_5 .
 
 
 
