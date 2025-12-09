@@ -9,7 +9,7 @@
 #@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> . 
 #@prefix : <http://example.org/recipes/> .
 
-:spaghetti_carbonara a rbox:MainDish;
+rbox:spaghetti_carbonara a rbox:MainDish;
     # properties of the recipe
     rbox:hasID "recipe001" ;
     rbox:hasTitle "Spaghetti Carbonara" ;
@@ -19,8 +19,14 @@
     rbox:hasCuisine rbox:ItalianCuisine ;
 
     #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:Eggs, rbox:DairyProduct, rbox:Pork ;
-    rbox:hasIngredient rbox:Spaghetti, rbox:Pancetta, rbox:Eggs, rbox:ParmesanCheese, rbox:BlackPepper ;
+    rbox:hasAllergenInfo rbox:Gluten, rbox:EggAllergen, rbox:DairyProduct, rbox:Pork ;
+    rbox:hasIngredientList (
+        [ rbox:hasIngredient rbox:Spaghetti ; rbox:hasQuantity 400 ; rbox:hasUnit rbox:grams ]
+        [ rbox:hasIngredient rbox:Pancetta ; rbox:hasQuantity 150 ; rbox:hasUnit rbox:grams ]
+        [ rbox:hasIngredient rbox:Eggs ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:count ]
+        [ rbox:hasIngredient rbox:ParmesanCheese ; rbox:hasQuantity 100 ; rbox:hasUnit rbox:grams ]
+        [ rbox:hasIngredient rbox:BlackPepper ]
+    ) ;
 
     #properties of the preparation
     schema:prepTime "PT20M" ;
@@ -30,7 +36,7 @@
     4. Combine hot spaghetti with pancetta and egg mixture, stirring quickly to create a creamy sauce. 
     5. Season with black pepper and serve immediately.""" .
 
-:briyani a rbox:MainDish ;
+rbox:briyani a rbox:MainDish ;
     # properties of the recipe
     rbox:hasID "recipe002" ;
     rbox:hasTitle "Chicken Biryani" ;
@@ -41,7 +47,15 @@
 
     #properties of the ingredients
     rbox:hasAllergenInfo rbox:Gluten, rbox:DairyProduct ;
-    rbox:hasIngredient rbox:BasmatiRice, rbox:Chicken, rbox:Yogurt, rbox:Onions, rbox:Garlic, rbox:Ginger, rbox:Spices ;
+    rbox:hasIngredientList (
+        [ rbox:hasIngredient rbox:BasmatiRice ; rbox:hasQuantity 500 ; rbox:hasUnit rbox:grams ]
+        [ rbox:hasIngredient rbox:Chicken ; rbox:hasQuantity 1000 ; rbox:hasUnit rbox:grams ]
+        [ rbox:hasIngredient rbox:Yogurt ; rbox:hasQuantity 200 ; rbox:hasUnit rbox:grams ]
+        [ rbox:hasIngredient rbox:Onions ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+        [ rbox:hasIngredient rbox:Garlic ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:cloves ]
+        [ rbox:hasIngredient rbox:Ginger ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:inch ] 
+        [ rbox:hasIngredient rbox:Spices ]
+    ); 
 
     #properties of the preparation
     schema:prepTime "PT1H30M" ;
@@ -51,7 +65,7 @@
     4. Cook on low heat until chicken is tender and rice is fully cooked.
     5. Garnish with fried onions and serve hot.""" .
 
-:spaghetti_bolognese a rbox:MainDish;
+rbox:spaghetti_bolognese a rbox:MainDish;
     # properties of the recipe
     rbox:hasID "recipe003" ;
     rbox:hasTitle "Spaghetti Bolognese" ;
@@ -62,8 +76,17 @@
 
     #properties of the ingredients
     rbox:hasAllergenInfo rbox:Gluten, rbox:DairyProduct ;
-    rbox:hasIngredient rbox:Spaghetti, rbox:GroundBeef, rbox:TomatoSauce, rbox:Onions, rbox:Garlic, rbox:OliveOil, rbox:ParmesanCheese ;
-
+   
+    rbox:hasIngredientList (
+        [ rbox:hasIngredient rbox:Spaghetti ; rbox:hasQuantity 500 ; rbox:hasUnit rbox:grams ]
+        [ rbox:hasIngredient rbox:GroundBeef ; rbox:hasQuantity 500 ; rbox:hasUnit rbox:grams ]
+        [ rbox:hasIngredient rbox:TomatoSauce ; rbox:hasQuantity 400 ; rbox:hasUnit rbox:grams ]
+        [ rbox:hasIngredient rbox:Onions ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+        [ rbox:hasIngredient rbox:Garlic ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:cloves ]
+        [ rbox:hasIngredient rbox:OliveOil ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
+        [ rbox:hasIngredient rbox:ParmesanCheese ; rbox:hasQuantity 100 ; rbox:hasUnit rbox:grams ]
+    ) ;  
+    
     #properties of the preparation
     schema:prepTime "PT45M" ;
     rbox:hasInstructions """1. Cook spaghetti according to package instructions. 
@@ -72,7 +95,7 @@
     4. Pour in tomato sauce and simmer for 20 minutes.
     5. Serve sauce over spaghetti and top with grated Parmesan cheese.""" .
 
-:Kairserschmarn a rbox:Dessert, rbox:VegetarianRecipe;
+rbox:Kairserschmarn a rbox:Dessert, rbox:VegetarianRecipe;
     # properties of the recipe
     rbox:hasID "recipe004" ;
     rbox:hasTitle "Kaiserschmarrn" ;
@@ -82,8 +105,16 @@
     rbox:hasCuisine rbox:GermanCuisine ;
 
     #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:DairyProduct, rbox:Eggs ;
-    rbox:hasIngredient rbox:Flour, rbox:Eggs, rbox:Milk, rbox:Butter, rbox:Sugar, rbox:Salt, rbox:PowderedSugar ;
+    rbox:hasAllergenInfo rbox:Gluten, rbox:DairyProduct, rbox:EggAllergen ;
+    rbox:hasIngredientList (
+        [ rbox:hasIngredient rbox:Flour ; rbox:hasQuantity 150 ; rbox:hasUnit rbox:grams ]
+        [ rbox:hasIngredient rbox:Eggs ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:count ]
+        [ rbox:hasIngredient rbox:Milk ; rbox:hasQuantity 200 ; rbox:hasUnit rbox:milliliter ]
+        [ rbox:hasIngredient rbox:Butter ; rbox:hasQuantity 50 ; rbox:hasUnit rbox:grams ]
+        [ rbox:hasIngredient rbox:Sugar ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
+        [ rbox:hasIngredient rbox:Salt ; rbox:hasQuantity "a pinch" ; rbox:hasUnit rbox:MiscUnit ]
+        [ rbox:hasIngredient rbox:PowderedSugar ; rbox:hasQuantity "for dusting" ; rbox:hasUnit rbox:MiscUnit ]
+    );
 
     #properties of the preparation
     schema:prepTime "PT30M" ;
@@ -92,7 +123,7 @@
     3. Cook until golden brown on both sides, then shred into pieces using two forks.
     4. Sprinkle with powdered sugar and serve with fruit compote.""" .
 
-:fried_rice a rbox:MainDish ;
+rbox:fried_rice a rbox:MainDish ;
     # properties of the recipe
     rbox:hasID "recipe005" ;
     rbox:hasTitle "Chinese Fried Rice" ;
@@ -102,8 +133,16 @@
     rbox:hasCuisine rbox:ChineseCuisine ;
 
     #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:Eggs ;
-    rbox:hasIngredient rbox:Rice, rbox:Eggs, rbox:SoySauce, rbox:SesameOil , rbox:Peas, rbox:Carrots, rbox:Corn ;
+    rbox:hasAllergenInfo rbox:Gluten, rbox:EggAllergen ;
+    rbox:hasIngredientList (
+        [ rbox:hasIngredient rbox:Rice ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:cup ]
+        [ rbox:hasIngredient rbox:Eggs ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+        [ rbox:hasIngredient rbox:SoySauce ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
+        [ rbox:hasIngredient rbox:SesameOil ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:tablespoon ]
+        [ rbox:hasIngredient rbox:Peas ; rbox:hasQuantity 0.5 ; rbox:hasUnit rbox:cup ]
+        [ rbox:hasIngredient rbox:Carrots ; rbox:hasQuantity 0.5 ; rbox:hasUnit rbox:cup ]
+        [ rbox:hasIngredient rbox:Corn ; rbox:hasQuantity 0.5 ; rbox:hasUnit rbox:cup ]
+    );
 
     #properties of the preparation
     schema:prepTime "PT25M" ;
@@ -114,7 +153,7 @@
     5. Serve hot.""" .
 
 # vegan french recipe: 
-:ratatouille a rbox:MainDish, rbox:VeganRecipe ;
+rbox:Ratatouille a rbox:MainDish, rbox:VeganRecipe ;
     # properties of the recipe
     rbox:hasID "recipe006" ;
     rbox:hasTitle "Ratatouille" ;
@@ -124,8 +163,17 @@
     rbox:hasCuisine rbox:FrenchCuisine ;
 
     #properties of the ingredients
-    rbox:hasAllergenInfo; 
-    rbox:hasIngredient rbox:Eggplant, rbox:Zucchini, rbox:BellPeppers, rbox:Tomatoes, rbox:Onions, rbox:Garlic, rbox:OliveOil, rbox:HerbsDeProvence ;
+    # no allergies
+    rbox:hasIngredientList (
+        [ rbox:hasIngredient rbox:Eggplant ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:count ]
+        [ rbox:hasIngredient rbox:Zucchini ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+        [ rbox:hasIngredient rbox:BellPeppers ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+        [ rbox:hasIngredient rbox:Tomatoes ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:count ]
+        [ rbox:hasIngredient rbox:Onions ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:count ]
+        [ rbox:hasIngredient rbox:Garlic ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:cloves ]
+        [ rbox:hasIngredient rbox:OliveOil ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:tablespoon ]
+        [ rbox:hasIngredient rbox:HerbsDeProvence ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:teaspoon ]
+    );  
 
     #properties of the preparation
     schema:prepTime "PT1H" ;
@@ -134,150 +182,118 @@
     3. Layer the sliced vegetables in a baking dish.
     4. Drizzle with olive oil and sprinkle with Herbs de Provence.
     5. Bake at 375°F (190°C) for about 45 minutes until vegetables are tender.""" .
+
 # Ingredients declarations
     #Ingredients of Ratatouille and its measurments. 
         rbox:Eggplant a rbox:Vegetable ;
-            rbox:hasName "Eggplant" ;
-            rbox:hasQuantity "1 large eggplant" .
+            rbox:hasName "Eggplant". 
+
         rbox:Zucchini a rbox:Vegetable ;
-            rbox:hasName "Zucchini" ;
-            rbox:hasQuantity "2 medium zucchinis" .
+            rbox:hasName "Zucchini" .
+
         rbox:BellPeppers a rbox:Vegetable ;
-            rbox:hasName "Bell Peppers" ;
-            rbox:hasQuantity "2 bell peppers (any color)" .
+            rbox:hasName "Bell Peppers" .
         rbox:Tomatoes a rbox:Vegetable ;
-            rbox:hasName "Tomatoes" ;
-            rbox:hasQuantity "4 large tomatoes" .
-        rbox:Onions a rbox:Vegetable ;
-            rbox:hasName "Onions" ;
-            rbox:hasQuantity "1 large onion" .
-        rbox:Garlic a rbox:Vegetable ;
-            rbox:hasName "Garlic" ;
-            rbox:hasQuantity "3 cloves" .
-        rbox:OliveOil a rbox:Oil ;
-            rbox:hasName "Olive Oil" ;
-            rbox:hasQuantity "3 tablespoons" .
+            rbox:hasName "Tomatoes" .
+
         rbox:HerbsDeProvence a rbox:Spice ;
-            rbox:hasName "Herbs de Provence" ;
-            rbox:hasQuantity "1 teaspoon" .
-    #Ingredients of fried rice 
+            rbox:hasName "Herbs de Provence" .
+
         rbox:Rice a rbox:Grain ;
             rbox:hasName "Rice" ;
-            rbox:hasQuantity "2 cups" ;
             rbox:hasAllergenInfo rbox:Gluten .
+
         rbox:Eggs a rbox:EggProduct ;
             rbox:hasName "Eggs" ;
-            rbox:hasQuantity "2 large eggs" ;
-            rbox:hasAllergenInfo rbox:Eggs .
+            rbox:hasAllergenInfo rbox:EggAllergen .
 
         rbox:SoySauce a rbox:Condiment ;
             rbox:hasName "Soy Sauce" ;
-            rbox:hasQuantity "2 tablespoons" ;
-            rbox:hasAllergenInfo rbox:Gluten .
+            rbox:hasAllergenInfo rbox:Gluten, rbox:Soybeans.
 
         rbox:SesameOil a rbox:Oil ;
-            rbox:hasName "Sesame Oil" ;
-            rbox:hasQuantity "1 tablespoon" .
+            rbox:hasName "Sesame Oil"; 
+            rbox:hasAllergenInfo rbox:Sesame .
 
         rbox:Peas a rbox:Vegetable ;
-            rbox:hasName "Peas" ;
-            rbox:hasQuantity "1/2 cup" .
+            rbox:hasName "Peas" .
+
         rbox:Carrots a rbox:Vegetable ;
-            rbox:hasName "Carrots" ;
-            rbox:hasQuantity "1/2 cup, diced" .
+            rbox:hasName "Carrots" .
+
         rbox:Corn a rbox:Vegetable ;
-            rbox:hasName "Corn" ;
-            rbox:hasQuantity "1/2 cup" .
+            rbox:hasName "Corn" .
 
     #Ingredients of Kaiserschmarn
         rbox:Flour a rbox:Grain ;
-            rbox:hasName "Flour" ;
-            rbox:hasQuantity "150 grams" ;
+            rbox:hasName "Flour";
             rbox:hasAllergenInfo rbox:Gluten .
-        rbox:Eggs a rbox:EggProduct ;
-            rbox:hasName "Eggs" ;
-            rbox:hasQuantity "4 large eggs" ;
-            rbox:hasAllergenInfo rbox:Eggs .
 
         rbox:Milk a rbox:DairyProduct ;
             rbox:hasName "Milk" ;
-            rbox:hasQuantity "200 ml" ;
             rbox:hasAllergenInfo rbox:DairyProduct .
 
         rbox:Butter a rbox:DairyProduct ;
-            rbox:hasName "Butter" ;
-            rbox:hasQuantity "50 grams" ;
+            rbox:hasName "Butter" ; 
             rbox:hasAllergenInfo rbox:DairyProduct .
 
         rbox:Sugar a rbox:Sweetener ;
-            rbox:hasName "Sugar" ;
-            rbox:hasQuantity "2 tablespoons" .
+            rbox:hasName "Sugar" .
 
         rbox:Salt a rbox:Mineral ;
-            rbox:hasName "Salt" ;
-            rbox:hasQuantity "a pinch" .
+            rbox:hasName "Salt" .
 
         rbox:PowderedSugar a rbox:Sweetener ;
-            rbox:hasName "Powdered Sugar" ;
-            rbox:hasQuantity "for dusting" .
+            rbox:hasName "Powdered Sugar" .
 
     # Ingredients of Spaghetti Carbonara   
         rbox:Spaghetti a rbox:Grain ; 
-            rbox:hasName "Spaghetti" ;
-            rbox:hasQuantity "400 grams" ;
+            rbox:hasName "Spaghetti";
             rbox:hasAllergenInfo rbox:Gluten .
-        rbox:Pancetta a rbox:Meat ;
-            rbox:hasName "Pancetta" ;
-            rbox:hasQuantity "150 grams" .
 
-        rbox:Eggs a rbox:EggProduct ;
-            rbox:hasName "Eggs" ;
-            rbox:hasQuantity "4 large eggs" ;
-            rbox:hasAllergenInfo rbox:Eggs .
+        rbox:Pancetta a rbox:Meat ;
+            rbox:hasName "Pancetta" .
+
         rbox:ParmesanCheese a rbox:DairyProduct ;
             rbox:hasName "Parmesan Cheese" ;
-            rbox:hasQuantity "100 grams" ;
             rbox:hasAllergenInfo rbox:DairyProduct .
 
         rbox:BlackPepper a rbox:Spice ;
-            rbox:hasName "Black Pepper" ;
-            rbox:hasQuantity "to taste" .
+            rbox:hasName "Black Pepper" .
 
     # Ingredients of Chicken Biryani
         rbox:BasmatiRice a rbox:Grain ;
-            rbox:hasName "Basmati Rice" ;
-            rbox:hasQuantity "500 grams" ;  
-            rbox:hasAllergenInfo rbox:Gluten .
+            rbox:hasName "Basmati Rice" .
+
         rbox:Chicken a rbox:Meat ;
-            rbox:hasName "Chicken" ;
-            rbox:hasQuantity "1 kg" .
+            rbox:hasName "Chicken" . 
+
         rbox:Yogurt a rbox:DairyProduct ;
             rbox:hasName "Yogurt" ;
-            rbox:hasQuantity "200 grams" ;
             rbox:hasAllergenInfo rbox:DairyProduct .
-        rbox:Onions a rbox:Vegetable ;
-            rbox:hasName "Onions" ;
-            rbox:hasQuantity "2 large onions" .
-        rbox:Garlic a rbox:Vegetable ;
-            rbox:hasName "Garlic" ;
-            rbox:hasQuantity "4 cloves" .
-        rbox:Ginger a rbox:Vegetable ;
-            rbox:hasName "Ginger" ;
-            rbox:hasQuantity "1 inch piece" .
-        rbox:Spices a rbox:Spice ;  
-            rbox:hasName "Mixed Spices" ;
-            rbox:hasQuantity "to taste" .
 
-    # Ingredients of Spaghetti Bolognese
+        rbox:Onions a rbox:Vegetable ;
+            rbox:hasName "Onions" .
+
+        rbox:Garlic a rbox:Vegetable ;
+            rbox:hasName "Garlic" .
+
+        rbox:Ginger a rbox:Vegetable ;
+            rbox:hasName "Ginger" .
+
+        rbox:Spices a rbox:Spice ;  
+            rbox:hasName "Mixed Spices" .
+
+    # Ingredients of Spaghetti Bolognese 
+
         rbox:GroundBeef a rbox:Meat ;
-            rbox:hasName "Ground Beef" ;
-            rbox:hasQuantity "500 grams" .
+            rbox:hasName "Ground Beef".
+
         rbox:TomatoSauce a rbox:Sauce ;
-            rbox:hasName "Tomato Sauce" ;
-            rbox:hasQuantity "400 grams" .
+            rbox:hasName "Tomato Sauce".
+
         rbox:OliveOil a rbox:Oil ;
-            rbox:hasName "Olive Oil" ;
-            rbox:hasQuantity "2 tablespoons" .
+            rbox:hasName "Olive Oil". 
 
         
 @prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
