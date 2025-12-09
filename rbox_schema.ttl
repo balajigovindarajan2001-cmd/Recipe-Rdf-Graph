@@ -112,6 +112,12 @@ rbox:Menu a rdfs:Class ; # still link it
     rdfs:label "Menu"@en, "Menü"@de ;
     rdfs:comment "A collection of recipes that go well as a menu together. A buyable product."@en,
                  "Eine Sammlung von Rezepten, die zusammen serviert werden können und als ein Produkt verkauft werden können."@de .
+    
+    rbox:hasRecipe a rdf:Property ;
+        rdfs:label "has recipe"@en, "hat Rezept"@de ;
+        rdfs:domain rbox:Menu ;
+        rdfs:range rbox:Recipe .
+
 
 rbox:Unit a rdfs:Class ;
     rdfs:label "Unit"@en, "Einheit"@de ;
@@ -236,21 +242,21 @@ rbox:Unit a rdfs:Class ;
 
 # recipe properties
     rbox:hasID a rdfs:DatatypeProperty ;
-        rdfs:domain rbox:Recipe ;
+        rdfs:domain rbox:Recipe, rbox:Menu;
         rdfs:range xsd:string ; 
         rdfs:label "has ID"@en, "hat ID"@de ;
         rdfs:comment "A unique identifier for the recipe."@en,
                  "Eine eindeutige Kennung für das Rezept."@de .
 
     rbox:hasTitle a rdfs:DatatypeProperty ;
-        rdfs:domain rbox:Recipe ;
+        rdfs:domain rbox:Recipe, rbox:Menu;
         rdfs:range xsd:string ;
         rdfs:label "has title"@en, "hat Titel"@de ;
         rdfs:comment "The title of the recipe."@en,
                  "Der Titel des Rezepts."@de .
 
     rbox:hasDescription a rdfs:DatatypeProperty ;
-        rdfs:domain rbox:Recipe ;
+        rdfs:domain rbox:Recipe, rbox:Menu ;
         rdfs:range xsd:string ;
         rdfs:label "has description"@en, "hat Beschreibung"@de ;
         rdfs:comment "A brief description of the recipe."@en,
@@ -264,7 +270,7 @@ rbox:Unit a rdfs:Class ;
                      "Die Zubereitungsanweisungen für das Rezept."@de .
 
     rbox:hasCuisine a rdfs:ObjectProperty ;
-        rdfs:domain rbox:Recipe ;
+        rdfs:domain rbox:Recipe, rbox:Menu ;
         rdfs:range rbox:Cuisine ;
         rdfs:label "has cuisine"@en, "gehört zur Küche"@de ;
         rdfs:comment "Specifies the cuisine type of the recipe."@en,
@@ -285,5 +291,175 @@ rbox:hasAllergenInfo a rdfs:ObjectProperty ;
     rdfs:comment "Provides allergen information for the recipe."@en,
                  "Bietet Allergeninformationen für das Rezept."@de .
     #owl:propertyChainAxiom ( rbox:hasIngredient rbox:hasAllergenInfo ) .
+
+# Balajis Ontology part
+# Classes
+# Customer
+rbox:Customer a rdfs:Class ;
+    rdfs:subClassOf schema:Person ;
+    rdfs:label "Customer"@en ;
+    rdfs:comment "A customer subscribed to the recipe box service."@en .
+
+# Courier
+rbox:Courier a rdfs:Class ;
+    rdfs:subClassOf schema:Person ;
+    rdfs:label "Courier"@en ;
+    rdfs:comment "A delivery person responsible for delivering recipe boxes."@en .
+
+# Subscription Plan
+rbox:SubscriptionPlan a rdfs:Class ;
+    rdfs:label "Subscription Plan"@en ;
+    rdfs:comment "A pricing plan selected by a customer, e.g., 3 recipes x 2 people."@en .
+
+# Order
+rbox:Order a rdfs:Class ;
+    rdfs:subClassOf schema:Order ;
+    rdfs:label "Order"@en ;
+    rdfs:comment "An order placed by a customer for one or more recipes."@en .
+
+# Order Line
+rbox:OrderLine a rdfs:Class ;
+    rdfs:subClassOf schema:OrderItem ;
+    rdfs:label "Order Line"@en ;
+    rdfs:comment "A line item in an order linking a selected recipe and quantity."@en .
+
+# Delivery
+rbox:Delivery a rdfs:Class ;
+    rdfs:subClassOf schema:DeliveryEvent ;
+    rdfs:label "Delivery"@en ;
+    rdfs:comment "A delivery event for a customer order, executed by a courier."@en .
+
+# Review
+rbox:Review a rdfs:Class ;
+    rdfs:subClassOf schema:Review ;
+    rdfs:label "Review"@en ;
+    rdfs:comment "A customer review of a recipe, menu or delivery."@en .
+
+# Object Properties
+
+# Customer ↔ SubscriptionPlan
+rbox:hasSubscriptionPlan a rdf:Property ;
+    rdfs:label "has subscription plan"@en ;
+    rdfs:domain rbox:Customer ;
+    rdfs:range rbox:SubscriptionPlan ;
+    rdfs:comment "Links a customer to their selected subscription plan."@en .
+
+# Order ↔ Customer
+rbox:orderedBy a rdf:Property ;
+    rdfs:label "ordered by"@en ;
+    rdfs:subPropertyOf schema:customer ;
+    rdfs:domain rbox:Order ;
+    rdfs:range rbox:Customer ;
+    rdfs:comment "Associates an order with the customer who placed it."@en .
+
+# Order ↔ OrderLine
+rbox:hasOrderLine a rdf:Property ;
+    rdfs:label "has order line"@en ;
+    rdfs:domain rbox:Order ;
+    rdfs:range rbox:OrderLine ;
+    rdfs:comment "Links an order to each of its line items."@en .
+
+# Delivery ↔ Order
+rbox:deliveryForOrder a rdf:Property ;
+    rdfs:label "delivery for order"@en ;
+    rdfs:domain rbox:Delivery ;
+    rdfs:range rbox:Order ;
+    rdfs:comment "Links a delivery event to the order being delivered."@en .
+
+# Delivery ↔ Courier
+rbox:deliveredBy a rdf:Property ;
+    rdfs:label "delivered by"@en ;
+    rdfs:domain rbox:Delivery ;
+    rdfs:range rbox:Courier ;
+    rdfs:comment "Indicates which courier delivered the order."@en .
+
+# Delivery ↔ Customer
+rbox:deliveredTo a rdf:Property ;
+    rdfs:label "delivered to"@en ;
+    rdfs:domain rbox:Delivery ;
+    rdfs:range rbox:Customer ;
+    rdfs:comment "Indicates which customer received the delivery."@en .
+
+# Order ↔ Review
+rbox:hasReview a rdf:Property ;
+    rdfs:label "has review"@en ;
+    rdfs:domain rbox:Order ;
+    rdfs:range rbox:Review ;
+    rdfs:comment "Links an order to its customer-written review."@en .
+
+# Review ↔ Customer
+rbox:reviewAuthor a rdf:Property ;
+    rdfs:label "review author"@en ;
+    rdfs:subPropertyOf schema:author ;
+    rdfs:domain rbox:Review ;
+    rdfs:range rbox:Customer ;
+    rdfs:comment "Indicates the customer who authored the review."@en .
+
+# Properties
+
+# OrderLine quantity
+rbox:portionCount a rdf:Property ;
+    rdfs:label "portion count"@en ;
+    rdfs:domain rbox:OrderLine ;
+    rdfs:range xsd:integer ;
+    rdfs:comment "The number of portions ordered for this recipe."@en .
+
+# Delivery start date
+rbox:deliveryStart a rdf:Property ;
+    rdfs:label "delivery start date/time"@en ;
+    rdfs:domain rbox:Delivery ;
+    rdfs:range xsd:dateTime ;
+    rdfs:comment "Start time of the delivery window."@en .
+
+# Delivery end date
+rbox:deliveryEnd a rdf:Property ;
+    rdfs:label "delivery end date/time"@en ;
+    rdfs:domain rbox:Delivery ;
+    rdfs:range xsd:dateTime ;
+    rdfs:comment "End time of the delivery window."@en .
+
+# Subscription plan description
+rbox:planLabel a rdf:Property ;
+    rdfs:label "subscription plan label"@en ;
+    rdfs:domain rbox:SubscriptionPlan ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Human-readable label of the subscription plan."@en .
+
+# Subscription plan price
+rbox:planPrice a rdf:Property ;
+    rdfs:label "subscription plan price"@en ;
+    rdfs:domain rbox:SubscriptionPlan ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Price of the subscription plan per week."@en .
+
+# Popularity
+
+# How many orders are associated with this subscription plan
+rbox:planOrderCount a rdf:Property ;
+    rdfs:label "plan order count"@en ;
+    rdfs:comment "Total number of orders placed by customers using this subscription plan."@en ;
+    rdfs:domain rbox:SubscriptionPlan ;
+    rdfs:range xsd:integer .
+
+# How many reviews given by customers on this plan's orders
+rbox:planReviewCount a rdf:Property ;
+    rdfs:label "plan review count"@en ;
+    rdfs:comment "Total number of reviews written for orders of this subscription plan."@en ;
+    rdfs:domain rbox:SubscriptionPlan ;
+    rdfs:range xsd:integer .
+
+# Average rating of those reviews (0–5 for example)
+rbox:planAverageRating a rdf:Property ;
+    rdfs:label "plan average rating"@en ;
+    rdfs:comment "Average rating for orders associated with this subscription plan."@en ;
+    rdfs:domain rbox:SubscriptionPlan ;
+    rdfs:range xsd:decimal .
+
+# Combined popularity score (your own formula)
+rbox:planPopularityScore a rdf:Property ;
+    rdfs:label "plan popularity score"@en ;
+    rdfs:comment "Combined score based on order frequency and reviews for this subscription plan."@en ;
+    rdfs:domain rbox:SubscriptionPlan ;
+    rdfs:range xsd:decimal .
 
 
