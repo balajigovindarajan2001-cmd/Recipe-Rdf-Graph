@@ -1,0 +1,229 @@
+code:
+
+
+
+-----------------------------
+
+1) “Which subscription plan has the highest popularity score, and what are its average rating and total order count?”
+
+(uses derived properties: popularity, rating, count)
+
+PREFIX rbox: <http://example.org/rbox#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?plan ?planLabel ?planPrice ?orderCount ?reviewCount ?averageRating ?popularityScore
+WHERE {
+  ?plan a rbox:SubscriptionPlan ;
+        rbox:planLabel ?planLabel ;
+        rbox:planPrice ?planPrice ;
+        rbox:planOrderCount ?orderCount ;
+        rbox:planReviewCount ?reviewCount ;
+        rbox:planAverageRating ?averageRating ;
+        rbox:planPopularityScore ?popularityScore .
+}
+ORDER BY DESC(xsd:decimal(?popularityScore))
+LIMIT 1
+
+
+------------------------
+
+2) “Which meal plans are chosen by customers who order more than once?”
+
+PREFIX rbox: <http://example.org/rbox#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?customer ?customerName ?plan ?planLabel (COUNT(?order) AS ?orderCount)
+WHERE {
+  # Customer with subscription plan
+  ?customer a rbox:Customer ;
+            rbox:hasSubscriptionPlan ?plan .
+  OPTIONAL { ?customer rdfs:label ?customerName . }
+
+  # All orders placed by this customer
+  ?order a rbox:Order ;
+         rbox:orderedBy ?customer .
+
+  # Plan details
+  OPTIONAL { ?plan rbox:planLabel ?planLabel . }
+}
+GROUP BY ?customer ?customerName ?plan ?planLabel
+HAVING (COUNT(?order) > 1)
+ORDER BY ?planLabel ?customerName
+
+-----------------------------
+
+3) “How long does delivery usually take for each subscription plan on average?”
+
+PREFIX rbox: <http://example.org/rbox#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?plan ?planLabel
+       (AVG(?durationMinutes) AS ?avgDeliveryMinutes)
+WHERE {
+  # Subscription plan
+  ?plan a rbox:SubscriptionPlan ;
+        rbox:planLabel ?planLabel .
+
+  # Customer using this plan
+  ?customer a rbox:Customer ;
+            rbox:hasSubscriptionPlan ?plan .
+
+  # Orders placed by this customer
+  ?order a rbox:Order ;
+         rbox:orderedBy ?customer .
+
+  # Delivery for those orders
+  ?delivery a rbox:Delivery ;
+            rbox:deliveryForOrder ?order ;
+            rbox:deliveryStart ?deliveryStart ;
+            rbox:deliveryEnd ?deliveryEnd .
+
+  # Compute duration in minutes (end - start)
+  BIND(
+    ( (HOURS(?deliveryEnd) * 60 + MINUTES(?deliveryEnd)) -
+      (HOURS(?deliveryStart) * 60 + MINUTES(?deliveryStart)) )
+    AS ?durationMinutes
+  )
+}
+GROUP BY ?plan ?planLabel
+ORDER BY ?planLabel
+
+
+------------------------------
+
+4) “Can you show me, for every order, how many portions people ordered and what rating they gave?”
+
+PREFIX rbox:   <http://example.org/rbox#>
+PREFIX schema: <https://schema.org/>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?order ?orderLabel ?orderLine ?itemDescription ?portionCount ?ratingValue
+WHERE {
+  # One line (item) in an order with its portion count
+  ?orderLine a rbox:OrderLine ;
+             rbox:portionCount ?portionCount ;
+             schema:description ?itemDescription .
+
+  # The order that contains this line
+  ?order a rbox:Order ;
+         rbox:hasOrderLine ?orderLine ;
+         rbox:hasReview ?review .
+  OPTIONAL { ?order rdfs:label ?orderLabel . }
+
+  # The review and its rating value
+  ?review a rbox:Review ;
+          schema:reviewRating ?ratingNode .
+
+  ?ratingNode a schema:Rating ;
+              schema:ratingValue ?ratingValue .
+}
+ORDER BY ?order ?orderLine
+
+
+
+------------------------------
+
+5) "Which meal plan is trending the most right now?”
+
+PREFIX rbox: <http://example.org/rbox#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?plan ?planLabel ?planPrice ?orderCount ?reviewCount ?averageRating ?popularityScore
+WHERE {
+  ?plan a rbox:SubscriptionPlan ;
+        rbox:planLabel ?planLabel ;
+        rbox:planPrice ?planPrice ;
+        rbox:planOrderCount ?orderCount ;
+        rbox:planReviewCount ?reviewCount ;
+        rbox:planAverageRating ?averageRating ;
+        rbox:planPopularityScore ?popularityScore .
+}
+ORDER BY DESC(xsd:decimal(?popularityScore))
+LIMIT 1
+
+------------------------------
+
+6) “Is the expensive plan actually worth it?”
+
+SubscriptionPlan → planPrice → planAverageRating
+
+PREFIX rbox: <http://example.org/rbox#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?plan ?planLabel ?planPrice ?averageRating
+WHERE {
+  ?plan a rbox:SubscriptionPlan ;
+        rbox:planLabel ?planLabel ;
+        rbox:planPrice ?planPrice ;
+        rbox:planAverageRating ?averageRating .
+}
+ORDER BY DESC(xsd:decimal(?planPrice))
+
+-----------------------------
+
+7) “Do people like the pricey meal plan more than the budget plan?”
+
+PREFIX rbox: <http://example.org/rbox#>
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?plan ?planLabel ?planPrice ?averageRating
+WHERE {
+  # Most expensive plan
+  {
+    SELECT ?plan ?planLabel ?planPrice ?averageRating
+    WHERE {
+      ?plan a rbox:SubscriptionPlan ;
+            rbox:planLabel ?planLabel ;
+            rbox:planPrice ?planPrice ;
+            rbox:planAverageRating ?averageRating .
+    }
+    ORDER BY DESC(xsd:decimal(?planPrice))
+    LIMIT 1
+  }
+
+  UNION
+
+  # Cheapest plan
+  {
+    SELECT ?plan ?planLabel ?planPrice ?averageRating
+    WHERE {
+      ?plan a rbox:SubscriptionPlan ;
+            rbox:planLabel ?planLabel ;
+            rbox:planPrice ?planPrice ;
+            rbox:planAverageRating ?averageRating .
+    }
+    ORDER BY xsd:decimal(?planPrice) ASC
+    LIMIT 1
+  }
+}
+
+-----------------------------
+
+8) “Which main dishes can be cooked in under 25 minutes?”
+
+PREFIX rbox:  <http://www.researchbox.org/ontology#>
+PREFIX schema:<http://schema.org/>
+PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
+
+CONSTRUCT {
+  ?recipe a rbox:QuickMainDish ;
+          rbox:hasID ?id ;
+          rbox:hasTitle ?title ;
+          rbox:hasCuisine ?cuisine ;
+          schema:prepTime ?prepTime .
+}
+WHERE {
+  ?recipe a rbox:MainDish ;
+          rbox:hasID ?id ;
+          rbox:hasTitle ?title ;
+          rbox:hasCuisine ?cuisine ;
+          schema:prepTime ?prepTime .
+
+  # Extract minutes from ISO 8601 duration like "PT20M"
+  BIND(xsd:integer(REPLACE(STR(?prepTime), "PT|M", "")) AS ?minutes)
+
+  FILTER(?minutes < 25)
+}
+
+-----------------------------

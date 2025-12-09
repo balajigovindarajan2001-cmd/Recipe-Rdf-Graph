@@ -1,0 +1,61 @@
+This rbox_ontology :
+
+The customer will subscribe to the plan and then he places the order the oder can contain one or more orderline.
+Then the delivery guy deliver the order.Then the customer gets the order and then he gives rating.
+
+a)It has 7 main classses which is :
+
+1)rbox:Customer:It is the service that is being offered to the customers.
+    It contains a subclass of schema:Person which contains like name, email,etc.
+    There is a option for the customer for the subscription plan.Based on the plan we can calculate the popularity of the meal.
+
+2)rbox:courier:It represents the person who is delivering the oders.
+    It conatains a subclass of schema:Person.
+
+
+3)rbox:Subscriptionplan:It describies the customers subscription plan.
+    We have 3 meals per 2 persons and 4 meals per 4 persons plans.
+    based on the peoples choice we calaculate the popularity of the meal.
+
+4)rbox:Order:It has multiple OrderLines, each one has one recipe with the numnber of portions.
+    
+5)rbox:OrderLine:It inform about what the things it contain inside the order
+    Example: you might contain the box which has chicken Briyani X 4 portions and Spaghetti Carbonara X 2 portions.
+
+6)rbox:Delivery:Which is notthing but the delivery. Who delivered ? Who received ? when (start/end time) ?
+
+7)rbox:Review:It tells about the customerreviw:
+    Rating schema:Rating and review Rating is done by the customer at the time order is received.
+
+b)Object Properties(Relatioonships):
+
+1) Customer and SubscriptionPlan:
+    rbox:hasSubscriptionPlan : Customer selects the SubscriptionPlan based on there requirements.
+
+2) Customer and Order:
+    rbox:orderedBy : This links the order to the customer.
+
+3) Order and OrderLine:
+    rbox:hasOrder : This links the order to its order lines.
+
+4)Delivery and Order:
+    rbox:deliveryForOrder : This links the delivery to the order being delivered.
+    
+5) Delivery and Courier:
+    rbox:deliveredBy : This tells who delivered the order.
+
+6) Delivery and Customer:
+    rbox:deliveredto : Which customer received it.
+
+7) Review and Order:
+    rbox:review : here the Customers can review their order. 
+
+8)Review and Customer:
+    rbox:reviewAuthor :where customer used to write there review
+
+c)Datatype Properties:
+ This one contains the simple attributies like numbers and strings.It is divided into three:
+
+ For OrderLine:We have a rbox:portionCount which informs us about how many many portion are ordered.
+ For Delivery:I created two Rbox:deliveryStart and deliveryEnd which is time slot.
+ For SubscriptionPlan:Here i have used the label which is rbox:planlabel which say the name of the plan and it also contains rbox:planprice which tells about the price.
