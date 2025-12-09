@@ -6,185 +6,349 @@
 @prefix rbox: <http://www.researchbox.org/ontology#> . # our own ontology
 @prefix schema: <http://schema.org/> . # for the recipe schema 
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-#@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> . 
 #@prefix : <http://example.org/recipes/> .
 
 rbox:spaghetti_carbonara a rbox:MainDish;
-    # properties of the recipe
-    rbox:hasID "recipe001" ;
-    rbox:hasTitle "Spaghetti Carbonara" ;
-    rbox:hasDescription "A classic Italian pasta dish made with eggs, cheese, pancetta, and pepper." ;
-    
-    schema:recipeYield "4 servings" ;
-    rbox:hasCuisine rbox:ItalianCuisine ;
+    # general attributes of the recipe
+        rbox:hasID "recipe001" ;
+        rbox:hasTitle "Spaghetti Carbonara" ;
+        rbox:hasDescription "A classic Italian pasta dish made with eggs, cheese, pancetta, and pepper." ;
+        schema:recipeYield "4 servings" ;
+        rbox:hasCuisine rbox:ItalianCuisine ;
 
-    #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:EggAllergen, rbox:DairyProduct, rbox:Pork ;
-    rbox:hasIngredientList (
-        [ rbox:hasIngredient rbox:Spaghetti ; rbox:hasQuantity 400 ; rbox:hasUnit rbox:grams ]
-        [ rbox:hasIngredient rbox:Pancetta ; rbox:hasQuantity 150 ; rbox:hasUnit rbox:grams ]
-        [ rbox:hasIngredient rbox:Eggs ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:count ]
-        [ rbox:hasIngredient rbox:ParmesanCheese ; rbox:hasQuantity 100 ; rbox:hasUnit rbox:grams ]
-        [ rbox:hasIngredient rbox:BlackPepper ]
-    ) ;
+    # properties about the ingredients 
+        rbox:hasAllergenInfo rbox:Gluten, rbox:EggAllergen, rbox:DairyProduct, rbox:Pork ;
+        rbox:hasIngredientList (
+            [ rbox:hasIngredient rbox:Spaghetti ; rbox:hasQuantity 400 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Pancetta ; rbox:hasQuantity 150 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Eggs ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:ParmesanCheese ; rbox:hasQuantity 100 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:BlackPepper ]
+        ) ;
 
     #properties of the preparation
-    schema:prepTime "PT20M" ;
-    rbox:hasInstructions """1. Cook spaghetti according to package instructions. 
-    2. In a pan, cook pancetta until crispy.
-    3. Beat eggs and mix with grated Parmesan cheese.
-    4. Combine hot spaghetti with pancetta and egg mixture, stirring quickly to create a creamy sauce. 
-    5. Season with black pepper and serve immediately.""" .
+        schema:prepTime "PT20M" ;
+        rbox:hasInstructions """1. Cook spaghetti according to package instructions. 
+        2. In a pan, cook pancetta until crispy.
+        3. Beat eggs and mix with grated Parmesan cheese.
+        4. Combine hot spaghetti with pancetta and egg mixture, stirring quickly to create a creamy sauce. 
+        5. Season with black pepper and serve immediately.""" .
 
 rbox:briyani a rbox:MainDish ;
-    # properties of the recipe
-    rbox:hasID "recipe002" ;
-    rbox:hasTitle "Chicken Biryani" ;
-    rbox:hasDescription "A flavorful Indian rice dish made with marinated chicken, spices, and basmati rice." ;
-    
-    schema:recipeYield "6 servings" ;
-    rbox:hasCuisine rbox:IndianCuisine ;
+    # general attributes of the recipe
+        rbox:hasID "recipe002" ;
+        rbox:hasTitle "Chicken Biryani" ;
+        rbox:hasDescription "A flavorful Indian rice dish made with marinated chicken, spices, and basmati rice." ;   
+        schema:recipeYield "6 servings" ;
+        rbox:hasCuisine rbox:IndianCuisine ;
 
-    #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:DairyProduct ;
-    rbox:hasIngredientList (
-        [ rbox:hasIngredient rbox:BasmatiRice ; rbox:hasQuantity 500 ; rbox:hasUnit rbox:grams ]
-        [ rbox:hasIngredient rbox:Chicken ; rbox:hasQuantity 1000 ; rbox:hasUnit rbox:grams ]
-        [ rbox:hasIngredient rbox:Yogurt ; rbox:hasQuantity 200 ; rbox:hasUnit rbox:grams ]
-        [ rbox:hasIngredient rbox:Onions ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
-        [ rbox:hasIngredient rbox:Garlic ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:cloves ]
-        [ rbox:hasIngredient rbox:Ginger ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:inch ] 
-        [ rbox:hasIngredient rbox:Spices ]
-    ); 
+    # properties about the ingredients
+        rbox:hasAllergenInfo rbox:Gluten, rbox:Milk ;
+        rbox:hasIngredientList (
+            [ rbox:hasIngredient rbox:BasmatiRice ; rbox:hasQuantity 500 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Chicken ; rbox:hasQuantity 1000 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Yogurt ; rbox:hasQuantity 200 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Onions ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Garlic ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:cloves ]
+            [ rbox:hasIngredient rbox:Ginger ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:inch ] 
+            [ rbox:hasIngredient rbox:Spices ]
+        ); 
 
     #properties of the preparation
-    schema:prepTime "PT1H30M" ;
-    rbox:hasInstructions """1. Marinate chicken with yogurt and spices.
-    2. Fry onions until golden brown.
-    3. Layer marinated chicken and partially cooked basmati rice in a pot.
-    4. Cook on low heat until chicken is tender and rice is fully cooked.
-    5. Garnish with fried onions and serve hot.""" .
+        schema:prepTime "PT1H30M" ;
+        rbox:hasInstructions """1. Marinate chicken with yogurt and spices.
+        2. Fry onions until golden brown.
+        3. Layer marinated chicken and partially cooked basmati rice in a pot.
+        4. Cook on low heat until chicken is tender and rice is fully cooked.
+        5. Garnish with fried onions and serve hot.""" .
 
 rbox:spaghetti_bolognese a rbox:MainDish;
-    # properties of the recipe
-    rbox:hasID "recipe003" ;
-    rbox:hasTitle "Spaghetti Bolognese" ;
-    rbox:hasDescription "A traditional Italian pasta dish with a rich meat sauce." ;
-    
-    schema:recipeYield "4 servings" ;
-    rbox:hasCuisine rbox:ItalianCuisine ;
+    # general attributes of the recipe
+        rbox:hasID "recipe003" ;
+        rbox:hasTitle "Spaghetti Bolognese" ;
+        rbox:hasDescription "A traditional Italian pasta dish with a rich meat sauce." ; 
+        schema:recipeYield "4 servings" ;
+        rbox:hasCuisine rbox:ItalianCuisine ;
 
-    #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:DairyProduct ;
-   
-    rbox:hasIngredientList (
-        [ rbox:hasIngredient rbox:Spaghetti ; rbox:hasQuantity 500 ; rbox:hasUnit rbox:grams ]
-        [ rbox:hasIngredient rbox:GroundBeef ; rbox:hasQuantity 500 ; rbox:hasUnit rbox:grams ]
-        [ rbox:hasIngredient rbox:TomatoSauce ; rbox:hasQuantity 400 ; rbox:hasUnit rbox:grams ]
-        [ rbox:hasIngredient rbox:Onions ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
-        [ rbox:hasIngredient rbox:Garlic ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:cloves ]
-        [ rbox:hasIngredient rbox:OliveOil ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
-        [ rbox:hasIngredient rbox:ParmesanCheese ; rbox:hasQuantity 100 ; rbox:hasUnit rbox:grams ]
-    ) ;  
+    # properties about the ingredients
+        rbox:hasAllergenInfo rbox:Gluten, rbox:Milk ;
+        rbox:hasIngredientList (
+            [ rbox:hasIngredient rbox:Spaghetti ; rbox:hasQuantity 500 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:GroundBeef ; rbox:hasQuantity 500 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:TomatoSauce ; rbox:hasQuantity 400 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Onions ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Garlic ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:cloves ]
+            [ rbox:hasIngredient rbox:OliveOil ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
+            [ rbox:hasIngredient rbox:ParmesanCheese ; rbox:hasQuantity 100 ; rbox:hasUnit rbox:grams ]
+        ) ;  
     
+    # properties of the preparation
+        schema:prepTime "PT45M" ;
+        rbox:hasInstructions """1. Cook spaghetti according to package instructions. 
+        2. In a pan, sauté onions and garlic in olive oil until translucent.
+        3. Add ground beef and cook until browned.
+        4. Pour in tomato sauce and simmer for 20 minutes.
+        5. Serve sauce over spaghetti and top with grated Parmesan cheese.""" .
+
+rbox:bruschetta a rbox:Appetizer ;
+    # general attributes of the recipe
+        rbox:hasID "recipe009" ;
+        rbox:hasTitle "Bruschetta al Pomodoro" ;
+        rbox:hasDescription "A simple Italian appetizer with grilled bread, garlic, tomatoes, and basil." ;
+        schema:recipeYield "4 servings" ;
+        rbox:hasCuisine rbox:ItalianCuisine ;
+    
+    # properties about the ingredients
+        rbox:hasAllergenInfo rbox:Gluten ;
+        rbox:hasIngredientList (
+            [ rbox:hasIngredient rbox:Bread ; rbox:hasQuantity 8 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Tomatoes ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Garlic ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:cloves ]
+            [ rbox:hasIngredient rbox:OliveOil ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
+            [ rbox:hasIngredient rbox:Basil ; rbox:hasQuantity 8 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Salt ]) ;
+
+    # properties of the preparation
+        schema:prepTime "PT15M" ;
+        rbox:hasInstructions """1. Grill or toast bread slices.
+        2. Rub bread with garlic and drizzle with olive oil.
+        3. Top with chopped tomatoes, basil leaves, and a pinch of salt.
+        4. Serve immediately.""" .
+# Italian Dessert
+rbox:tiramisu a rbox:Dessert, rbox:VegetarianRecipe ;
+    # general attributes of the recipe
+        rbox:hasID "recipe011" ;
+        rbox:hasTitle "Tiramisu" ;
+        rbox:hasDescription "A classic Italian layered dessert made with coffee-soaked ladyfingers and mascarpone cream." ;
+        schema:recipeYield "4 servings" ;
+        rbox:hasCuisine rbox:ItalianCuisine ;
+
+    # properties about the ingredients
+        rbox:hasAllergenInfo rbox:Gluten, rbox:EggAllergen, rbox:Milk ;
+        rbox:hasIngredientList (
+            [ rbox:hasIngredient rbox:Ladyfingers ; rbox:hasQuantity 200 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Mascarpone ; rbox:hasQuantity 250 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Egg ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Sugar ; rbox:hasQuantity 80 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Coffee ; rbox:hasQuantity 200 ; rbox:hasUnit rbox:milliliter ]
+            [ rbox:hasIngredient rbox:CocoaPowder ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]) ;
+
+    # properties of the preparation
+        schema:prepTime "PT30M" ;
+        rbox:hasInstructions """1. Prepare coffee and let it cool.
+        2. Beat egg yolks with sugar and fold in mascarpone.
+        3. Dip ladyfingers in coffee and layer in a dish.
+        4. Spread mascarpone cream over the layer and repeat.
+        5. Dust with cocoa powder and refrigerate for 2 hours before serving.""" .
+
+rbox:bretzel a rbox:Appetizer ;
+    # general attributes of the recipe
+        rbox:hasID "recipe012" ;
+        rbox:hasTitle "Betzel" ;
+        rbox:hasDescription "A traditional German soft baked Bretzel, perfect as a snack or appetizer." ;
+        schema:recipeYield "4 servings" ;
+        rbox:hasCuisine rbox:GermanCuisine ;
+
+    # properties about the ingredients
+        rbox:hasAllergenInfo rbox:Gluten ;
+        rbox:hasIngredientList (
+            [ rbox:hasIngredient rbox:Flour ; rbox:hasQuantity 500 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Yeast ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:tablespoon ]
+            [ rbox:hasIngredient rbox:Salt ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:teaspoon ]
+            [ rbox:hasIngredient rbox:Water ; rbox:hasQuantity 300 ; rbox:hasUnit rbox:milliliter ]
+            [ rbox:hasIngredient rbox:BakingSoda ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
+            [ rbox:hasIngredient rbox:Butter ; rbox:hasQuantity 20 ; rbox:hasUnit rbox:grams ]) ;
+
+    # properties of the preparation
+        schema:prepTime "PT2H" ;
+        rbox:hasInstructions """1. Mix flour, yeast, salt, and water to form dough.
+        2. Let dough rise for 1 hour.
+        3. Shape dough into pretzels and boil briefly in water with baking soda.
+        4. Bake at 200°C for 15 minutes.
+        5. Brush with melted butter before serving.""" .
+
+rbox:kairserschmarn a rbox:Dessert, rbox:VegetarianRecipe;
+    # general attributes of the recipe
+        rbox:hasID "recipe004" ;
+        rbox:hasTitle "Kaiserschmarrn" ;
+        rbox:hasDescription "A traditional Austrian shredded pancake dessert, often served with fruit compote." ;
+        schema:recipeYield "2 servings" ;
+        rbox:hasCuisine rbox:GermanCuisine ;
+
+    #properties about the ingredients
+        rbox:hasAllergenInfo rbox:Gluten, rbox:Milk, rbox:EggAllergen ;
+        rbox:hasIngredientList (
+            [ rbox:hasIngredient rbox:Flour ; rbox:hasQuantity 150 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Eggs ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Milk ; rbox:hasQuantity 200 ; rbox:hasUnit rbox:milliliter ]
+            [ rbox:hasIngredient rbox:Butter ; rbox:hasQuantity 50 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Sugar ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
+            [ rbox:hasIngredient rbox:Salt ]
+            [ rbox:hasIngredient rbox:PowderedSugar ]);
+
     #properties of the preparation
-    schema:prepTime "PT45M" ;
-    rbox:hasInstructions """1. Cook spaghetti according to package instructions. 
-    2. In a pan, sauté onions and garlic in olive oil until translucent.
-    3. Add ground beef and cook until browned.
-    4. Pour in tomato sauce and simmer for 20 minutes.
-    5. Serve sauce over spaghetti and top with grated Parmesan cheese.""" .
+        schema:prepTime "PT30M" ;
+        rbox:hasInstructions """1. Mix flour, eggs, milk, sugar, and a pinch of salt to form a batter.
+        2. Heat butter in a pan and pour in the batter to make a thick pancake.
+        3. Cook until golden brown on both sides, then shred into pieces using two forks.
+        4. Sprinkle with powdered sugar and serve with fruit compote.""" .
 
-rbox:Kairserschmarn a rbox:Dessert, rbox:VegetarianRecipe;
-    # properties of the recipe
-    rbox:hasID "recipe004" ;
-    rbox:hasTitle "Kaiserschmarrn" ;
-    rbox:hasDescription "A traditional Austrian shredded pancake dessert, often served with fruit compote." ;
+rbox:apfelstrudel a rbox:Dessert, rbox:VegetarianRecipe ;
+    # general attributes of the recipe
+        rbox:hasID "recipe007" ;
+        rbox:hasTitle "Apfelstrudel" ;
+        rbox:hasDescription "A classic Austrian/German apple strudel dessert with thin pastry and spiced apple filling." ;
+        schema:recipeYield "4 servings" ;
+        rbox:hasCuisine rbox:GermanCuisine ;
     
-    schema:recipeYield "2 servings" ;
-    rbox:hasCuisine rbox:GermanCuisine ;
+    # properties about the ingredients
+        rbox:hasAllergenInfo rbox:Gluten, rbox:Milk, rbox:EggAllergen ;
+        rbox:hasIngredientList (
+            [ rbox:hasIngredient rbox:Flour ; rbox:hasQuantity 250 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Apple ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Sugar ; rbox:hasQuantity 50 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Cinnamon ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:teaspoon ]
+            [ rbox:hasIngredient rbox:Butter ; rbox:hasQuantity 50 ; rbox:hasUnit rbox:grams ]
+            [ rbox:hasIngredient rbox:Eggs ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:PowderedSugar ]) ;
+    
+    # properties of the preparation
+        schema:prepTime "PT1H" ;
+        rbox:hasInstructions """1. Peel and slice apples, mix with sugar and cinnamon.
+        2. Roll out pastry thinly, place apple mixture in the center.
+        3. Fold pastry and bake at 180°C for 40 minutes.
+        4. Brush with melted butter and sprinkle with powdered sugar before serving.""" . 
 
-    #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:DairyProduct, rbox:EggAllergen ;
-    rbox:hasIngredientList (
-        [ rbox:hasIngredient rbox:Flour ; rbox:hasQuantity 150 ; rbox:hasUnit rbox:grams ]
-        [ rbox:hasIngredient rbox:Eggs ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:count ]
-        [ rbox:hasIngredient rbox:Milk ; rbox:hasQuantity 200 ; rbox:hasUnit rbox:milliliter ]
-        [ rbox:hasIngredient rbox:Butter ; rbox:hasQuantity 50 ; rbox:hasUnit rbox:grams ]
-        [ rbox:hasIngredient rbox:Sugar ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
-        [ rbox:hasIngredient rbox:Salt ; rbox:hasQuantity "a pinch" ; rbox:hasUnit rbox:MiscUnit ]
-        [ rbox:hasIngredient rbox:PowderedSugar ; rbox:hasQuantity "for dusting" ; rbox:hasUnit rbox:MiscUnit ]
-    );
+rbox:schweinebraten a rbox:MainDish ;
+    # general attributes of the recipe
+        rbox:hasID "recipe008" ;
+        rbox:hasTitle "Schweinebraten" ;
+        rbox:hasDescription "A traditional German roast pork with crispy crust, typically served with gravy and vegetables." ;
+        schema:recipeYield "4 servings" ;
+        rbox:hasCuisine rbox:GermanCuisine ;
 
-    #properties of the preparation
-    schema:prepTime "PT30M" ;
-    rbox:hasInstructions """1. Mix flour, eggs, milk, sugar, and a pinch of salt to form a batter.
-    2. Heat butter in a pan and pour in the batter to make a thick pancake.
-    3. Cook until golden brown on both sides, then shred into pieces using two forks.
-    4. Sprinkle with powdered sugar and serve with fruit compote.""" .
+    # properties about ingredients 
+        rbox:hasAllergenInfo rbox:None ;
+        rbox:hasIngredientList (
+            [ rbox:hasIngredient rbox:PorkShoulder ; rbox:hasQuantity 1.5 ; rbox:hasUnit rbox:kilograms ]
+            [ rbox:hasIngredient rbox:Salt ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:teaspoon ]
+            [ rbox:hasIngredient rbox:BlackPepper ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:teaspoon ]
+            [ rbox:hasIngredient rbox:Garlic ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:cloves ]
+            [ rbox:hasIngredient rbox:Onions ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Carrots ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Celery ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:count ]) ;
+    
+    # properties of preparation 
+        schema:prepTime "PT2H30M" ;
+        rbox:hasInstructions """1. Preheat oven to 180°C.
+        2. Season pork with salt, pepper, and garlic.
+        3. Roast pork in oven for 2 hours, basting occasionally.
+        4. Roast vegetables alongside and serve with pan gravy.""" .
 
 rbox:fried_rice a rbox:MainDish ;
-    # properties of the recipe
-    rbox:hasID "recipe005" ;
-    rbox:hasTitle "Chinese Fried Rice" ;
-    rbox:hasDescription "A popular Chinese dish made with stir-fried rice, vegetables, and eggs." ;
-    
-    schema:recipeYield "4 servings" ;
-    rbox:hasCuisine rbox:ChineseCuisine ;
+    # general attributes of the recipe
+        rbox:hasID "recipe005" ;
+        rbox:hasTitle "Chinese Fried Rice" ;
+        rbox:hasDescription "A popular Chinese dish made with stir-fried rice, vegetables, and eggs." ;
+        schema:recipeYield "4 servings" ;
+        rbox:hasCuisine rbox:ChineseCuisine ;
 
-    #properties of the ingredients
-    rbox:hasAllergenInfo rbox:Gluten, rbox:EggAllergen ;
-    rbox:hasIngredientList (
-        [ rbox:hasIngredient rbox:Rice ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:cup ]
-        [ rbox:hasIngredient rbox:Eggs ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
-        [ rbox:hasIngredient rbox:SoySauce ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
-        [ rbox:hasIngredient rbox:SesameOil ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:tablespoon ]
-        [ rbox:hasIngredient rbox:Peas ; rbox:hasQuantity 0.5 ; rbox:hasUnit rbox:cup ]
-        [ rbox:hasIngredient rbox:Carrots ; rbox:hasQuantity 0.5 ; rbox:hasUnit rbox:cup ]
-        [ rbox:hasIngredient rbox:Corn ; rbox:hasQuantity 0.5 ; rbox:hasUnit rbox:cup ]
-    );
+    #properties about the ingredients
+        rbox:hasAllergenInfo rbox:Gluten, rbox:EggAllergen ;
+        rbox:hasIngredientList (
+            [ rbox:hasIngredient rbox:Rice ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:cup ]
+            [ rbox:hasIngredient rbox:Eggs ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:SoySauce ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
+            [ rbox:hasIngredient rbox:SesameOil ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:tablespoon ]
+            [ rbox:hasIngredient rbox:Peas ; rbox:hasQuantity 0.5 ; rbox:hasUnit rbox:cup ]
+            [ rbox:hasIngredient rbox:Carrots ; rbox:hasQuantity 0.5 ; rbox:hasUnit rbox:cup ]
+            [ rbox:hasIngredient rbox:Corn ; rbox:hasQuantity 0.5 ; rbox:hasUnit rbox:cup ]);
 
     #properties of the preparation
-    schema:prepTime "PT25M" ;
-    rbox:hasInstructions """1. Cook rice and let it cool.
-    2. In a wok, heat sesame oil and sauté mixed vegetables.
-    3. Push vegetables to the side and scramble eggs in the wok.
-    4. Add cooked rice and soy sauce, stir-frying everything together.
-    5. Serve hot.""" .
+        schema:prepTime "PT25M" ;
+        rbox:hasInstructions """1. Cook rice and let it cool.
+        2. In a wok, heat sesame oil and sauté mixed vegetables.
+        3. Push vegetables to the side and scramble eggs in the wok.
+        4. Add cooked rice and soy sauce, stir-frying everything together.
+        5. Serve hot.""" .
+ 
+rbox:ratatouille a rbox:MainDish, rbox:VeganRecipe ;
+    # general attributes of the recipe
+        rbox:hasID "recipe006" ;
+        rbox:hasTitle "Ratatouille" ;
+        rbox:hasDescription "A traditional French Provençal stewed vegetable dish, originating in Nice." ;
+        schema:recipeYield "4 servings" ;
+        rbox:hasCuisine rbox:FrenchCuisine ;
 
-# vegan french recipe: 
-rbox:Ratatouille a rbox:MainDish, rbox:VeganRecipe ;
-    # properties of the recipe
-    rbox:hasID "recipe006" ;
-    rbox:hasTitle "Ratatouille" ;
-    rbox:hasDescription "A traditional French Provençal stewed vegetable dish, originating in Nice." ;
-    
+    #properties about the ingredients
+        # no allergies
+        rbox:hasIngredientList (
+            [ rbox:hasIngredient rbox:Eggplant ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Zucchini ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:BellPeppers ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Tomatoes ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Onions ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Garlic ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:cloves ]
+            [ rbox:hasIngredient rbox:OliveOil ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:tablespoon ]
+            [ rbox:hasIngredient rbox:HerbsDeProvence ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:teaspoon ]);  
+
+    #properties of the preparation
+        schema:prepTime "PT1H" ;
+        rbox:hasInstructions """1. Slice eggplant, zucchini, bell peppers, and tomatoes.
+        2. Sauté onions and garlic in olive oil until translucent.
+        3. Layer the sliced vegetables in a baking dish.
+        4. Drizzle with olive oil and sprinkle with Herbs de Provence.
+        5. Bake at 190°C for about 45 minutes until vegetables are tender.""" .
+
+rbox:ratatouille_tart a rbox:Appetizer ;
+    # general attributes of the recipe
+        rbox:hasID "recipe013" ;
+        rbox:hasTitle "Ratatouille Tart" ;
+        rbox:hasDescription "A French appetizer tart with layers of colorful vegetables, inspired by classic ratatouille." ;
+        schema:recipeYield "4 servings" ;
+        rbox:hasCuisine rbox:FrenchCuisine ;
+
+    # properties about the ingredients
+        rbox:hasAllergenInfo rbox:Gluten, rbox:Milk ;
+        rbox:hasIngredientList (
+            [ rbox:hasIngredient rbox:PastryDough ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Zucchini ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Eggplant ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:BellPeppers ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Tomatoes ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Cheese ; rbox:hasQuantity 50 ; rbox:hasUnit rbox:grams ]) ;
+
+    # properties of the preparation
+        schema:prepTime "PT50M" ;
+        rbox:hasInstructions """1. Preheat oven to 180°C.
+        2. Roll out pastry dough and place in tart pan.
+        3. Slice vegetables thinly and layer them decoratively on the dough.
+        4. Sprinkle with cheese and bake for 35-40 minutes until vegetables are tender and pastry is golden.
+        5. Serve warm.""" .
+
+rbox:creme_brulee a rbox:Dessert, rbox:VegetarianRecipe ;
+    rbox:hasID "recipe010" ;
+    rbox:hasTitle "Crème Brûlée" ;
+    rbox:hasDescription "A classic French dessert consisting of rich custard topped with a layer of hard caramel." ;
     schema:recipeYield "4 servings" ;
     rbox:hasCuisine rbox:FrenchCuisine ;
-
-    #properties of the ingredients
-    # no allergies
+    rbox:hasAllergenInfo rbox:Milk, rbox:EggAllergen ;
     rbox:hasIngredientList (
-        [ rbox:hasIngredient rbox:Eggplant ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:count ]
-        [ rbox:hasIngredient rbox:Zucchini ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
-        [ rbox:hasIngredient rbox:BellPeppers ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:count ]
-        [ rbox:hasIngredient rbox:Tomatoes ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:count ]
-        [ rbox:hasIngredient rbox:Onions ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:count ]
-        [ rbox:hasIngredient rbox:Garlic ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:cloves ]
-        [ rbox:hasIngredient rbox:OliveOil ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:tablespoon ]
-        [ rbox:hasIngredient rbox:HerbsDeProvence ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:teaspoon ]
-    );  
+        [ rbox:hasIngredient rbox:Eggs ; rbox:hasQuantity 4 ; rbox:hasUnit rbox:count ]
+        [ rbox:hasIngredient rbox:Sugar ; rbox:hasQuantity 100 ; rbox:hasUnit rbox:grams ]
+        [ rbox:hasIngredient rbox:Milk ; rbox:hasQuantity 500 ; rbox:hasUnit rbox:milliliter ]
+        [ rbox:hasIngredient rbox:VanillaExtract ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:teaspoon ]
+        [ rbox:hasIngredient rbox:PowderedSugar ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
+    ) ;
+    schema:prepTime "PT50M" ;
+    rbox:hasInstructions """1. Preheat oven to 150°C.
+    2. Beat egg yolks with sugar until pale.
+    3. Heat milk with vanilla and pour slowly into egg mixture.
+    4. Pour custard into ramekins and bake in a water bath for 40 minutes.
+    5. Cool, sprinkle sugar on top, and caramelize with a torch before serving.""" .
 
-    #properties of the preparation
-    schema:prepTime "PT1H" ;
-    rbox:hasInstructions """1. Slice eggplant, zucchini, bell peppers, and tomatoes.
-    2. Sauté onions and garlic in olive oil until translucent.
-    3. Layer the sliced vegetables in a baking dish.
-    4. Drizzle with olive oil and sprinkle with Herbs de Provence.
-    5. Bake at 375°F (190°C) for about 45 minutes until vegetables are tender.""" .
-
-# Ingredients declarations
-    #Ingredients of Ratatouille and its measurments. 
+# Ingredients Declarations
+    #I Ingredients of Ratatouille and its measurments. 
         rbox:Eggplant a rbox:Vegetable ;
             rbox:hasName "Eggplant". 
 
@@ -193,6 +357,7 @@ rbox:Ratatouille a rbox:MainDish, rbox:VeganRecipe ;
 
         rbox:BellPeppers a rbox:Vegetable ;
             rbox:hasName "Bell Peppers" .
+
         rbox:Tomatoes a rbox:Vegetable ;
             rbox:hasName "Tomatoes" .
 
@@ -207,7 +372,7 @@ rbox:Ratatouille a rbox:MainDish, rbox:VeganRecipe ;
             rbox:hasName "Eggs" ;
             rbox:hasAllergenInfo rbox:EggAllergen .
 
-        rbox:SoySauce a rbox:Condiment ;
+        rbox:SoySauce a rbox:Sauce ;
             rbox:hasName "Soy Sauce" ;
             rbox:hasAllergenInfo rbox:Gluten, rbox:Soybeans.
 
@@ -224,29 +389,30 @@ rbox:Ratatouille a rbox:MainDish, rbox:VeganRecipe ;
         rbox:Corn a rbox:Vegetable ;
             rbox:hasName "Corn" .
 
-    #Ingredients of Kaiserschmarn
+    # Missing Ingredients of Kaiserschmarn
         rbox:Flour a rbox:Grain ;
             rbox:hasName "Flour";
             rbox:hasAllergenInfo rbox:Gluten .
 
         rbox:Milk a rbox:DairyProduct ;
             rbox:hasName "Milk" ;
-            rbox:hasAllergenInfo rbox:DairyProduct .
+            rbox:hasAllergenInfo rbox:Milk .
 
         rbox:Butter a rbox:DairyProduct ;
             rbox:hasName "Butter" ; 
-            rbox:hasAllergenInfo rbox:DairyProduct .
+            rbox:hasAllergenInfo rbox:Milk .
 
-        rbox:Sugar a rbox:Sweetener ;
+        rbox:Sugar a rbox:Spice ;
             rbox:hasName "Sugar" .
 
-        rbox:Salt a rbox:Mineral ;
+        rbox:Salt a rbox:Spice ;
             rbox:hasName "Salt" .
 
-        rbox:PowderedSugar a rbox:Sweetener ;
+        rbox:PowderedSugar a rbox:Spice ;
             rbox:hasName "Powdered Sugar" .
+    #
 
-    # Ingredients of Spaghetti Carbonara   
+    # Missing Ingredients of Spaghetti Carbonara   
         rbox:Spaghetti a rbox:Grain ; 
             rbox:hasName "Spaghetti";
             rbox:hasAllergenInfo rbox:Gluten .
@@ -256,12 +422,12 @@ rbox:Ratatouille a rbox:MainDish, rbox:VeganRecipe ;
 
         rbox:ParmesanCheese a rbox:DairyProduct ;
             rbox:hasName "Parmesan Cheese" ;
-            rbox:hasAllergenInfo rbox:DairyProduct .
+            rbox:hasAllergenInfo rbox:Milk .
 
         rbox:BlackPepper a rbox:Spice ;
             rbox:hasName "Black Pepper" .
 
-    # Ingredients of Chicken Biryani
+    # Missing Ingredients of Chicken Biryani
         rbox:BasmatiRice a rbox:Grain ;
             rbox:hasName "Basmati Rice" .
 
@@ -270,7 +436,7 @@ rbox:Ratatouille a rbox:MainDish, rbox:VeganRecipe ;
 
         rbox:Yogurt a rbox:DairyProduct ;
             rbox:hasName "Yogurt" ;
-            rbox:hasAllergenInfo rbox:DairyProduct .
+            rbox:hasAllergenInfo rbox:Milk .
 
         rbox:Onions a rbox:Vegetable ;
             rbox:hasName "Onions" .
@@ -284,7 +450,7 @@ rbox:Ratatouille a rbox:MainDish, rbox:VeganRecipe ;
         rbox:Spices a rbox:Spice ;  
             rbox:hasName "Mixed Spices" .
 
-    # Ingredients of Spaghetti Bolognese 
+    # Missing ingredients of Spaghetti Bolognese 
 
         rbox:GroundBeef a rbox:Meat ;
             rbox:hasName "Ground Beef".
@@ -294,267 +460,170 @@ rbox:Ratatouille a rbox:MainDish, rbox:VeganRecipe ;
 
         rbox:OliveOil a rbox:Oil ;
             rbox:hasName "Olive Oil". 
-
+    
+    # Missing ingredients of Apfelstrudel 
+        rbox:Cinnamon a rbox:Spice ; 
+            rbox:hasName "Cinnamon". 
+    
+    # Missing ingredients of Schweinebraten 
+        rbox:Porkshoulder a rbox:Meat; 
+            rbox:hasName "Porkshoulder"@en, "Schweineschulter"@de. 
         
-@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
-@prefix schema: <https://schema.org/> .
-@prefix rbox:   <http://example.org/rbox#> .
+        rbox:Celery a rbox:Vegetable; 
+            rbox:hasName "Celery"@en, "Sellerie"@de.
 
-############### Subscription plans #################
+    # Missing ingredients of Bruscetta
+        rbox:Bread a rbox:Grain ; 
+            rbox:hasName "Bread"; 
+            rbox:hasAllergenInfo rbox:Gluten .
 
-rbox:Plan_3x2 a rbox:SubscriptionPlan ;
-    rbox:planLabel "3 recipes x 2 people" ;
-    rbox:planPrice "49.90"^^xsd:decimal .
+        rbox:Basil a rbox:Vegetable ; 
+            rbox:hasName "Basil" .
+         
+    # Missing ingredients creme brulee 
+        rbox:VanillaExtract a rbox:Spice ; 
+        rbox:hasName "Vanilla Extract" .
+    
+    # Missing ingredients Tiramisu
+        rbox:Ladyfingers a rbox:Grain ;
+            rbox:hasName "Ladyfingers" ;
+            rbox:hasAllergenInfo rbox:Gluten .
 
-rbox:Plan_4x4 a rbox:SubscriptionPlan ;
-    rbox:planLabel "4 recipes x 4 people" ;
-    rbox:planPrice "89.90"^^xsd:decimal .
+        rbox:Mascarpone a rbox:DairyProduct ;
+            rbox:hasName "Mascarpone" ;
+            rbox:hasAllergenInfo rbox:Milk .
 
+        rbox:Coffee a rbox:Drink ;
+            rbox:hasName "Coffee" .
 
+        rbox:CocoaPowder a rbox:Spice ;
+            rbox:hasName "Cocoa Powder" .
+    ### Drink Other 
+    # Missing ingredients Pretzel
+        rbox:Yeast a rbox:Spice ;
+            rbox:hasName "Yeast" .
 
-################ Customers ####################
+        rbox:Water a rbox:Drink ;
+            rbox:hasName "Water" .
 
-rbox:Customer_Alice a rbox:Customer ;
-    rdfs:label "Alice Martin" ;
-    schema:email "alice@gamil.com" ;
-    rbox:hasSubscriptionPlan rbox:Plan_3x2 .
+        rbox:BakingSoda a rbox:Spice ;
+            rbox:hasName "Baking Soda" .
 
-rbox:Customer_Bruno a rbox:Customer ;
-    rdfs:label "Bruno Lefevre" ;
-    schema:email "bruno@gamil.com" ;
-    rbox:hasSubscriptionPlan rbox:Plan_4x4 .
+    # Missing ingredients Ratatouille Tart
+        rbox:PastryDough a rbox:Grain ;
+            rbox:hasName "Pastry Dough" .
 
-rbox:Customer_Claire a rbox:Customer ;
-    rdfs:label "Claire Dubois" ;
-    schema:email "Claire@gamil.com" ;
-    rbox:hasSubscriptionPlan rbox:Plan_3x2 .
+        rbox:Cheese a rbox:DairyProduct ;
+            rbox:hasName "Cheese" ;
+            rbox:hasAllergenInfo rbox:Milk .
 
-rbox:Customer_David a rbox:Customer ;
-    rdfs:label "David Morel" ;
-    schema:email "David@gamil.com" ;
-    rbox:hasSubscriptionPlan rbox:Plan_4x4 .
+# Allergies Declarations 
 
-rbox:Customer_Eva a rbox:Customer ;
-    rdfs:label "Eva Simon" ;
-    schema:email "Eva@gamil,com" ;
-    rbox:hasSubscriptionPlan rbox:Plan_3x2 .
+    rbox:Gluten a rbox:Allergen ;
+        rdfs:label "Gluten"@en, "Gluten"@de .
 
-################ Couriers ################
+    rbox:Crustaceans a rbox:Allergen ;
+        rdfs:label "Crustaceans"@en, "Krebstiere"@de .
 
-rbox:Courier_Emma a rbox:Courier ;
-    rdfs:label "Emma Dubois" ;
-    schema:telephone "+33-6-00-00-00-01" .
+    rbox:EggAllergen a rbox:Allergen ;
+        rdfs:label "Eggs"@en, "Eier"@de .
 
-rbox:Courier_Luc a rbox:Courier ;
-    rdfs:label "Luc Bernard" ;
-    schema:telephone "+33-6-00-00-00-02" .
+    rbox:Fish a rbox:Allergen ;
+        rdfs:label "Fish"@en, "Fisch"@de .
 
-rbox:Courier_Sophie a rbox:Courier ;
-    rdfs:label "Sophie Moreau" ;
-    schema:telephone "+33-6-00-00-00-03" .
+    rbox:Peanuts a rbox:Allergen ;
+        rdfs:label "Peanuts"@en, "Erdnüsse"@de .
 
-rbox:Courier_Maxime a rbox:Courier ;
-    rdfs:label "Maxime Richard" ;
-    schema:telephone "+33-6-00-00-00-04" .
+    rbox:Soybeans a rbox:Allergen ;
+        rdfs:label "Soybeans"@en, "Sojabohnen"@de .
 
-############### Orders ##################
+    rbox:Milk a rbox:Allergen ;
+        rdfs:label "Milk"@en, "Milch"@de .
 
-# Alice's order
-rbox:Order_1 a rbox:Order ;
-    rdfs:label "Order #1 (Alice)" ;
-    rbox:orderedBy rbox:Customer_Alice .
+    rbox:Nuts a rbox:Allergen ;
+        rdfs:label "Nuts"@en, "Nüsse"@de .
 
-# Bruno's order
-rbox:Order_2 a rbox:Order ;
-    rdfs:label "Order #2 (Bruno)" ;
-    rbox:orderedBy rbox:Customer_Bruno .
+    rbox:Celery a rbox:Allergen ;
+        rdfs:label "Celery"@en, "Sellerie"@de .
 
-#Claire's order
-rbox:Order_3 a rbox:Order ;
-    rdfs:label "Order #3 (Claire)" ;
-    rbox:orderedBy rbox:Customer_Claire .
+    rbox:Mustard a rbox:Allergen ;
+        rdfs:label "Mustard"@en, "Senf"@de .
 
-# David's order
-rbox:Order_4 a rbox:Order ; 
-    rdfs:label "Order #4 (David)" ;
-    rbox:orderedBy rbox:Customer_David .    
+    rbox:Sesame a rbox:Allergen ;
+        rdfs:label "Sesame"@en, "Sesam"@de .
 
-# Eva's order
-rbox:Order_5 a rbox:Order ;
-    rdfs:label "Order #5 (Eva)" ;
-    rbox:orderedBy rbox:Customer_Eva .
+    rbox:Lupin a rbox:Allergen ;
+        rdfs:label "Lupin"@en, "Lupine"@de .
 
+    rbox:Molluscs a rbox:Allergen ;
+        rdfs:label "Molluscs"@en, "Weichtiere"@de .
 
-############## Order lines #############
+# Unit Declarations 
+    # Mass units
+        rbox:grams a rbox:MassUnit ;
+            rdfs:label "grams"@en, "Gramm"@de .
 
-# Order 1 has two different recipes (we just describe them textually)
-rbox:OrderLine_1_1 a rbox:OrderLine ;
-    rbox:portionCount 2 ;
-    schema:description "Spaghetti Carbonara for 2 people" .
+        rbox:kilograms a rbox:MassUnit ;
+            rdfs:label "kilograms"@en, "Kilogramm"@de .
 
-rbox:OrderLine_1_2 a rbox:OrderLine ;
-    rbox:portionCount 2 ;
-    schema:description "Chinese Fried Rice for 2 people" .
+    # Volume units
+        rbox:tablespoon a rbox:VolumeUnit ;
+            rdfs:label "tablespoon"@en, "Esslöffel"@de .
 
-rbox:Order_1
-    rbox:hasOrderLine rbox:OrderLine_1_1 ,
-                      rbox:OrderLine_1_2 .
+        rbox:teaspoon a rbox:VolumeUnit ;
+            rdfs:label "teaspoon"@en, "Teelöffel"@de .
 
-# Order 2 has one large family recipe
-rbox:OrderLine_2_1 a rbox:OrderLine ;
-    rbox:portionCount 4 ;
-    schema:description "Chicken Biryani for 4 people" .
+        rbox:cup a rbox:VolumeUnit ;
+            rdfs:label "cup"@en, "Tasse"@de .
 
-rbox:Order_2
-    rbox:hasOrderLine rbox:OrderLine_2_1 .
+        rbox:milliliter a rbox:VolumeUnit ;
+            rdfs:label "milliliter"@en, "Milliliter"@de .
 
+        rbox:liter a rbox:VolumeUnit ;
+            rdfs:label "liter"@en, "Liter"@de .
 
-## Order 3 has three different recipes
-rbox:OrderLine_3_1 a rbox:OrderLine ;
-    rbox:portionCount 2 ;
-    schema:description "Spaghetti Bolognese for 2 people" .   
+    # Count units
+        rbox:count a rbox:CountUnit ;
+            rdfs:label "count"@en, "Stück"@de .
 
-rbox:OrderLine_3_2 a rbox:OrderLine ;
-    rbox:portionCount 2 ;           
-    schema:description "Kaiserschmarrn for 2 people" .  
-rbox:OrderLine_3_3 a rbox:OrderLine ;
-    rbox:portionCount 2 ;   
-    schema:description "Chinese Fried Rice for 2 people" .
-rbox:Order_3
-    rbox:hasOrderLine rbox:OrderLine_3_1 ,      
-                        rbox:OrderLine_3_2 ,
-                        rbox:OrderLine_3_3 .                                                    
+        rbox:cloves a rbox:CountUnit ;
+            rdfs:label "cloves"@en, "Zehen"@de .
 
-# Order 4 has two family recipes
-rbox:OrderLine_4_1 a rbox:OrderLine ;
-    rbox:portionCount 4 ;
-    schema:description "Spaghetti Carbonara for 4 people" .        
-    rbox:OrderLine_4_2 a rbox:OrderLine ;
-    rbox:portionCount 4 ;
-    schema:description "Chicken Biryani for 4 people" .        
-rbox:Order_4
-    rbox:hasOrderLine rbox:OrderLine_4_1 ,    
-                        rbox:OrderLine_4_2 .    
+    # Length units
+        rbox:inch a rbox:LengthUnit ;
+            rdfs:label "inch"@en, "Zoll"@de .
+    
+    # casual units
+        rbox:pinch a rbox:MiscUnit ;
+            rdfs:label "pinch"@en, "Prise"@de .
 
-
-# Order 5 has one recipe
-rbox:OrderLine_5_1 a rbox:OrderLine ;
-    rbox:portionCount 2 ;
-    schema:description "Spaghetti Bolognese for 2 people" . 
-rbox:Order_5                            
-    rbox:hasOrderLine rbox:OrderLine_5_1 .      
-
-            
-
-############ Deliveries ################
-
-# Delivery of Alice's order by Emma
-rbox:Delivery_1 a rbox:Delivery ;
-    rdfs:label "Delivery of Order #1" ;
-    rbox:deliveryForOrder rbox:Order_1 ;
-    rbox:deliveredBy rbox:Courier_Emma ;
-    rbox:deliveredTo rbox:Customer_Alice ;
-    rbox:deliveryStart "2025-12-10T18:00:00"^^xsd:dateTime ;
-    rbox:deliveryEnd   "2025-12-10T20:00:00"^^xsd:dateTime .
-
-# Delivery of Bruno's order by Luc
-rbox:Delivery_2 a rbox:Delivery ;
-    rdfs:label "Delivery of Order #2" ;
-    rbox:deliveryForOrder rbox:Order_2 ;
-    rbox:deliveredBy rbox:Courier_Luc ;
-    rbox:deliveredTo rbox:Customer_Bruno ;
-    rbox:deliveryStart "2025-12-11T10:00:00"^^xsd:dateTime ;
-    rbox:deliveryEnd   "2025-12-11T12:00:00"^^xsd:dateTime .
-
-# Delivery of Claire's order by Sophie
-rbox:Delivery_3 a rbox:Delivery ;           
-    rdfs:label "Delivery of Order #3" ;
-    rbox:deliveryForOrder rbox:Order_3 ;
-    rbox:deliveredBy rbox:Courier_Sophie ;
-    rbox:deliveredTo rbox:Customer_Claire ;
-    rbox:deliveryStart "2025-12-12T14:00:00"^^xsd:dateTime ;
-    rbox:deliveryEnd   "2025-12-12T16:00:00"^^xsd:dateTime .
-
-# Delivery of David's order by Maxime
-rbox:Delivery_4 a rbox:Delivery ;           
-    rdfs:label "Delivery of Order #4" ;
-    rbox:deliveryForOrder rbox:Order_4 ;
-    rbox:deliveredBy rbox:Courier_Maxime ;
-    rbox:deliveredTo rbox:Customer_David ;
-    rbox:deliveryStart "2025-12-13T09:00:00"^^xsd:dateTime ;
-    rbox:deliveryEnd   "2025-12-13T11:00:00"^^xsd:dateTime .
-
-# Delivery of Eva's order by Emma
-rbox:Delivery_5 a rbox:Delivery ;           
-    rdfs:label "Delivery of Order #5" ;
-    rbox:deliveryForOrder rbox:Order_5 ;
-    rbox:deliveredBy rbox:Courier_Emma ;
-    rbox:deliveredTo rbox:Customer_Eva ;
-    rbox:deliveryStart "2025-12-14T15:00:00"^^xsd:dateTime ;
-    rbox:deliveryEnd   "2025-12-14T17:00:00"^^xsd:dateTime .
-
-############## Reviews ##############
-# Alice reviews her order
-rbox:Review_1 a rbox:Review ;
-    rdfs:label "Review for Order #1" ;
-    rbox:reviewAuthor rbox:Customer_Alice ;
-    schema:reviewBody "Very tasty and easy to cook. Delivery was on time." ;
-    schema:reviewRating [
-        a schema:Rating ;
-        schema:ratingValue "5"^^xsd:integer ;
-        schema:bestRating "5"^^xsd:integer
-    ] .
-
-rbox:Order_1 rbox:hasReview rbox:Review_1 .
-
-# Bruno reviews his order
-rbox:Review_2 a rbox:Review ;
-    rdfs:label "Review for Order #2" ;
-    rbox:reviewAuthor rbox:Customer_Bruno ;
-    schema:reviewBody "Good recipes but the salmon box arrived slightly late." ;
-    schema:reviewRating [
-        a schema:Rating ;
-        schema:ratingValue "3"^^xsd:integer ;
-        schema:bestRating "5"^^xsd:integer
-    ] .
-
-rbox:Order_2 rbox:hasReview rbox:Review_2 .
-
-# Claire reviews her order
-rbox:Review_3 a rbox:Review ;
-    rdfs:label "Review for Order #3" ;
-    rbox:reviewAuthor rbox:Customer_Claire ;
-    schema:reviewBody "Loved the variety of recipes! Will order again." ;
-    schema:reviewRating [
-        a schema:Rating ;
-        schema:ratingValue "4"^^xsd:integer ;
-        schema:bestRating "5"^^xsd:integer
-    ] .
-rbox:Order_3 rbox:hasReview rbox:Review_3 .
-
-# David reviews his order
-rbox:Review_4 a rbox:Review ;
-    rdfs:label "Review for Order #4" ;
-    rbox:reviewAuthor rbox:Customer_David ;
-    schema:reviewBody "The roast beef was delicious, but the delivery was delayed." ;
-    schema:reviewRating [
-        a schema:Rating ;
-        schema:ratingValue "4"^^xsd:integer ;
-        schema:bestRating "5"^^xsd:integer
-    ] .
-rbox:Order_4 rbox:hasReview rbox:Review_4 .
-
-# Eva reviews her order
-rbox:Review_5 a rbox:Review ;
-    rdfs:label "Review for Order #5" ;
-    rbox:reviewAuthor rbox:Customer_Eva ;
-    schema:reviewBody "Spaghetti Bolognese was fantastic! Quick delivery too." ;
-    schema:reviewRating [
-        a schema:Rating ;
-        schema:ratingValue "5"^^xsd:integer ;
-        schema:bestRating "5"^^xsd:integer
-    ] .
-rbox:Order_5 rbox:hasReview rbox:Review_5 .
-
+# Cuisine Declarations
+    rbox:ItalianCuisine a rbox:Cuisine ;
+        rdfs:label "Italian Cuisine"@en, "Italienische Küche"@de ;
+        rdfs:comment "A recipe from Italian cuisine."@en,
+                     "Ein Rezept aus der italienischen Küche."@de .
+    
+    rbox:ChineseCuisine a rbox:Cuisine ;
+        rdfs:label "Chinese Cuisine"@en, "Chinesische Küche"@de ;
+        rdfs:comment "A recipe from Chinese cuisine."@en,
+                     "Ein Rezept aus der chinesischen Küche."@de .
+    
+    rbox:MexicanCuisine a rbox:Cuisine ;
+        rdfs:label "Mexican Cuisine"@en, "Mexikanische Küche"@de ;
+        rdfs:comment "A recipe from Mexican cuisine."@en,
+                     "Ein Rezept aus der mexikanischen Küche."@de .
+    
+    rbox:IndianCuisine a rbox:Cuisine ;
+        rdfs:label "Indian Cuisine"@en, "Indische Küche"@de ;
+        rdfs:comment "A recipe from Indian cuisine."@en,
+                     "Ein Rezept aus der indischen Küche."@de .
+    
+    rbox:FrenchCuisine a rbox:Cuisine ;
+        rdfs:label "French Cuisine"@en, "Französische Küche"@de ;
+        rdfs:comment "A recipe from French cuisine."@en,
+                     "Ein Rezept aus der französischen Küche."@de .
+    
+    rbox:GermanCuisine a rbox:Cuisine ;
+        rdfs:label "German Cuisine"@en, "Deutsche Küche"@de ;
+        rdfs:comment "A recipe from German cuisine."@en,
+                     "Ein Rezept aus der deutschen Küche."@de .
