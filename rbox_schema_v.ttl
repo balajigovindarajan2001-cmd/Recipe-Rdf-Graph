@@ -25,6 +25,7 @@ rbox:Ingredient a rdfs:Class ;
         rdfs:comment "A plant or part of a plant used as food."@en,
                      "Eine Pflanze oder ein Teil einer Pflanze, die als Nahrungsmittel verwendet wird."@de ;
         rdfs:subClassOf rbox:Ingredient .
+
     rbox:Fruit a rdfs:Class ;
         rdfs:label "Fruit"@en, "Obst"@de ;
         rdfs:comment "The sweet and fleshy product of a tree or other plant that contains seed and can be eaten as food."@en,
@@ -101,11 +102,91 @@ rbox:Menu a rdfs:Class ; # still link it
     rdfs:comment "A collection of recipes that go well as a menu together. A buyable product."@en,
                  "Eine Sammlung von Rezepten, die zusammen serviert werden können und als ein Produkt verkauft werden können."@de .
 
-rbox:Quantity a rdfs:Class ;
-    rdfs:label "Quantity"@en, "Menge"@de ;
-    rdfs:comment "The amount of an ingredient required for a recipe."@en,
-                 "Die Menge einer Zutat, die für ein Rezept benötigt wird."@de .
-    
+rbox:Unit a rdfs:Class ;
+    rdfs:label "Unit"@en, "Einheit"@de ;
+    rdfs:comment "A measurement unit used to express the amount of an ingredient."@en ,
+                 "Eine Maßeinheit, um die Menge einer Zutat auszudrücken."@de .
+
+    rbox:hasQuantity a rdf:Property ;
+    rdfs:domain rbox:Ingredient ;
+    rdfs:range rbox:Quantity .
+
+    # subclasses of unit 
+    rbox:MassUnit a rdfs:Class ;
+        rdfs:label "Mass Unit"@en ;
+        rdfs:comment "A unit used to measure mass, e.g., grams or kilograms."@en; 
+        rdfs:subClassOf rbox:Unit .
+
+    rbox:VolumeUnit a rdfs:Class ;
+        rdfs:label "Volume Unit"@en ;
+        rdfs:comment "A unit used to measure volume, e.g., liters or milliliters."@en;
+        rdfs:subClassOf rbox:Unit .
+
+    rbox:CountUnit a rdfs:Class ;
+        rdfs:label "Count Unit"@en ;
+        rdfs:comment "A unit representing countable items, e.g., pieces or items."@en; 
+        rdfs:subClassOf rbox:Unit .
+
+    rbox:LengthUnit a rdfs:Class ;
+        rdfs:label "Length Unit"@en ;
+        rdfs:comment "Units that measure length (e.g., inch) when relevant in recipes."@en ; 
+        rdfs:subClassOf rbox:Unit .
+
+    rbox:MiscUnit a rdfs:Class ;
+        rdfs:label "Miscellaneous Unit"@en ;
+        rdfs:comment "Non-standard/casual measures (e.g., pinch, handful, dash)."@en ; 
+        rdfs:subClassOf rbox:Unit .
+
+# properties of Unit
+rbox:hasUnit a rdf:Property ;
+    rdfs:domain rbox:Ingredient ;
+    rdfs:range rbox:Unit ;
+    rdfs:label "has unit"@en ;
+    rdfs:comment "Links an ingredient to a concrete unit instance that contains the amount and unit type."@en .
+
+rbox:amount a rdf:Property ;
+    rdfs:domain rbox:Unit ;
+    rdfs:range xsd:decimal ;
+    rdfs:label "amount"@en ;
+    rdfs:comment "Numeric amount associated with this unit instance."@en .
+
+rbox:unitName a rdf:Property ;
+    rdfs:domain rbox:Unit ;
+    rdfs:range xsd:string ;
+    rdfs:label "unit name"@en ;
+    rdfs:comment "Human-readable name of the unit (e.g., 'gram', 'cup', 'inch'). Useful for display."@en .
+
+rbox:unitType a rdf:Property ;
+    rdfs:domain rbox:Unit ;
+    rdfs:range rbox:Unit ;
+    rdfs:label "unit type"@en ;
+    rdfs:comment "Optional: points to a canonical unit individual/type if you want reuse."@en .
+
+# links from Ingredient to recipe 
+rbox:hasIngredientList a rdf:Property ;
+    rdfs:domain rbox:Recipe ;
+    rdfs:range rbox:RecipeIngredient ;
+    rdfs:label "has ingredient list"@en, "Zutatenliste"@de ;
+    rdfs:comment "Links a recipe to its ingredient+amount+unit tuples."@en, "Verbindet Zutaten mit Quantität und Einheit".
+
+    rbox:hasIngredient a rdf:Property ;
+        rdfs:domain rbox:RecipeIngredient ;
+        rdfs:range rbox:Ingredient ;
+        rdfs:label "has ingredient"@en, "hat Zutat"@de ;
+        rdfs:comment "The ingredient in the recipe ingredient tuple."@en, "Die Zutat als triple in der Ingredientliste" .
+
+    rbox:hasQuantity a rdf:Property ;
+        rdfs:domain rbox:RecipeIngredient ;
+        rdfs:range xsd:decimal ;
+        rdfs:label "has quantity"@en, "hat Quantität"@de ;
+        rdfs:comment "The numeric amount of the ingredient in the recipe."@en, "der Zahlenwert zugehörig zu einer Einheit"@de .
+
+    rbox:hasUnit a rdf:Property ;
+        rdfs:domain rbox:RecipeIngredient ;
+        rdfs:range rbox:Unit ;
+        rdfs:label "has unit"@en, "hat Einheit"@de ;
+        rdfs:comment "The unit of measurement for this ingredient amount."@en, "D" .
+
 #instances of allergens
 rbox:Allergen a rdfs:Class ;
     rdfs:label "Allergen"@en, "Allergen"@de ;
@@ -363,4 +444,5 @@ rbox:hasAllergenInfo a rdfs:ObjectProperty ;
     rdfs:comment "Provides allergen information for the recipe."@en,
                  "Bietet Allergeninformationen für das Rezept."@de .
     #owl:propertyChainAxiom ( :hasIngredient rbox:hasAllergenInfo ) .
+
 

@@ -112,7 +112,53 @@
     4. Add cooked rice and soy sauce, stir-frying everything together.
     5. Serve hot.""" .
 
+# vegan french recipe: 
+:ratatouille a rbox:MainDish, rbox:VeganRecipe ;
+    # properties of the recipe
+    rbox:hasID "recipe006" ;
+    rbox:hasTitle "Ratatouille" ;
+    rbox:hasDescription "A traditional French Provençal stewed vegetable dish, originating in Nice." ;
+    
+    schema:recipeYield "4 servings" ;
+    rbox:hasCuisine rbox:FrenchCuisine ;
+
+    #properties of the ingredients
+    rbox:hasAllergenInfo; 
+    rbox:hasIngredient rbox:Eggplant, rbox:Zucchini, rbox:BellPeppers, rbox:Tomatoes, rbox:Onions, rbox:Garlic, rbox:OliveOil, rbox:HerbsDeProvence ;
+
+    #properties of the preparation
+    schema:prepTime "PT1H" ;
+    rbox:hasInstructions """1. Slice eggplant, zucchini, bell peppers, and tomatoes.
+    2. Sauté onions and garlic in olive oil until translucent.
+    3. Layer the sliced vegetables in a baking dish.
+    4. Drizzle with olive oil and sprinkle with Herbs de Provence.
+    5. Bake at 375°F (190°C) for about 45 minutes until vegetables are tender.""" .
 # Ingredients declarations
+    #Ingredients of Ratatouille and its measurments. 
+        rbox:Eggplant a rbox:Vegetable ;
+            rbox:hasName "Eggplant" ;
+            rbox:hasQuantity "1 large eggplant" .
+        rbox:Zucchini a rbox:Vegetable ;
+            rbox:hasName "Zucchini" ;
+            rbox:hasQuantity "2 medium zucchinis" .
+        rbox:BellPeppers a rbox:Vegetable ;
+            rbox:hasName "Bell Peppers" ;
+            rbox:hasQuantity "2 bell peppers (any color)" .
+        rbox:Tomatoes a rbox:Vegetable ;
+            rbox:hasName "Tomatoes" ;
+            rbox:hasQuantity "4 large tomatoes" .
+        rbox:Onions a rbox:Vegetable ;
+            rbox:hasName "Onions" ;
+            rbox:hasQuantity "1 large onion" .
+        rbox:Garlic a rbox:Vegetable ;
+            rbox:hasName "Garlic" ;
+            rbox:hasQuantity "3 cloves" .
+        rbox:OliveOil a rbox:Oil ;
+            rbox:hasName "Olive Oil" ;
+            rbox:hasQuantity "3 tablespoons" .
+        rbox:HerbsDeProvence a rbox:Spice ;
+            rbox:hasName "Herbs de Provence" ;
+            rbox:hasQuantity "1 teaspoon" .
     #Ingredients of fried rice 
         rbox:Rice a rbox:Grain ;
             rbox:hasName "Rice" ;
