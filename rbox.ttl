@@ -10,6 +10,40 @@
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
 #@prefix : <http://example.org/recipes/> .
 
+# Menus class
+    # Italian Menu
+        rbox:italian_menu a rbox:Menu ;
+            # general attributes
+                rbox:hasID "menu001" ;
+                rbox:hasTitle "Italian Menu" ;
+                rbox:hasDescription "A complete Italian menu with appetizer, main dish, and dessert." ;
+                rbox:hasCuisine rbox:ItalianCuisine ;
+
+            # linking recipes
+                rbox:hasRecipe rbox:bruschetta, rbox:spaghetti_carbonara, rbox:tiramisu .
+
+    # German Menu
+        rbox:german_menu a rbox:Menu ;
+            # general attributes
+                rbox:hasID "menu002" ;
+                rbox:hasTitle "German Menu" ;
+                rbox:hasDescription "A complete German menu with appetizer, main dish, and dessert." ;
+                rbox:hasCuisine rbox:GermanCuisine ;
+
+            # linking recipes
+                rbox:hasRecipe rbox:pretzel, rbox:Kairserschmarn, rbox:Apfelstrudel .
+
+    # French Menu
+        rbox:french_menu a rbox:Menu ;
+            # general attributes
+                rbox:hasID "menu003" ;
+                rbox:hasTitle "French Menu" ;
+                rbox:hasDescription "A complete French menu with appetizer, main dish, and dessert." ;
+                rbox:hasCuisine rbox:FrenchCuisine ;
+
+        # linking recipes
+            rbox:hasRecipe rbox:ratatouille_tart, rbox:Ratatouille, rbox:CremeBrulee .
+# Recipes
 rbox:spaghetti_carbonara a rbox:MainDish;
     # general attributes of the recipe
         rbox:hasID "recipe001" ;
@@ -92,7 +126,7 @@ rbox:spaghetti_bolognese a rbox:MainDish;
         4. Pour in tomato sauce and simmer for 20 minutes.
         5. Serve sauce over spaghetti and top with grated Parmesan cheese.""" .
 
-rbox:bruschetta a rbox:Appetizer ;
+rbox:bruschetta a rbox:Appetizer, rbox:VegetarianRecipe ;
     # general attributes of the recipe
         rbox:hasID "recipe009" ;
         rbox:hasTitle "Bruschetta al Pomodoro" ;
@@ -116,7 +150,6 @@ rbox:bruschetta a rbox:Appetizer ;
         2. Rub bread with garlic and drizzle with olive oil.
         3. Top with chopped tomatoes, basil leaves, and a pinch of salt.
         4. Serve immediately.""" .
-# Italian Dessert
 rbox:tiramisu a rbox:Dessert, rbox:VegetarianRecipe ;
     # general attributes of the recipe
         rbox:hasID "recipe011" ;
@@ -143,7 +176,7 @@ rbox:tiramisu a rbox:Dessert, rbox:VegetarianRecipe ;
         4. Spread mascarpone cream over the layer and repeat.
         5. Dust with cocoa powder and refrigerate for 2 hours before serving.""" .
 
-rbox:bretzel a rbox:Appetizer ;
+rbox:bretzel a rbox:Appetizer, rbox:VegetarianRecipe ;
     # general attributes of the recipe
         rbox:hasID "recipe012" ;
         rbox:hasTitle "Betzel" ;

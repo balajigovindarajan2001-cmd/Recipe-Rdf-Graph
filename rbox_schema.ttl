@@ -118,7 +118,6 @@ rbox:Menu a rdfs:Class ; # still link it
         rdfs:domain rbox:Menu ;
         rdfs:range rbox:Recipe .
 
-
 rbox:Unit a rdfs:Class ;
     rdfs:label "Unit"@en, "Einheit"@de ;
     rdfs:comment "A measurement unit used to express the amount of an ingredient."@en ,
