@@ -664,270 +664,289 @@ rbox:creme_brulee a rbox:Dessert, rbox:VegetarianRecipe ;
                      "Ein Rezept aus der deutschen Küche."@de .
 
 # balajis implementation part 
-# balajis implementation part 
-# Subscription plan
-    rbox:Plan_3x2 a rbox:SubscriptionPlan ;
-        rbox:planLabel "3 recipes x 2 people" ;
-        rbox:planPrice "49.90"^^xsd:decimal ;
-        rbox:planOrderCount 12 ;
-        rbox:planReviewCount 9 ;
-        rbox:planAverageRating "4.6"^^xsd:decimal ;
-        rbox:planPopularityScore "55.2"^^xsd:decimal .
 
-    rbox:Plan_4x4 a rbox:SubscriptionPlan ;
-        rbox:planLabel "4 recipes x 4 people" ;
-        rbox:planPrice "89.90"^^xsd:decimal ;
-        rbox:planOrderCount 5 ;
-        rbox:planReviewCount 3 ;
-        rbox:planAverageRating "4.0"^^xsd:decimal ;
-        rbox:planPopularityScore "20.0"^^xsd:decimal .
+# Subscription Plans
+rbox:Plan_3x2 a rbox:SubscriptionPlan ;
+    rbox:planLabel "3 recipes x 2 people" ;
+    rbox:planPrice "49.90"^^xsd:decimal ;
+    rbox:planOrderCount 12 ;
+    rbox:planReviewCount 9 ;
+    rbox:planAverageRating "4.6"^^xsd:decimal ;
+    rbox:planPopularityScore "55.2"^^xsd:decimal .
 
+rbox:Plan_4x4 a rbox:SubscriptionPlan ;
+    rbox:planLabel "4 recipes x 4 people" ;
+    rbox:planPrice "89.90"^^xsd:decimal ;
+    rbox:planOrderCount 5 ;
+    rbox:planReviewCount 3 ;
+    rbox:planAverageRating "4.0"^^xsd:decimal ;
+    rbox:planPopularityScore "20.0"^^xsd:decimal .
+
+
+###############################################################
 # Customers
-    rbox:Customer_Alice a rbox:Customer ;
-        rdfs:label "Alice Martin" ;
-        schema:email "alice@gmail.com" ;
-        rbox:hasSubscriptionPlan rbox:Plan_3x2 .
+###############################################################
 
-    rbox:Customer_Bruno a rbox:Customer ;
-        rdfs:label "Bruno Lefevre" ;
-        schema:email "bruno@gmail.com" ;
-        rbox:hasSubscriptionPlan rbox:Plan_4x4 .
+rbox:Customer_Alice a rbox:Customer ;
+    rdfs:label "Alice Martin" ;
+    schema:email "alice@gmail.com" ;
+    rbox:hasSubscriptionPlan rbox:Plan_3x2 .
 
-    rbox:Customer_Claire a rbox:Customer ;
-        rdfs:label "Claire Dubois" ;
-        schema:email "claire@gmail.com" ;
-        rbox:hasSubscriptionPlan rbox:Plan_3x2 .
+rbox:Customer_Bruno a rbox:Customer ;
+    rdfs:label "Bruno Lefevre" ;
+    schema:email "bruno@gmail.com" ;
+    rbox:hasSubscriptionPlan rbox:Plan_4x4 .
 
-    rbox:Customer_David a rbox:Customer ;
-        rdfs:label "David Morel" ;
-        schema:email "david@gmail.com" ;
-        rbox:hasSubscriptionPlan rbox:Plan_4x4 .
+rbox:Customer_Claire a rbox:Customer ;
+    rdfs:label "Claire Dubois" ;
+    schema:email "claire@gmail.com" ;
+    rbox:hasSubscriptionPlan rbox:Plan_3x2 .
 
-    rbox:Customer_Eva a rbox:Customer ;
-        rdfs:label "Eva Simon" ;
-        schema:email "eva@gmail.com" ;
-        rbox:hasSubscriptionPlan rbox:Plan_3x2 .
+rbox:Customer_David a rbox:Customer ;
+    rdfs:label "David Morel" ;
+    schema:email "david@gmail.com" ;
+    rbox:hasSubscriptionPlan rbox:Plan_4x4 .
 
-# Couriers 
-    rbox:Courier_Emma a rbox:Courier ;
-        rdfs:label "Emma Dubois" ;
-        schema:telephone "+33-6-00-00-00-01" .
+rbox:Customer_Eva a rbox:Customer ;
+    rdfs:label "Eva Simon" ;
+    schema:email "eva@gmail.com" ;
+    rbox:hasSubscriptionPlan rbox:Plan_3x2 .
 
-    rbox:Courier_Luc a rbox:Courier ;
-        rdfs:label "Luc Bernard" ;
-        schema:telephone "+33-6-00-00-00-02" .
 
-    rbox:Courier_Sophie a rbox:Courier ;
-        rdfs:label "Sophie Moreau" ;
-        schema:telephone "+33-6-00-00-00-03" .
+###############################################################
+# Couriers
+###############################################################
 
-    rbox:Courier_Maxime a rbox:Courier ;
-        rdfs:label "Maxime Richard" ;
-        schema:telephone "+33-6-00-00-00-04" .
+rbox:Courier_Emma a rbox:Courier ;
+    rdfs:label "Emma Dubois" ;
+    schema:telephone "+33-6-00-00-00-01" .
 
+rbox:Courier_Luc a rbox:Courier ;
+    rdfs:label "Luc Bernard" ;
+    schema:telephone "+33-6-00-00-00-02" .
+
+rbox:Courier_Sophie a rbox:Courier ;
+    rdfs:label "Sophie Moreau" ;
+    schema:telephone "+33-6-00-00-00-03" .
+
+rbox:Courier_Maxime a rbox:Courier ;
+    rdfs:label "Maxime Richard" ;
+    schema:telephone "+33-6-00-00-00-04" .
+
+
+###############################################################
 # Orders
-    # Alice's order
-    rbox:Order_1 a rbox:Order ;
-        rdfs:label "Order #1 (Alice)" ;
-        rbox:orderedBy rbox:Customer_Alice .
+###############################################################
 
-    # Bruno's order
-    rbox:Order_2 a rbox:Order ;
-        rdfs:label "Order #2 (Bruno)" ;
-        rbox:orderedBy rbox:Customer_Bruno .
+rbox:Order_1 a rbox:Order ;
+    rdfs:label "Order #1 (Alice)" ;
+    rbox:orderedBy rbox:Customer_Alice .
 
-    # Claire's order
-    rbox:Order_3 a rbox:Order ;
-        rdfs:label "Order #3 (Claire)" ;
-        rbox:orderedBy rbox:Customer_Claire .
+rbox:Order_2 a rbox:Order ;
+    rdfs:label "Order #2 (Bruno)" ;
+    rbox:orderedBy rbox:Customer_Bruno .
 
-    # David's order
-    rbox:Order_4 a rbox:Order ;
-        rdfs:label "Order #4 (David)" ;
-        rbox:orderedBy rbox:Customer_David .
+rbox:Order_3 a rbox:Order ;
+    rdfs:label "Order #3 (Claire)" ;
+    rbox:orderedBy rbox:Customer_Claire .
 
-    # Eva's order
-    rbox:Order_5 a rbox:Order ;
-        rdfs:label "Order #5 (Eva)" ;
-        rbox:orderedBy rbox:Customer_Eva .
+rbox:Order_4 a rbox:Order ;
+    rdfs:label "Order #4 (David)" ;
+    rbox:orderedBy rbox:Customer_David .
 
-# Order lines
-    # Order 1 has two different recipes
-        rbox:OrderLine_1_1 a rbox:OrderLine ;
-            rbox:recipeTimes 2 ;
-            rbox:orderRecipe rbox:spaghetti_carbonara ;
-            schema:description "Spaghetti Carbonara for 2 people" .
+rbox:Order_5 a rbox:Order ;
+    rdfs:label "Order #5 (Eva)" ;
+    rbox:orderedBy rbox:Customer_Eva .
 
-        rbox:OrderLine_1_2 a rbox:OrderLine ;
-            rbox:recipeTimes 2 ;
-            rbox:orderRecipe rbox:fried_rice ;
-            schema:description "Chinese Fried Rice for 2 people" .
 
-        rbox:Order_1
-            rbox:hasOrderLine rbox:OrderLine_1_1 ,
-                              rbox:OrderLine_1_2 .
+###############################################################
+# Order Lines — Main Dishes
+###############################################################
 
-    # Order 2 has one large family recipe
-        rbox:OrderLine_2_1 a rbox:OrderLine ;
-            rbox:recipeTimes 4 ;
-            rbox:orderRecipe rbox:briyani ;
-            schema:description "Chicken Biryani for 4 people" .
+# Order 1 Main
+rbox:OrderLine_1_1 a rbox:OrderLine ;
+    rbox:recipeTimes 2 ;
+    rbox:orderRecipe rbox:spaghetti_carbonara ;
+    schema:description "Spaghetti Carbonara for 2 people" .
 
-        rbox:Order_2
-            rbox:hasOrderLine rbox:OrderLine_2_1 .
+rbox:OrderLine_1_2 a rbox:OrderLine ;
+    rbox:recipeTimes 2 ;
+    rbox:orderRecipe rbox:fried_rice ;
+    schema:description "Chinese Fried Rice for 2 people" .
 
-    # Order 3 has three different recipes
-        rbox:OrderLine_3_1 a rbox:OrderLine ;
-            rbox:recipeTimes 2 ;
-            rbox:orderRecipe rbox:spaghetti_bolognese ;
-            schema:description "Spaghetti Bolognese for 2 people" .
+rbox:Order_1 rbox:hasOrderLine rbox:OrderLine_1_1, rbox:OrderLine_1_2 .
 
-        rbox:OrderLine_3_2 a rbox:OrderLine ;
-            rbox:recipeTimes 2 ;
-            rbox:orderRecipe rbox:kairserschmarn ;
-            schema:description "Kaiserschmarrn for 2 people" .
 
-        rbox:OrderLine_3_3 a rbox:OrderLine ;
-            rbox:recipeTimes 2 ;
-            rbox:orderRecipe rbox:fried_rice ;
-            schema:description "Chinese Fried Rice for 2 people" .
+# Order 2 Main
+rbox:OrderLine_2_1 a rbox:OrderLine ;
+    rbox:recipeTimes 4 ;
+    rbox:orderRecipe rbox:briyani ;
+    schema:description "Chicken Biryani for 4 people" .
 
-        rbox:Order_3
-            rbox:hasOrderLine rbox:OrderLine_3_1 ,
-                              rbox:OrderLine_3_2 ,
-                              rbox:OrderLine_3_3 .
+rbox:Order_2 rbox:hasOrderLine rbox:OrderLine_2_1 .
 
-    # Order 4 has two family recipes
-        rbox:OrderLine_4_1 a rbox:OrderLine ;
-            rbox:recipeTimes 4 ;
-            rbox:orderRecipe rbox:spaghetti_carbonara ;
-            schema:description "Spaghetti Carbonara for 4 people" .
 
-        rbox:OrderLine_4_2 a rbox:OrderLine ;
-            rbox:recipeTimes 4 ;
-            rbox:orderRecipe rbox:briyani ;
-            schema:description "Chicken Biryani for 4 people" .
+# Order 3 Main
+rbox:OrderLine_3_1 a rbox:OrderLine ;
+    rbox:recipeTimes 2 ;
+    rbox:orderRecipe rbox:spaghetti_bolognese ;
+    schema:description "Spaghetti Bolognese for 2 people" .
 
-        rbox:Order_4
-            rbox:hasOrderLine rbox:OrderLine_4_1 ,
-                              rbox:OrderLine_4_2 .
+rbox:OrderLine_3_2 a rbox:OrderLine ;
+    rbox:recipeTimes 2 ;
+    rbox:orderRecipe rbox:kaiserschmarrn ;
+    schema:description "Kaiserschmarrn for 2 people" .
 
-    # Order 5 has one recipe
-        rbox:OrderLine_5_1 a rbox:OrderLine ;
-            rbox:recipeTimes 2 ;
-            rbox:orderRecipe rbox:spaghetti_bolognese ;
-            schema:description "Spaghetti Bolognese for 2 people" .
+rbox:OrderLine_3_3 a rbox:OrderLine ;
+    rbox:recipeTimes 2 ;
+    rbox:orderRecipe rbox:fried_rice ;
+    schema:description "Chinese Fried Rice for 2 people" .
 
-        rbox:Order_5
-            rbox:hasOrderLine rbox:OrderLine_5_1 .
-        
+rbox:Order_3 rbox:hasOrderLine rbox:OrderLine_3_1, rbox:OrderLine_3_2, rbox:OrderLine_3_3 .
+
+
+# Order 4 Main
+rbox:OrderLine_4_1 a rbox:OrderLine ;
+    rbox:recipeTimes 4 ;
+    rbox:orderRecipe rbox:spaghetti_carbonara ;
+    schema:description "Spaghetti Carbonara for 4 people" .
+
+rbox:OrderLine_4_2 a rbox:OrderLine ;
+    rbox:recipeTimes 4 ;
+    rbox:orderRecipe rbox:briyani ;
+    schema:description "Chicken Biryani for 4 people" .
+
+rbox:Order_4 rbox:hasOrderLine rbox:OrderLine_4_1, rbox:OrderLine_4_2 .
+
+
+# Order 5 Main
+rbox:OrderLine_5_1 a rbox:OrderLine ;
+    rbox:recipeTimes 2 ;
+    rbox:orderRecipe rbox:spaghetti_bolognese ;
+    schema:description "Spaghetti Bolognese for 2 people" .
+
+rbox:Order_5 rbox:hasOrderLine rbox:OrderLine_5_1 .
+
+
+###############################################################
+# Order Lines — Desserts (Option 1)
+###############################################################
+
+# Order 1 Dessert
+rbox:OrderLine_1_3 a rbox:OrderLine ;
+    rbox:recipeTimes 2 ;
+    rbox:orderRecipe rbox:tiramisu ;
+    schema:description "Tiramisu for 2 people" .
+
+rbox:Order_1 rbox:hasOrderLine rbox:OrderLine_1_3 .
+
+
+# Order 2 Dessert
+rbox:OrderLine_2_2 a rbox:OrderLine ;
+    rbox:recipeTimes 4 ;
+    rbox:orderRecipe rbox:apfelstrudel ;
+    schema:description "Apfelstrudel for 4 people" .
+
+rbox:Order_2 rbox:hasOrderLine rbox:OrderLine_2_2 .
+
+
+# Order 4 Dessert
+rbox:OrderLine_4_3 a rbox:OrderLine ;
+    rbox:recipeTimes 4 ;
+    rbox:orderRecipe rbox:tiramisu ;
+    schema:description "Tiramisu for 4 people" .
+
+rbox:Order_4 rbox:hasOrderLine rbox:OrderLine_4_3 .
+
+
+# Order 5 Dessert
+rbox:OrderLine_5_2 a rbox:OrderLine ;
+    rbox:recipeTimes 2 ;
+    rbox:orderRecipe rbox:creme_brulee ;
+    schema:description "Crème Brûlée for 2 people" .
+
+rbox:Order_5 rbox:hasOrderLine rbox:OrderLine_5_2 .
+
+
+###############################################################
 # Deliveries
-    # Delivery of Alice's order by Emma
-    rbox:Delivery_1 a rbox:Delivery ;
-        rdfs:label "Delivery of Order #1" ;
-        rbox:deliveryForOrder rbox:Order_1 ;
-        rbox:deliveredBy rbox:Courier_Emma ;
-        rbox:deliveredTo rbox:Customer_Alice ;
-        rbox:deliveryStart "2025-12-10T18:00:00"^^xsd:dateTime ;
-        rbox:deliveryEnd   "2025-12-10T20:00:00"^^xsd:dateTime .
+###############################################################
 
-    # Delivery of Bruno's order by Luc
-    rbox:Delivery_2 a rbox:Delivery ;
-        rdfs:label "Delivery of Order #2" ;
-        rbox:deliveryForOrder rbox:Order_2 ;
-        rbox:deliveredBy rbox:Courier_Luc ;
-        rbox:deliveredTo rbox:Customer_Bruno ;
-        rbox:deliveryStart "2025-12-11T10:00:00"^^xsd:dateTime ;
-        rbox:deliveryEnd   "2025-12-11T12:00:00"^^xsd:dateTime .
+rbox:Delivery_1 a rbox:Delivery ;
+    rbox:deliveryForOrder rbox:Order_1 ;
+    rbox:deliveredBy rbox:Courier_Emma ;
+    rbox:deliveredTo rbox:Customer_Alice ;
+    rbox:deliveryStart "2025-12-10T18:00:00"^^xsd:dateTime ;
+    rbox:deliveryEnd   "2025-12-10T20:00:00"^^xsd:dateTime .
 
-    # Delivery of Claire's order by Sophie
-    rbox:Delivery_3 a rbox:Delivery ;
-        rdfs:label "Delivery of Order #3" ;
-        rbox:deliveryForOrder rbox:Order_3 ;
-        rbox:deliveredBy rbox:Courier_Sophie ;
-        rbox:deliveredTo rbox:Customer_Claire ;
-        rbox:deliveryStart "2025-12-12T14:00:00"^^xsd:dateTime ;
-        rbox:deliveryEnd   "2025-12-12T16:00:00"^^xsd:dateTime .
+rbox:Delivery_2 a rbox:Delivery ;
+    rbox:deliveryForOrder rbox:Order_2 ;
+    rbox:deliveredBy rbox:Courier_Luc ;
+    rbox:deliveredTo rbox:Customer_Bruno ;
+    rbox:deliveryStart "2025-12-11T10:00:00"^^xsd:dateTime ;
+    rbox:deliveryEnd   "2025-12-11T12:00:00"^^xsd:dateTime .
 
-    # Delivery of David's order by Maxime
-    rbox:Delivery_4 a rbox:Delivery ;
-        rdfs:label "Delivery of Order #4" ;
-        rbox:deliveryForOrder rbox:Order_4 ;
-        rbox:deliveredBy rbox:Courier_Maxime ;
-        rbox:deliveredTo rbox:Customer_David ;
-        rbox:deliveryStart "2025-12-13T09:00:00"^^xsd:dateTime ;
-        rbox:deliveryEnd   "2025-12-13T11:00:00"^^xsd:dateTime .
+rbox:Delivery_3 a rbox:Delivery ;
+    rbox:deliveryForOrder rbox:Order_3 ;
+    rbox:deliveredBy rbox:Courier_Sophie ;
+    rbox:deliveredTo rbox:Customer_Claire ;
+    rbox:deliveryStart "2025-12-12T14:00:00"^^xsd:dateTime ;
+    rbox:deliveryEnd   "2025-12-12T16:00:00"^^xsd:dateTime .
 
-    # Delivery of Eva's order by Emma
-    rbox:Delivery_5 a rbox:Delivery ;
-        rdfs:label "Delivery of Order #5" ;
-        rbox:deliveryForOrder rbox:Order_5 ;
-        rbox:deliveredBy rbox:Courier_Emma ;
-        rbox:deliveredTo rbox:Customer_Eva ;
-        rbox:deliveryStart "2025-12-14T15:00:00"^^xsd:dateTime ;
-        rbox:deliveryEnd   "2025-12-14T17:00:00"^^xsd:dateTime .
+rbox:Delivery_4 a rbox:Delivery ;
+    rbox:deliveryForOrder rbox:Order_4 ;
+    rbox:deliveredBy rbox:Courier_Maxime ;
+    rbox:deliveredTo rbox:Customer_David ;
+    rbox:deliveryStart "2025-12-13T09:00:00"^^xsd:dateTime ;
+    rbox:deliveryEnd   "2025-12-13T11:00:00"^^xsd:dateTime .
 
-# Reviews 
-    rbox:Review_1 a rbox:Review ;
-        rdfs:label "Review for Order #1" ;
-        rbox:reviewAuthor rbox:Customer_Alice ;
-        schema:reviewBody "Very tasty and easy to cook. Delivery was on time." ;
-        schema:reviewRating [
-            a schema:Rating ;
-            schema:ratingValue "5"^^xsd:integer ;
-            schema:bestRating "5"^^xsd:integer
-        ] .
+rbox:Delivery_5 a rbox:Delivery ;
+    rbox:deliveryForOrder rbox:Order_5 ;
+    rbox:deliveredBy rbox:Courier_Emma ;
+    rbox:deliveredTo rbox:Customer_Eva ;
+    rbox:deliveryStart "2025-12-14T15:00:00"^^xsd:dateTime ;
+    rbox:deliveryEnd   "2025-12-14T17:00:00"^^xsd:dateTime .
 
-    rbox:Order_1 rbox:hasReview rbox:Review_1 .
 
-    # Bruno reviews his order
-    rbox:Review_2 a rbox:Review ;
-        rdfs:label "Review for Order #2" ;
-        rbox:reviewAuthor rbox:Customer_Bruno ;
-        schema:reviewBody "Good recipes but the salmon box arrived slightly late." ;
-        schema:reviewRating [
-            a schema:Rating ;
-            schema:ratingValue "3"^^xsd:integer ;
-            schema:bestRating "5"^^xsd:integer
-        ] .
+###############################################################
+# Reviews
+###############################################################
 
-    rbox:Order_2 rbox:hasReview rbox:Review_2 .
+rbox:Review_1 a rbox:Review ;
+    rbox:reviewAuthor rbox:Customer_Alice ;
+    schema:reviewBody "Very tasty and easy to cook. Delivery was on time." ;
+    schema:reviewRating [ a schema:Rating ; schema:ratingValue "5"^^xsd:integer ] .
 
-    # Claire reviews her order
-    rbox:Review_3 a rbox:Review ;
-        rdfs:label "Review for Order #3" ;
-        rbox:reviewAuthor rbox:Customer_Claire ;
-        schema:reviewBody "Loved the variety of recipes! Will order again." ;
-        schema:reviewRating [
-            a schema:Rating ;
-            schema:ratingValue "4"^^xsd:integer ;
-            schema:bestRating "5"^^xsd:integer
-        ] .
+rbox:Order_1 rbox:hasReview rbox:Review_1 .
 
-    rbox:Order_3 rbox:hasReview rbox:Review_3 .
 
-    # David reviews his order
-    rbox:Review_4 a rbox:Review ;
-        rdfs:label "Review for Order #4" ;
-        rbox:reviewAuthor rbox:Customer_David ;
-        schema:reviewBody "The roast beef was delicious, but the delivery was delayed." ;
-        schema:reviewRating [
-            a schema:Rating ;
-            schema:ratingValue "4"^^xsd:integer ;
-            schema:bestRating "5"^^xsd:integer
-        ] .
+rbox:Review_2 a rbox:Review ;
+    rbox:reviewAuthor rbox:Customer_Bruno ;
+    schema:reviewBody "Good recipes but the box arrived slightly late." ;
+    schema:reviewRating [ a schema:Rating ; schema:ratingValue "3"^^xsd:integer ] .
 
-    rbox:Order_4 rbox:hasReview rbox:Review_4 .
+rbox:Order_2 rbox:hasReview rbox:Review_2 .
 
-    # Eva reviews her order
-    rbox:Review_5 a rbox:Review ;
-        rdfs:label "Review for Order #5" ;
-        rbox:reviewAuthor rbox:Customer_Eva ;
-        schema:reviewBody "Spaghetti Bolognese was fantastic! Quick delivery too." ;
-        schema:reviewRating [
-            a schema:Rating ;
-            schema:ratingValue "5"^^xsd:integer ;
-            schema:bestRating "5"^^xsd:integer
-        ] .
 
-    rbox:Order_5 rbox:hasReview rbox:Review_5 .
+rbox:Review_3 a rbox:Review ;
+    rbox:reviewAuthor rbox:Customer_Claire ;
+    schema:reviewBody "Loved the variety of recipes! Will order again." ;
+    schema:reviewRating [ a schema:Rating ; schema:ratingValue "4"^^xsd:integer ] .
+
+rbox:Order_3 rbox:hasReview rbox:Review_3 .
+
+
+rbox:Review_4 a rbox:Review ;
+    rbox:reviewAuthor rbox:Customer_David ;
+    schema:reviewBody "Delicious food but delivery was delayed." ;
+    schema:reviewRating [ a schema:Rating ; schema:ratingValue "4"^^xsd:integer ] .
+
+rbox:Order_4 rbox:hasReview rbox:Review_4 .
+
+
+rbox:Review_5 a rbox:Review ;
+    rbox:reviewAuthor rbox:Customer_Eva ;
+    schema:reviewBody "Fantastic recipes and quick delivery!" ;
+    schema:reviewRating [ a schema:Rating ; schema:ratingValue "5"^^xsd:integer ] .
+
+rbox:Order_5 rbox:hasReview rbox:Review_5 .
