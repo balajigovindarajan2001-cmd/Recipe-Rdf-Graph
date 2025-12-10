@@ -664,6 +664,7 @@ rbox:creme_brulee a rbox:Dessert, rbox:VegetarianRecipe ;
                      "Ein Rezept aus der deutschen Küche."@de .
 
 # balajis implementation part 
+# balajis implementation part 
 # Subscription plan
     rbox:Plan_3x2 a rbox:SubscriptionPlan ;
         rbox:planLabel "3 recipes x 2 people" ;
@@ -751,13 +752,15 @@ rbox:creme_brulee a rbox:Dessert, rbox:VegetarianRecipe ;
         rbox:orderedBy rbox:Customer_Eva .
 
 # Order lines
-    # Order 1 has two different recipes (we just describe them textually)
+    # Order 1 has two different recipes
         rbox:OrderLine_1_1 a rbox:OrderLine ;
-            rbox:portionCount 2 ;
+            rbox:recipeTimes 2 ;
+            rbox:orderRecipe rbox:spaghetti_carbonara ;
             schema:description "Spaghetti Carbonara for 2 people" .
 
         rbox:OrderLine_1_2 a rbox:OrderLine ;
-            rbox:portionCount 2 ;
+            rbox:recipeTimes 2 ;
+            rbox:orderRecipe rbox:fried_rice ;
             schema:description "Chinese Fried Rice for 2 people" .
 
         rbox:Order_1
@@ -766,7 +769,8 @@ rbox:creme_brulee a rbox:Dessert, rbox:VegetarianRecipe ;
 
     # Order 2 has one large family recipe
         rbox:OrderLine_2_1 a rbox:OrderLine ;
-            rbox:portionCount 4 ;
+            rbox:recipeTimes 4 ;
+            rbox:orderRecipe rbox:briyani ;
             schema:description "Chicken Biryani for 4 people" .
 
         rbox:Order_2
@@ -774,15 +778,18 @@ rbox:creme_brulee a rbox:Dessert, rbox:VegetarianRecipe ;
 
     # Order 3 has three different recipes
         rbox:OrderLine_3_1 a rbox:OrderLine ;
-            rbox:portionCount 2 ;
+            rbox:recipeTimes 2 ;
+            rbox:orderRecipe rbox:spaghetti_bolognese ;
             schema:description "Spaghetti Bolognese for 2 people" .
 
         rbox:OrderLine_3_2 a rbox:OrderLine ;
-            rbox:portionCount 2 ;
+            rbox:recipeTimes 2 ;
+            rbox:orderRecipe rbox:kairserschmarn ;
             schema:description "Kaiserschmarrn for 2 people" .
 
         rbox:OrderLine_3_3 a rbox:OrderLine ;
-            rbox:portionCount 2 ;
+            rbox:recipeTimes 2 ;
+            rbox:orderRecipe rbox:fried_rice ;
             schema:description "Chinese Fried Rice for 2 people" .
 
         rbox:Order_3
@@ -792,11 +799,13 @@ rbox:creme_brulee a rbox:Dessert, rbox:VegetarianRecipe ;
 
     # Order 4 has two family recipes
         rbox:OrderLine_4_1 a rbox:OrderLine ;
-            rbox:portionCount 4 ;
+            rbox:recipeTimes 4 ;
+            rbox:orderRecipe rbox:spaghetti_carbonara ;
             schema:description "Spaghetti Carbonara for 4 people" .
 
         rbox:OrderLine_4_2 a rbox:OrderLine ;
-            rbox:portionCount 4 ;
+            rbox:recipeTimes 4 ;
+            rbox:orderRecipe rbox:briyani ;
             schema:description "Chicken Biryani for 4 people" .
 
         rbox:Order_4
@@ -805,7 +814,8 @@ rbox:creme_brulee a rbox:Dessert, rbox:VegetarianRecipe ;
 
     # Order 5 has one recipe
         rbox:OrderLine_5_1 a rbox:OrderLine ;
-            rbox:portionCount 2 ;
+            rbox:recipeTimes 2 ;
+            rbox:orderRecipe rbox:spaghetti_bolognese ;
             schema:description "Spaghetti Bolognese for 2 people" .
 
         rbox:Order_5
