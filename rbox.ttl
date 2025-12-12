@@ -681,10 +681,7 @@ rbox:Plan_4x4 a rbox:SubscriptionPlan ;
     rbox:planAverageRating "4.0"^^xsd:decimal ;
     rbox:planPopularityScore "20.0"^^xsd:decimal .
 
-
-###############################################################
 # Customers
-###############################################################
 
 rbox:Customer_Alice a rbox:Customer ;
     rdfs:label "Alice Martin" ;
@@ -711,10 +708,7 @@ rbox:Customer_Eva a rbox:Customer ;
     schema:email "eva@gmail.com" ;
     rbox:hasSubscriptionPlan rbox:Plan_3x2 .
 
-
-###############################################################
 # Couriers
-###############################################################
 
 rbox:Courier_Emma a rbox:Courier ;
     rdfs:label "Emma Dubois" ;
@@ -732,10 +726,7 @@ rbox:Courier_Maxime a rbox:Courier ;
     rdfs:label "Maxime Richard" ;
     schema:telephone "+33-6-00-00-00-04" .
 
-
-###############################################################
 # Orders
-###############################################################
 
 rbox:Order_1 a rbox:Order ;
     rdfs:label "Order #1 (Alice)" ;
@@ -758,9 +749,7 @@ rbox:Order_5 a rbox:Order ;
     rbox:orderedBy rbox:Customer_Eva .
 
 
-###############################################################
 # Order Lines — Main Dishes
-###############################################################
 
 # Order 1 Main
 rbox:OrderLine_1_1 a rbox:OrderLine ;
@@ -826,10 +815,7 @@ rbox:OrderLine_5_1 a rbox:OrderLine ;
 
 rbox:Order_5 rbox:hasOrderLine rbox:OrderLine_5_1 .
 
-
-###############################################################
 # Order Lines — Desserts (Option 1)
-###############################################################
 
 # Order 1 Dessert
 rbox:OrderLine_1_3 a rbox:OrderLine ;
@@ -866,10 +852,7 @@ rbox:OrderLine_5_2 a rbox:OrderLine ;
 
 rbox:Order_5 rbox:hasOrderLine rbox:OrderLine_5_2 .
 
-
-###############################################################
 # Deliveries
-###############################################################
 
 rbox:Delivery_1 a rbox:Delivery ;
     rbox:deliveryForOrder rbox:Order_1 ;
@@ -906,10 +889,7 @@ rbox:Delivery_5 a rbox:Delivery ;
     rbox:deliveryStart "2025-12-14T15:00:00"^^xsd:dateTime ;
     rbox:deliveryEnd   "2025-12-14T17:00:00"^^xsd:dateTime .
 
-
-###############################################################
 # Reviews
-###############################################################
 
 rbox:Review_1 a rbox:Review ;
     rbox:reviewAuthor rbox:Customer_Alice ;
