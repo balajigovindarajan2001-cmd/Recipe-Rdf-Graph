@@ -1,33 +1,223 @@
-code:
+# Sparql Querries
+Vinzent Aschir Balaji GOVINDARAJAN
+
+
+1) We found a new delicious recipe, and want to add it to our Recipes, together with the missing Ingredients and recipes. 
+
+      prefix rbox: <http://example.org/rbox#>
+      prefix schema: <http://schema.org/>
+
+      PREFIX rbox: <http://example.org/rbox#>
+      PREFIX schema: <http://schema.org/>
+
+      insert {
+        rbox:lablebi a rbox:MainDish ;
+            # general attributes
+            rbox:hasID ?newID ;
+            rbox:hasTitle "Lablebi" ;
+            rbox:hasDescription "A traditional Tunisian chickpea soup, often served with olive oil, cumin, harissa, and bread." ;
+            schema:recipeYield "2-3 servings" ;
+            rbox:hasCuisine rbox:TunisianCuisine ;
+
+            # properties about ingredients
+            rbox:hasAllergenInfo rbox:Gluten ;
+            rbox:hasIngredientList (
+              [ rbox:hasIngredient rbox:Chickpeas ; rbox:hasQuantity 200 ; rbox:hasUnit rbox:grams ]
+              [ rbox:hasIngredient rbox:Garlic ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:cloves ]
+              [ rbox:hasIngredient rbox:OliveOil ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]
+              [ rbox:hasIngredient rbox:Cumin ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:teaspoon ]
+              [ rbox:hasIngredient rbox:Salt ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:teaspoon ]
+              [ rbox:hasIngredient rbox:Harissa ; rbox:hasQuantity 1 ; rbox:hasUnit rbox:tablespoon ]
+              [ rbox:hasIngredient rbox:Bread ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:slices ]
+            ) ;
+
+            # properties of preparation
+            schema:prepTime "PT45M" ;
+            rbox:hasInstructions """1. Soak chickpeas overnight and boil until soft.
+      2. In a pot, heat olive oil and sauté minced garlic.
+      3. Add boiled chickpeas, cumin, and salt; simmer for 15 minutes.
+      4. Serve hot with harissa and slices of bread on the side.""" .
+
+      # Cuisine
+      rbox:TunisianCuisine a rbox:Cuisine ;
+            rdfs:label "Tunisian Cuisine"@en, "Tunesische Küche"@de ;
+            rdfs:comment "Traditional cuisine of Tunisia, characterized by spices, olive oil, and Mediterranean ingredients."@en,
+                         "Traditionelle Küche Tunesiens, geprägt von Gewürzen, Olivenöl und mediterranen Zutaten."@de .
+      # Ingredients
+      rbox:Chickpeas a rbox:Meat ;
+            rdfs:label "Chickpeas"@en, "Kichererbsen"@de ;
+            rdfs:comment "Common legume used as the main ingredient in Lablebi."@en,
+                         "Hülsenfrucht, die als Hauptzutat in Lablebi verwendet wird."@de .
+
+      rbox:Cumin a rbox:Spice ;
+            rdfs:label "Cumin"@en, "Kreuzkümmel"@de ;
+            rdfs:comment "Spice that gives Lablebi its characteristic flavor."@en,
+                         "Gewürz, das Lablebi seinen charakteristischen Geschmack verleiht."@de .
+
+        rbox:Harissa a rbox:Sauce ;
+            rdfs:label "Harissa"@en, "Harissa"@de ;
+            rdfs:comment "Tunisian chili paste that adds spiciness."@en,
+                         "Tunesische Chili-Paste, die Schärfe verleiht."@de .
+      } 
+      where {
+         select (CONCAT("R", "0", STR(MAX(xsd:decimal(REPLACE(?id, "^R", ""))) + 1)) AS ?newID)
+         where {
+            ?r rbox:hasID ?id .
+          }}
+
+
+2) I have some tomatoes eggs and bread in my fridge. Is there an recipe where i could use at least one of them for cooking but that respects my allergy against milk-products?
+
+      PREFIX rbox: <http://example.org/rbox#>
+      PREFIX schema: <http://schema.org/>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+      SELECT ?t (MIN(?id) AS ?receptID)
+      WHERE {
+        ?r a rbox:Recipe ;
+                rbox:hasID ?id ;
+                rbox:hasTitle ?t ;
+                rbox:hasAllergenInfo ?allergen ;
+                rbox:hasIngredientList ?ingList .
+
+        ?ingList rdf:rest*/rdf:first ?ingNode .
+        ?ingNode rbox:hasIngredient ?ingredient .
+
+        filter(?ingredient IN (rbox:Eggs, rbox:Tomatoes, rbox:Bread))
+
+        filter(NOT EXISTS { ?r rbox:hasAllergenInfo rbox:Milk })
+      }
+      GROUP BY ?t
+      ORDER BY ?t
 
 
 
------------------------------
+3) Do people like the pricey meal-plan more than the cheaper one?
 
-1) “Which subscription plan has the highest popularity score, and what are its average rating and total order count?”
+      PREFIX rbox: <http://example.org/rbox#>
+      PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 
-(uses derived properties: popularity, rating, count)
+      SELECT ?plan ?planLabel ?planPrice ?averageRating
+      WHERE {
+        # Most expensive plan
+        {
+          SELECT ?plan ?planLabel ?planPrice ?averageRating
+          WHERE {
+            ?plan a rbox:SubscriptionPlan ;
+                  rbox:planLabel ?planLabel ;
+                  rbox:planPrice ?planPrice ;
+                  rbox:planAverageRating ?averageRating .
+          }
+          ORDER BY DESC(?planPrice)
+          LIMIT 1
+        }
 
+        UNION
+
+        # Cheapest plan
+        {
+          SELECT ?plan ?planLabel ?planPrice ?averageRating
+          WHERE {
+            ?plan a rbox:SubscriptionPlan ;
+                  rbox:planLabel ?planLabel ;
+                  rbox:planPrice ?planPrice ;
+                  rbox:planAverageRating ?averageRating .
+          }
+          ORDER BY ASC(?planPrice) 
+          LIMIT 1
+        }
+      }
+
+
+
+4) “Which main dishes can be cooked in under 25 minutes and is vegetraian? ”
+      
+      prefix schema: <http://schema.org/>
+      prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
+      PREFIX rbox: <http://example.org/rbox#>
+      
+      select ?recipe ?id ?title ?prepTime
+      where {
+         ?recipe a rbox:VegetarianRecipe ;  
+          rbox:hasID ?id ;
+          rbox:hasTitle ?title ;
+          schema:prepTime ?prepTime .
+      
+        # Convert ISO 8601 duration like "PT20M" to integer minutes
+       bind(xsd:integer(replace(str(?prepTime), "PT*([0-9]+)M*", "$1")) AS ?minutes)
+      
+       FILTER(?minutes < 25) 
+      }
+
+
+
+5) I want some proteins! Is there an Italian dish with at least two eggs? 
+
+      PREFIX rbox: <http://example.org/rbox#>
+      PREFIX schema: <http://schema.org/>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+      SELECT ?t ?id ?egg_n
+      WHERE {
+        ?r a rbox:Recipe ;
+                rbox:hasID ?id ;
+                rbox:hasTitle ?t ;
+                rbox:hasCuisine rbox:ItalianCuisine ;
+                rbox:hasIngredientList ?ingList .
+
+        ?ingList rdf:rest*/rdf:first ?ingNode .
+        ?ingNode rbox:hasIngredient rbox:Eggs ;
+                 rbox:hasQuantity ?egg_n .
+
+        filter(?egg_n >= 2)
+      }
+      ORDER BY ?t
+
+6) Testing concepts: If an Ingredient is used in a recipe and can cause an specific allergic reaction, that is not specified in the recipe, then add to the allergen list of the recipe these specific allergy. 
 PREFIX rbox: <http://example.org/rbox#>
-PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-SELECT ?plan ?planLabel ?planPrice ?orderCount ?reviewCount ?averageRating ?popularityScore
-WHERE {
-  ?plan a rbox:SubscriptionPlan ;
-        rbox:planLabel ?planLabel ;
-        rbox:planPrice ?planPrice ;
-        rbox:planOrderCount ?orderCount ;
-        rbox:planReviewCount ?reviewCount ;
-        rbox:planAverageRating ?averageRating ;
-        rbox:planPopularityScore ?popularityScore .
+INSERT {
+    ?r rbox:hasAllergenInfo ?a .
 }
-ORDER BY DESC(xsd:decimal(?popularityScore))
-LIMIT 1
+WHERE {
+    ?r a rbox:Recipe ;
+            rbox:hasIngredientList ?ingList .
+
+    ?ingList rdf:rest*/rdf:first ?ingNode .
+    ?ingNode rbox:hasIngredient ?i .
+
+    ?i rbox:hasAllergenInfo ?a .
+	
+    filter not exists {
+        ?r rbox:hasAllergenInfo ?a .
+    }
+}
+
+# Balaji you can also move this question as last question its a summary table 
+7) How many of what did we actually implement? (recipes , ingredients, classes, properties,DatatypeProperties ) show us in a table! 
+
+      PREFIX rbox: <http://example.org/rbox#>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      select ?amount_Ingredients ?amount_Recipes ?amount_classes ?amont_properties ?amont_DatatypeProperties where {
+        { select (count(distinct ?i) as ?amount_Ingredients)  where {
+        	?i a rbox:Ingredient. }}
+        { select (count(distinct ?r) as ?amount_Recipes) where  {
+         	?r a rbox:Recipe.}}
+        { select (count(distinct ?c) as ?amount_classes) where {
+      	?c a rdfs:Class . } }
+       { select (count(distinct ?p) as ?amont_properties) where {
+      	?p a rdf:Property .
+       	filter not exists { ?p a rdfs:DatatypeProperty } } }
+       { select (count(distinct ?dp) as ?amont_DatatypeProperties) where {
+      	?dp a rdfs:DatatypeProperty . } } }
 
 
-------------------------
 
-2) “Which meal plans are chosen by customers who order more than once?”
+### Balaji Fixes ### 
+
+8) “Which mealplan plans are chosen by customers who order more than once?”     # no return -> no data bad for us or no working querry bad for us
 
 PREFIX rbox: <http://example.org/rbox#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -50,9 +240,7 @@ GROUP BY ?customer ?customerName ?plan ?planLabel
 HAVING (COUNT(?order) > 1)
 ORDER BY ?planLabel ?customerName
 
------------------------------
-
-3) “How long does delivery usually take for each subscription plan on average?”
+9) “How long does delivery usually take for each subscription plan on average?” # doesnt work 
 
 PREFIX rbox: <http://example.org/rbox#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
@@ -60,17 +248,15 @@ PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
 SELECT ?plan ?planLabel
        (AVG(?durationMinutes) AS ?avgDeliveryMinutes)
 WHERE {
-  # Subscription plan
-  ?plan a rbox:SubscriptionPlan ;
-        rbox:planLabel ?planLabel .
 
-  # Customer using this plan
   ?customer a rbox:Customer ;
-            rbox:hasSubscriptionPlan ?plan .
+    rbox:hasSubscriptionPlan ?plan .
 
-  # Orders placed by this customer
+  ?plan a rbox:SubscriptionPlan ;
+      rbox:planLabel ?planLabel .
+
   ?order a rbox:Order ;
-         rbox:orderedBy ?customer .
+    rbox:orderedBy ?customer .
 
   # Delivery for those orders
   ?delivery a rbox:Delivery ;
@@ -88,10 +274,7 @@ WHERE {
 GROUP BY ?plan ?planLabel
 ORDER BY ?planLabel
 
-
-------------------------------
-
-4) “Can you show me, for every order, how many portions people ordered and what rating they gave?”
+4) “Can you show me, for every order, how many portions people ordered and what rating they gave?” # doenst work 
 
 PREFIX rbox:   <http://example.org/rbox#>
 PREFIX schema: <https://schema.org/>
@@ -119,111 +302,3 @@ WHERE {
               schema:ratingValue ?ratingValue .
 }
 ORDER BY ?order ?orderLine
-
-
-
-------------------------------
-
-5) "Which meal plan is trending the most right now?”
-
-PREFIX rbox: <http://example.org/rbox#>
-PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
-
-SELECT ?plan ?planLabel ?planPrice ?orderCount ?reviewCount ?averageRating ?popularityScore
-WHERE {
-  ?plan a rbox:SubscriptionPlan ;
-        rbox:planLabel ?planLabel ;
-        rbox:planPrice ?planPrice ;
-        rbox:planOrderCount ?orderCount ;
-        rbox:planReviewCount ?reviewCount ;
-        rbox:planAverageRating ?averageRating ;
-        rbox:planPopularityScore ?popularityScore .
-}
-ORDER BY DESC(xsd:decimal(?popularityScore))
-LIMIT 1
-
-------------------------------
-
-6) “Is the expensive plan actually worth it?”
-
-SubscriptionPlan → planPrice → planAverageRating
-
-PREFIX rbox: <http://example.org/rbox#>
-PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
-
-SELECT ?plan ?planLabel ?planPrice ?averageRating
-WHERE {
-  ?plan a rbox:SubscriptionPlan ;
-        rbox:planLabel ?planLabel ;
-        rbox:planPrice ?planPrice ;
-        rbox:planAverageRating ?averageRating .
-}
-ORDER BY DESC(xsd:decimal(?planPrice))
-
------------------------------
-
-7) “Do people like the pricey meal plan more than the budget plan?”
-
-PREFIX rbox: <http://example.org/rbox#>
-PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
-
-SELECT ?plan ?planLabel ?planPrice ?averageRating
-WHERE {
-  # Most expensive plan
-  {
-    SELECT ?plan ?planLabel ?planPrice ?averageRating
-    WHERE {
-      ?plan a rbox:SubscriptionPlan ;
-            rbox:planLabel ?planLabel ;
-            rbox:planPrice ?planPrice ;
-            rbox:planAverageRating ?averageRating .
-    }
-    ORDER BY DESC(xsd:decimal(?planPrice))
-    LIMIT 1
-  }
-
-  UNION
-
-  # Cheapest plan
-  {
-    SELECT ?plan ?planLabel ?planPrice ?averageRating
-    WHERE {
-      ?plan a rbox:SubscriptionPlan ;
-            rbox:planLabel ?planLabel ;
-            rbox:planPrice ?planPrice ;
-            rbox:planAverageRating ?averageRating .
-    }
-    ORDER BY xsd:decimal(?planPrice) ASC
-    LIMIT 1
-  }
-}
-
------------------------------
-
-8) “Which main dishes can be cooked in under 25 minutes?”
-
-PREFIX rbox:  <http://www.researchbox.org/ontology#>
-PREFIX schema:<http://schema.org/>
-PREFIX xsd:   <http://www.w3.org/2001/XMLSchema#>
-
-CONSTRUCT {
-  ?recipe a rbox:QuickMainDish ;
-          rbox:hasID ?id ;
-          rbox:hasTitle ?title ;
-          rbox:hasCuisine ?cuisine ;
-          schema:prepTime ?prepTime .
-}
-WHERE {
-  ?recipe a rbox:MainDish ;
-          rbox:hasID ?id ;
-          rbox:hasTitle ?title ;
-          rbox:hasCuisine ?cuisine ;
-          schema:prepTime ?prepTime .
-
-  # Extract minutes from ISO 8601 duration like "PT20M"
-  BIND(xsd:integer(REPLACE(STR(?prepTime), "PT|M", "")) AS ?minutes)
-
-  FILTER(?minutes < 25)
-}
-
------------------------------

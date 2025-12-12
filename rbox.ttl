@@ -3,18 +3,17 @@
 # Project: recipe-company 
 # Date: 01/12/2025
 
-@prefix rbox: <http://www.researchbox.org/ontology#> . # our own ontology
+@prefix rbox: <http://example.org/rbox#> . # our own ontology
 @prefix schema: <http://schema.org/> . # for the recipe schema 
 @prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
-#@prefix : <http://example.org/recipes/> .
 
 # Menus class
     # Italian Menu
         rbox:italian_menu a rbox:Menu ;
             # general attributes
-                rbox:hasID "menu001" ;
+                rbox:hasID "M001" ;
                 rbox:hasTitle "Italian Menu" ;
                 rbox:hasDescription "A complete Italian menu with appetizer, main dish, and dessert." ;
                 rbox:hasCuisine rbox:ItalianCuisine ;
@@ -25,7 +24,7 @@
     # German Menu
         rbox:german_menu a rbox:Menu ;
             # general attributes
-                rbox:hasID "menu002" ;
+                rbox:hasID "M002" ;
                 rbox:hasTitle "German Menu" ;
                 rbox:hasDescription "A complete German menu with appetizer, main dish, and dessert." ;
                 rbox:hasCuisine rbox:GermanCuisine ;
@@ -36,7 +35,7 @@
     # French Menu
         rbox:french_menu a rbox:Menu ;
             # general attributes
-                rbox:hasID "menu003" ;
+                rbox:hasID "M003" ;
                 rbox:hasTitle "French Menu" ;
                 rbox:hasDescription "A complete French menu with appetizer, main dish, and dessert." ;
                 rbox:hasCuisine rbox:FrenchCuisine ;
@@ -46,7 +45,7 @@
 # Recipes
 rbox:spaghetti_carbonara a rbox:MainDish;
     # general attributes of the recipe
-        rbox:hasID "recipe001" ;
+        rbox:hasID "R001" ;
         rbox:hasTitle "Spaghetti Carbonara" ;
         rbox:hasDescription "A classic Italian pasta dish made with eggs, cheese, pancetta, and pepper." ;
         schema:recipeYield "4 servings" ;
@@ -72,7 +71,7 @@ rbox:spaghetti_carbonara a rbox:MainDish;
 
 rbox:briyani a rbox:MainDish ;
     # general attributes of the recipe
-        rbox:hasID "recipe002" ;
+        rbox:hasID "R002" ;
         rbox:hasTitle "Chicken Biryani" ;
         rbox:hasDescription "A flavorful Indian rice dish made with marinated chicken, spices, and basmati rice." ;   
         schema:recipeYield "6 servings" ;
@@ -100,7 +99,7 @@ rbox:briyani a rbox:MainDish ;
 
 rbox:spaghetti_bolognese a rbox:MainDish;
     # general attributes of the recipe
-        rbox:hasID "recipe003" ;
+        rbox:hasID "R003" ;
         rbox:hasTitle "Spaghetti Bolognese" ;
         rbox:hasDescription "A traditional Italian pasta dish with a rich meat sauce." ; 
         schema:recipeYield "4 servings" ;
@@ -128,7 +127,7 @@ rbox:spaghetti_bolognese a rbox:MainDish;
 
 rbox:bruschetta a rbox:Appetizer, rbox:VegetarianRecipe ;
     # general attributes of the recipe
-        rbox:hasID "recipe009" ;
+        rbox:hasID "R009" ;
         rbox:hasTitle "Bruschetta al Pomodoro" ;
         rbox:hasDescription "A simple Italian appetizer with grilled bread, garlic, tomatoes, and basil." ;
         schema:recipeYield "4 servings" ;
@@ -152,7 +151,7 @@ rbox:bruschetta a rbox:Appetizer, rbox:VegetarianRecipe ;
         4. Serve immediately.""" .
 rbox:tiramisu a rbox:Dessert, rbox:VegetarianRecipe ;
     # general attributes of the recipe
-        rbox:hasID "recipe011" ;
+        rbox:hasID "R011" ;
         rbox:hasTitle "Tiramisu" ;
         rbox:hasDescription "A classic Italian layered dessert made with coffee-soaked ladyfingers and mascarpone cream." ;
         schema:recipeYield "4 servings" ;
@@ -163,7 +162,7 @@ rbox:tiramisu a rbox:Dessert, rbox:VegetarianRecipe ;
         rbox:hasIngredientList (
             [ rbox:hasIngredient rbox:Ladyfingers ; rbox:hasQuantity 200 ; rbox:hasUnit rbox:grams ]
             [ rbox:hasIngredient rbox:Mascarpone ; rbox:hasQuantity 250 ; rbox:hasUnit rbox:grams ]
-            [ rbox:hasIngredient rbox:Egg ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:count ]
+            [ rbox:hasIngredient rbox:Eggs ; rbox:hasQuantity 3 ; rbox:hasUnit rbox:count ]
             [ rbox:hasIngredient rbox:Sugar ; rbox:hasQuantity 80 ; rbox:hasUnit rbox:grams ]
             [ rbox:hasIngredient rbox:Coffee ; rbox:hasQuantity 200 ; rbox:hasUnit rbox:milliliter ]
             [ rbox:hasIngredient rbox:CocoaPowder ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:tablespoon ]) ;
@@ -178,7 +177,7 @@ rbox:tiramisu a rbox:Dessert, rbox:VegetarianRecipe ;
 
 rbox:bretzel a rbox:Appetizer, rbox:VegetarianRecipe ;
     # general attributes of the recipe
-        rbox:hasID "recipe012" ;
+        rbox:hasID "R012" ;
         rbox:hasTitle "Betzel" ;
         rbox:hasDescription "A traditional German soft baked Bretzel, perfect as a snack or appetizer." ;
         schema:recipeYield "4 servings" ;
@@ -204,7 +203,7 @@ rbox:bretzel a rbox:Appetizer, rbox:VegetarianRecipe ;
 
 rbox:kairserschmarn a rbox:Dessert, rbox:VegetarianRecipe;
     # general attributes of the recipe
-        rbox:hasID "recipe004" ;
+        rbox:hasID "R004" ;
         rbox:hasTitle "Kaiserschmarrn" ;
         rbox:hasDescription "A traditional Austrian shredded pancake dessert, often served with fruit compote." ;
         schema:recipeYield "2 servings" ;
@@ -230,7 +229,7 @@ rbox:kairserschmarn a rbox:Dessert, rbox:VegetarianRecipe;
 
 rbox:apfelstrudel a rbox:Dessert, rbox:VegetarianRecipe ;
     # general attributes of the recipe
-        rbox:hasID "recipe007" ;
+        rbox:hasID "R007" ;
         rbox:hasTitle "Apfelstrudel" ;
         rbox:hasDescription "A classic Austrian/German apple strudel dessert with thin pastry and spiced apple filling." ;
         schema:recipeYield "4 servings" ;
@@ -256,14 +255,14 @@ rbox:apfelstrudel a rbox:Dessert, rbox:VegetarianRecipe ;
 
 rbox:schweinebraten a rbox:MainDish ;
     # general attributes of the recipe
-        rbox:hasID "recipe008" ;
+        rbox:hasID "R008" ;
         rbox:hasTitle "Schweinebraten" ;
         rbox:hasDescription "A traditional German roast pork with crispy crust, typically served with gravy and vegetables." ;
         schema:recipeYield "4 servings" ;
         rbox:hasCuisine rbox:GermanCuisine ;
 
     # properties about ingredients 
-        rbox:hasAllergenInfo rbox:None ;
+
         rbox:hasIngredientList (
             [ rbox:hasIngredient rbox:PorkShoulder ; rbox:hasQuantity 1.5 ; rbox:hasUnit rbox:kilograms ]
             [ rbox:hasIngredient rbox:Salt ; rbox:hasQuantity 2 ; rbox:hasUnit rbox:teaspoon ]
@@ -282,7 +281,7 @@ rbox:schweinebraten a rbox:MainDish ;
 
 rbox:fried_rice a rbox:MainDish ;
     # general attributes of the recipe
-        rbox:hasID "recipe005" ;
+        rbox:hasID "R005" ;
         rbox:hasTitle "Chinese Fried Rice" ;
         rbox:hasDescription "A popular Chinese dish made with stir-fried rice, vegetables, and eggs." ;
         schema:recipeYield "4 servings" ;
@@ -309,7 +308,7 @@ rbox:fried_rice a rbox:MainDish ;
  
 rbox:ratatouille a rbox:MainDish, rbox:VeganRecipe ;
     # general attributes of the recipe
-        rbox:hasID "recipe006" ;
+        rbox:hasID "R006" ;
         rbox:hasTitle "Ratatouille" ;
         rbox:hasDescription "A traditional French Provençal stewed vegetable dish, originating in Nice." ;
         schema:recipeYield "4 servings" ;
@@ -337,7 +336,7 @@ rbox:ratatouille a rbox:MainDish, rbox:VeganRecipe ;
 
 rbox:ratatouille_tart a rbox:Appetizer ;
     # general attributes of the recipe
-        rbox:hasID "recipe013" ;
+        rbox:hasID "R013" ;
         rbox:hasTitle "Ratatouille Tart" ;
         rbox:hasDescription "A French appetizer tart with layers of colorful vegetables, inspired by classic ratatouille." ;
         schema:recipeYield "4 servings" ;
@@ -362,7 +361,7 @@ rbox:ratatouille_tart a rbox:Appetizer ;
         5. Serve warm.""" .
 
 rbox:creme_brulee a rbox:Dessert, rbox:VegetarianRecipe ;
-    rbox:hasID "recipe010" ;
+    rbox:hasID "R010" ;
     rbox:hasTitle "Crème Brûlée" ;
     rbox:hasDescription "A classic French dessert consisting of rich custard topped with a layer of hard caramel." ;
     schema:recipeYield "4 servings" ;
