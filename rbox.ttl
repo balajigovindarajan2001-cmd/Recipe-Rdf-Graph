@@ -149,6 +149,7 @@ rbox:bruschetta a rbox:Appetizer, rbox:VegetarianRecipe ;
         2. Rub bread with garlic and drizzle with olive oil.
         3. Top with chopped tomatoes, basil leaves, and a pinch of salt.
         4. Serve immediately.""" .
+        
 rbox:tiramisu a rbox:Dessert, rbox:VegetarianRecipe ;
     # general attributes of the recipe
         rbox:hasID "R011" ;

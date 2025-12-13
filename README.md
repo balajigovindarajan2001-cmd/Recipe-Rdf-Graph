@@ -2,7 +2,12 @@
 
 **EXPLANATION – Vinzent Aschir and Balaji Govindarajan**
 
----
+## Getting the Project
+Clone the repository using Git:
+
+```bash
+git pull https://github.com/balajigovindarajan2001-cmd/Recipe-Rdf-Graph
+```
 
 ## Recipe Level – Vinzent
 
@@ -55,6 +60,61 @@ All class definitions at the recipe level are labeled and commented in **German 
 
 ## Company Level – Balaji
 
-The following main ideas have been implemented:
+### How It Works
+Customers subscribe to a **SubscriptionPlan**. After selecting one of the available subscription plans, an included menu is chosen. The recipes that belong to the selected menu are then ordered via an **OrderLine**.
 
-- Customers subscribe to meal plans
+---
+
+### Subscription Plan
+Subscriptions are divided into categories such as **3 recipes × 2 people** or **4 recipes × 4 people**. Based on customer requirements, an appropriate plan is selected.
+
+An instance of the class **SubscriptionPlan** holds the following properties to support popularity evaluation and decision-making:
+- `planOrderCount`
+- `planReviewCount`
+- `planAverageRating`
+- `planPopularityScore`
+
+Using these popularity-related metrics, customers can compare and choose a suitable plan.
+
+---
+
+### Order
+An instance of the class **Order** holds one or more **OrderLine** instances via the property `hasOrderLine`.
+
+An **OrderLine**, belonging to a specific order, summarizes for the customer all ordered recipes, whether they originate from different menus or from individually selected recipes.
+
+---
+
+### Courier
+An instance **DeliveryPerson** of the class **Courier** has a customer-provided rating (string).
+
+The attributes `deliveryStart` and `deliveryEnd` indicate whether a delivery is delayed. A **Courier** instance also contains properties describing customer details and the delivery destination.
+
+---
+
+### Review
+A **Review** consists of:
+- a **review body**, containing the textual review (string)
+- **review ratings**, represented as an integer
+
+Based on the reviews, a popularity score is calculated.
+
+For properties with integer, string, or other literal ranges, `rdfs:DatatypeProperty` was used instead of `rdf:Property`.
+
+---
+
+## Coding
+All class definitions at the recipe level are labeled and commented in both German and English. Some instances and properties are also labeled; however, full labeling and commenting were omitted due to time constraints.
+
+**GraphDB (Demo Version)** was used for visualization.
+
+The following tools were used to assist with debugging and coding:
+- ChatGPT
+- GitHub Copilot
+- Google and other search engines
+
+The design of the RDF graph, ontology decisions, and overall implementation were carried out independently by the team.
+
+---
+
+**Total number of triples:** 1643
