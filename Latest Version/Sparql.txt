@@ -130,7 +130,7 @@ Vinzent Aschir Balaji GOVINDARAJAN
 
 
 
-4) “Which main dishes can be cooked in under 25 minutes and is vegetraian? ”
+4) Which main dishes can be cooked in under 25 minutes and is vegetraian? 
       
       prefix schema: <http://schema.org/>
       prefix xsd:   <http://www.w3.org/2001/XMLSchema#>
@@ -194,53 +194,29 @@ WHERE {
     }
 }
 
-# Balaji you can also move this question as last question its a summary table 
-7) How many of what did we actually implement? (recipes , ingredients, classes, properties,DatatypeProperties ) show us in a table! 
 
-      PREFIX rbox: <http://example.org/rbox#>
-      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-      select ?amount_Ingredients ?amount_Recipes ?amount_classes ?amont_properties ?amont_DatatypeProperties where {
-        { select (count(distinct ?i) as ?amount_Ingredients)  where {
-        	?i a rbox:Ingredient. }}
-        { select (count(distinct ?r) as ?amount_Recipes) where  {
-         	?r a rbox:Recipe.}}
-        { select (count(distinct ?c) as ?amount_classes) where {
-      	?c a rdfs:Class . } }
-       { select (count(distinct ?p) as ?amont_properties) where {
-      	?p a rdf:Property .
-       	filter not exists { ?p a rdfs:DatatypeProperty } } }
-       { select (count(distinct ?dp) as ?amont_DatatypeProperties) where {
-      	?dp a rdfs:DatatypeProperty . } } }
-
-
-
-### Balaji Fixes ### 
-
-8) “Which mealplan plans are chosen by customers who order more than once?”     # no return -> no data bad for us or no working querry bad for us
+7) Which mealplan plans are chosen by customers who order more than once?
 
 PREFIX rbox: <http://example.org/rbox#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?customer ?customerName ?plan ?planLabel (COUNT(?order) AS ?orderCount)
 WHERE {
-  # Customer with subscription plan
   ?customer a rbox:Customer ;
             rbox:hasSubscriptionPlan ?plan .
+
   OPTIONAL { ?customer rdfs:label ?customerName . }
 
-  # All orders placed by this customer
   ?order a rbox:Order ;
          rbox:orderedBy ?customer .
 
-  # Plan details
   OPTIONAL { ?plan rbox:planLabel ?planLabel . }
 }
 GROUP BY ?customer ?customerName ?plan ?planLabel
-HAVING (COUNT(?order) > 1)
 ORDER BY ?planLabel ?customerName
 
-9) “How long does delivery usually take for each subscription plan on average?” # doesnt work 
+
+8) How long does delivery usually take for each subscription plan on average?
 
 PREFIX rbox: <http://example.org/rbox#>
 PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
@@ -274,31 +250,45 @@ WHERE {
 GROUP BY ?plan ?planLabel
 ORDER BY ?planLabel
 
-4) “Can you show me, for every order, how many portions people ordered and what rating they gave?” # doenst work 
+9) Can you show me, for every order, how many portions people ordered and what rating they gave?  
 
 PREFIX rbox:   <http://example.org/rbox#>
-PREFIX schema: <https://schema.org/>
+PREFIX schema: <http://schema.org/>
 PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
 
-SELECT ?order ?orderLabel ?orderLine ?itemDescription ?portionCount ?ratingValue
+SELECT ?order ?orderLabel ?orderLine ?itemDescription ?recipeTimes ?ratingValue
 WHERE {
-  # One line (item) in an order with its portion count
-  ?orderLine a rbox:OrderLine ;
-             rbox:portionCount ?portionCount ;
-             schema:description ?itemDescription .
-
-  # The order that contains this line
-  ?order a rbox:Order ;
-         rbox:hasOrderLine ?orderLine ;
-         rbox:hasReview ?review .
+  ?order rbox:hasOrderLine ?orderLine .
   OPTIONAL { ?order rdfs:label ?orderLabel . }
 
-  # The review and its rating value
-  ?review a rbox:Review ;
-          schema:reviewRating ?ratingNode .
+  ?orderLine rbox:recipeTimes ?recipeTimes ;
+             schema:description ?itemDescription .
 
-  ?ratingNode a schema:Rating ;
-              schema:ratingValue ?ratingValue .
+  OPTIONAL {
+    ?order rbox:hasReview ?review .
+    ?review schema:reviewRating ?r .
+    ?r schema:ratingValue ?ratingValue .
+  }
 }
 ORDER BY ?order ?orderLine
+
+
+
+10) How many of what did we actually implement? (recipes , ingredients, classes, properties,DatatypeProperties ) show us in a table! 
+
+      PREFIX rbox: <http://example.org/rbox#>
+      PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+      PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+      select ?amount_Ingredients ?amount_Recipes ?amount_classes ?amont_properties ?amont_DatatypeProperties where {
+        { select (count(distinct ?i) as ?amount_Ingredients)  where {
+        	?i a rbox:Ingredient. }}
+        { select (count(distinct ?r) as ?amount_Recipes) where  {
+         	?r a rbox:Recipe.}}
+        { select (count(distinct ?c) as ?amount_classes) where {
+      	?c a rdfs:Class . } }
+       { select (count(distinct ?p) as ?amont_properties) where {
+      	?p a rdf:Property .
+       	filter not exists { ?p a rdfs:DatatypeProperty } } }
+       { select (count(distinct ?dp) as ?amont_DatatypeProperties) where {
+      	?dp a rdfs:DatatypeProperty . } } }
+
